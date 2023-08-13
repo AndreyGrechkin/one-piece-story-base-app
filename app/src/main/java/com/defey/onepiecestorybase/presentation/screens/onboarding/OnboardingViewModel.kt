@@ -2,21 +2,34 @@ package com.defey.onepiecestorybase.presentation.screens.onboarding
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.defey.onepiecestorybase.domain.model.OnboardingPage
 import com.defey.onepiecestorybase.domain.repository.DataStorePreferences
+import com.defey.onepiecestorybase.presentation.screens.AppViewModel
+import com.defey.onepiecestorybase.presentation.screens.bonds.BondsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class OnboardingViewModel @Inject constructor(
     private val dataStore: DataStorePreferences
-): ViewModel() {
+) : AppViewModel<OnboardingUiState, OnboardingUiEvent>() {
 
-    fun onEvent(event: OnboardingUiEvent) {
+    private val pages = listOf(
+        OnboardingPage.First,
+        OnboardingPage.Second,
+        OnboardingPage.Third
+    )
+    private val _uiState = MutableStateFlow(OnboardingUiState(list = pages))
+    override val uiState: StateFlow<OnboardingUiState> = _uiState
+    override fun onEvent(event: OnboardingUiEvent) {
         when (event) {
-           is OnboardingUiEvent.SaveKey -> {
+            is OnboardingUiEvent.SaveKey -> {
                 saveOnboardingKey(complete = event.complete)
             }
+            is OnboardingUiEvent.NavigateTo -> navigateTo(event.naveTarget)
         }
     }
 
@@ -25,5 +38,6 @@ class OnboardingViewModel @Inject constructor(
             dataStore.saveOnboardingComplete(complete)
         }
     }
+
 
 }

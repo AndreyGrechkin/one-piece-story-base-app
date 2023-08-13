@@ -4,25 +4,33 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.defey.onepiecestorybase.presentation.screens.AppViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
 class IslandViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
-): ViewModel() {
+): AppViewModel<IslandUiState, IslandUiEvent>() {
 
-    private val _state = mutableStateOf(IslandUiState())
-    val state: State<IslandUiState> = _state
-
+    private val _uiState = MutableStateFlow(IslandUiState())
+    override val uiState: StateFlow<IslandUiState> = _uiState
     private val islandId: Int = savedStateHandle["islandId"] ?: 0
 
     init {
-        _state.value = _state.value.copy(title = "Остров $islandId")
+
+        _uiState.update { it.copy(title = "Остров $islandId") }
+
+    }
+
+
+    override fun onEvent(event: IslandUiEvent){
+
     }
 
 
-    fun onEvent(event: IslandUiEvent){
 
-    }
 }

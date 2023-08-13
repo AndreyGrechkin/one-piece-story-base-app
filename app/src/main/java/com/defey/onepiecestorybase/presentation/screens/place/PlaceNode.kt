@@ -8,6 +8,7 @@ import com.bumble.appyx.navmodel.backstack.BackStack
 import com.defey.onepiecestorybase.navigation.HiltComposeNode
 import com.defey.onepiecestorybase.navigation.NavTarget
 import com.defey.onepiecestorybase.navigation.appyxHiltViewModel
+import com.defey.onepiecestorybase.presentation.screens.AppScreen
 
 class PlaceNode(
     buildContext: BuildContext,
@@ -18,11 +19,14 @@ class PlaceNode(
     @Composable
     override fun View(modifier: Modifier){
         val viewModel = appyxHiltViewModel<PlaceViewModel>()
-        PlaceScreen(
-            stateMap = viewModel.stateMap,
-            state = viewModel.state.value,
-            onEvent = viewModel::onEvent,
-            backstack = backStack
-        )
+
+     AppScreen(viewModel = viewModel, backStack = backStack) {state, onEvent ->
+         PlaceScreen(
+             stateMap = viewModel.stateMap,
+             state = state,
+             onEvent = onEvent
+         )
+     }
+
     }
 }

@@ -1,5 +1,7 @@
 package com.defey.onepiecestorybase.presentation.screens.bonds
 
-sealed class BondsUiEvent{
+import com.defey.onepiecestorybase.presentation.screens.UiEvent
+
+sealed class BondsUiEvent : UiEvent{
 
 }

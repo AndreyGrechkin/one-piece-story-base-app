@@ -1,4 +1,4 @@
-package com.defey.onepiecestorybase.presentation.screens.setting
+package com.defey.onepiecestorybase.presentation.screens.info
 
 import android.app.Application
 import androidx.compose.runtime.Composable
@@ -8,19 +8,23 @@ import com.bumble.appyx.navmodel.backstack.BackStack
 import com.defey.onepiecestorybase.navigation.HiltComposeNode
 import com.defey.onepiecestorybase.navigation.NavTarget
 import com.defey.onepiecestorybase.navigation.appyxHiltViewModel
+import com.defey.onepiecestorybase.presentation.screens.AppScreen
 
-class SettingNode(
+class InfoNode(
     buildContext: BuildContext,
     application: Application,
     private val backStack: BackStack<NavTarget>
 ): HiltComposeNode(buildContext, application) {
     @Composable
     override fun View(modifier: Modifier){
-        val viewModel = appyxHiltViewModel<SettingViewModel>()
-        SettingScreen(
-            state = viewModel.state.value,
-            onEvent = viewModel::onEvent,
-            backstack = backStack
-        )
+        val viewModel = appyxHiltViewModel<InfoViewModel>()
+
+       AppScreen(viewModel = viewModel, backStack = backStack) { state, onEvent ->
+           InfoScreen(
+               state = state,
+               onEvent = onEvent
+           )
+       }
+
     }
 }

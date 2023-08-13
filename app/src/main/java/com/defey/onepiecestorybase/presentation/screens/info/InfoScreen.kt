@@ -1,16 +1,14 @@
-package com.defey.onepiecestorybase.presentation.screens.island
+package com.defey.onepiecestorybase.presentation.screens.info
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import com.bumble.appyx.navmodel.backstack.BackStack
-import com.defey.onepiecestorybase.navigation.NavTarget
 
 @Composable
-fun IslandScreen(
-    state: IslandUiState,
-    onEvent: (IslandUiEvent) -> Unit,
+fun InfoScreen(
+    state: InfoUiState,
+    onEvent: (InfoUiEvent) -> Unit
 ){
     Box(contentAlignment = Alignment.Center) {
         Text(text = "Экран ${state.title}")

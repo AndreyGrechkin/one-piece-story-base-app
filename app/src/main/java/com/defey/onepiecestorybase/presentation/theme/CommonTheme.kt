@@ -10,20 +10,26 @@ enum class OPSize {
 }
 
 data class OPColors(
-    val primaryTextColor: Color,
-    val primaryText: Color,
-    val primaryBackground: Color,
-    val secondaryText: Color,
-    val secondaryBackground: Color,
-    val tintColor: Color,
-    val secondaryTintColor: Color,
-    val controlColor: Color,
-    val strokeColor: Color,
-    val errorColor: Color,
-    val snackBarColor: Color,
-    val borderStrokeColor: Color,
-    val secondTintColor: Color,
-    val secondBorderStrokeColor: Color
+    val whiteColor: Color,
+    val blackColor: Color,
+    val grayColor: Color,
+    val lightGrayColor: Color,
+    val babyBlueEyesColor: Color,
+    val pinkColor: Color
+//    val primaryTextColor: Color,
+//    val primaryText: Color,
+//    val primaryBackground: Color,
+//    val secondaryText: Color,
+//    val secondaryBackground: Color,
+//    val tintColor: Color,
+//    val secondaryTintColor: Color,
+//    val controlColor: Color,
+//    val strokeColor: Color,
+//    val errorColor: Color,
+//    val snackBarColor: Color,
+//    val borderStrokeColor: Color,
+//    val secondTintColor: Color,
+//    val secondBorderStrokeColor: Color
 )
 
 data class OPTypography(

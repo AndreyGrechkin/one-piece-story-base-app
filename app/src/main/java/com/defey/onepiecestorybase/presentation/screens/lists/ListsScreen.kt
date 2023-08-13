@@ -1,6 +1,8 @@
 package com.defey.onepiecestorybase.presentation.screens.lists
 
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -11,9 +13,11 @@ import com.defey.onepiecestorybase.navigation.NavTarget
 fun ListsScreen(
     state: ListsUiState,
     onEvent: (ListsUiEvent) -> Unit,
-    backstack: BackStack<NavTarget>
 ){
-  Box(contentAlignment = Alignment.Center) {
-      Text(text = "Экран ${state.title}")
+ Column() {
+      Text(text = "Экран ${state.title}, search: ${state.search}")
+     Button(onClick = { onEvent(ListsUiEvent.Seteee) }) {
+         Text(text = "pusdf")
+     }
   }
 }

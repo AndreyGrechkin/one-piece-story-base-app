@@ -8,6 +8,7 @@ import com.bumble.appyx.navmodel.backstack.BackStack
 import com.defey.onepiecestorybase.navigation.HiltComposeNode
 import com.defey.onepiecestorybase.navigation.NavTarget
 import com.defey.onepiecestorybase.navigation.appyxHiltViewModel
+import com.defey.onepiecestorybase.presentation.screens.AppScreen
 
 class BondsNode(
     buildContext: BuildContext,
@@ -17,10 +18,15 @@ class BondsNode(
     @Composable
     override fun View(modifier: Modifier){
         val viewModel = appyxHiltViewModel<BondsViewModel>()
-        BondsScreen(
-            state = viewModel.state.value,
-            onEvent = viewModel::onEvent,
-            backstack = backStack
-        )
+
+      AppScreen(
+          viewModel = viewModel,
+          backStack = backStack) {state, onEvent ->
+          BondsScreen(
+              state = state,
+              onEvent = onEvent
+         )
+      }
+
     }
 }

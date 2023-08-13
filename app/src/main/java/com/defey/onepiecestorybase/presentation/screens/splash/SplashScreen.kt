@@ -24,8 +24,8 @@ import com.defey.onepiecestorybase.navigation.NavTarget
 
 @Composable
 fun SplashScreen(
-    state: SplashState,
-    backstack: BackStack<NavTarget>
+    state: SplashUiState,
+    onEvent: (SplashUiEvent) -> Unit
 ) {
     val onboardingComplete =  state.onboardingKey
     Log.d("MyLog", "splash Screen1: $onboardingComplete")
@@ -40,13 +40,13 @@ fun SplashScreen(
                 durationMillis = 3000
             )
         )
-        Log.d("MyLog", "splash Screen2: $onboardingComplete")
-        backstack.pop()
-        Log.d("MyLog", "splash Screen3: $onboardingComplete")
+//        Log.d("MyLog", "splash Screen2: $onboardingComplete")
+//     //   onEvent(SplashUiEvent.NavigateBack)
+//        Log.d("MyLog", "splash Screen3: $onboardingComplete")
         if (onboardingComplete)
-            backstack.push(NavTarget.PlaceScreen)
+            onEvent(SplashUiEvent.NavigateTo(NavTarget.PlaceScreen))
         else
-            backstack.push(NavTarget.OnboardingScreen)
+            onEvent(SplashUiEvent.NavigateTo(NavTarget.OnboardingScreen))
     }
 
 

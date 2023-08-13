@@ -1,33 +1,46 @@
 package com.defey.onepiecestorybase.presentation.screens.splash
 
 import android.util.Log
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.defey.onepiecestorybase.domain.repository.DataStorePreferences
+import com.defey.onepiecestorybase.navigation.name
+import com.defey.onepiecestorybase.presentation.screens.AppViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     private val dataStore: DataStorePreferences
-) : ViewModel() {
+) : AppViewModel<SplashUiState, SplashUiEvent>() {
+
+    private val _uiState = MutableStateFlow(SplashUiState())
+    override val uiState: StateFlow<SplashUiState> = _uiState
+
 
     init {
         getKey()
-    }
+        }
 
-    private val _state = mutableStateOf(SplashState())
-    val state: State<SplashState> = _state
+    override fun onEvent(event: SplashUiEvent) {
+        when (event) {
+            is SplashUiEvent.NavigateTo -> {
+                Log.d("MyLog", "eveb: ${event.naveTarget.name()}")
+                navigateTo(event.naveTarget)
+            }
+            SplashUiEvent.NavigateBack -> navigateBack()
+        }
+    }
 
     private fun getKey() {
         dataStore.readOnboardingComplete()
-            .onEach {
-                _state.value = _state.value.copy(onboardingKey = it)
-                Log.d("MyLog", "flow: $it")
+            .onEach { isKey ->
+                _uiState.update { it.copy(onboardingKey = isKey) }
+                Log.d("MyLog", "flow: $isKey")
             }
             .launchIn(viewModelScope)
     }

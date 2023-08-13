@@ -1,5 +1,7 @@
 package com.defey.onepiecestorybase.presentation.screens.lists
 
-sealed class ListsUiEvent{
+import com.defey.onepiecestorybase.presentation.screens.UiEvent
 
+sealed class ListsUiEvent: UiEvent{
+       object Seteee: ListsUiEvent()
 }

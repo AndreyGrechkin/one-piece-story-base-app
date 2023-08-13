@@ -63,7 +63,7 @@ fun PlaceScreen(
     state: PlaceUiState,
     viewModel: PlaceViewModel = hiltViewModel(),
     onEvent: (PlaceUiEvent) -> Unit,
-    backstack: BackStack<NavTarget>
+
 ) {
     var stateAnim = viewModel.animated
     var animated by remember { mutableStateOf(false) }
@@ -106,7 +106,7 @@ Box(modifier = Modifier
                     Text(
                         text = "Yotsuba Island Region",
                         modifier = Modifier,
-                        color = OPTheme.colors.primaryText,
+                        color = OPTheme.colors.blackColor,
                         style = OPTheme.typography.segoe,
 
                         )

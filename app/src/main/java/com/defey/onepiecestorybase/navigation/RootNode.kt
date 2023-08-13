@@ -5,13 +5,7 @@ import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Settings
-import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,17 +16,13 @@ import com.bumble.appyx.core.modality.BuildContext
 import com.bumble.appyx.core.node.Node
 import com.bumble.appyx.core.node.ParentNode
 import com.bumble.appyx.navmodel.backstack.BackStack
-import com.bumble.appyx.navmodel.backstack.operation.push
 import com.bumble.appyx.navmodel.backstack.transitionhandler.rememberBackstackFader
-import com.defey.onepiecestorybase.navigation.bottom.BottomNavItem
-import com.defey.onepiecestorybase.navigation.bottom.BottomNavigationBar
-import com.defey.onepiecestorybase.navigation.top.TopBarNavigation
 import com.defey.onepiecestorybase.presentation.screens.bonds.BondsNode
 import com.defey.onepiecestorybase.presentation.screens.island.IslandNode
 import com.defey.onepiecestorybase.presentation.screens.lists.ListsNode
 import com.defey.onepiecestorybase.presentation.screens.onboarding.OnboardingNode
 import com.defey.onepiecestorybase.presentation.screens.place.PlaceNode
-import com.defey.onepiecestorybase.presentation.screens.setting.SettingNode
+import com.defey.onepiecestorybase.presentation.screens.info.InfoNode
 import com.defey.onepiecestorybase.presentation.screens.splash.SplashNode
 
 class RootNode(
@@ -84,7 +74,7 @@ class RootNode(
                 backStack,
             )
 
-            NavTarget.SettingScreen -> SettingNode(
+            NavTarget.InfoScreen -> InfoNode(
                 buildContext,
                 application,
                 backStack,
@@ -107,57 +97,58 @@ class RootNode(
     @Composable
     override fun View(modifier: Modifier) {
 
-        Scaffold(
-            topBar = {
-                if (navTargetName != NavTarget.SplashScreen && navTargetName != NavTarget.PlaceScreen)
-                TopBarNavigation()
-                     },
-            bottomBar = {
-            if (navTargetName != NavTarget.SplashScreen)
-            BottomNavigationBar(
-                items = listOf(
-                    BottomNavItem(
-                        name = "Place",
-                        route = NavTarget.PlaceScreen,
-                        icon = Icons.Default.Home
-                    ),
-                    BottomNavItem(
-                        name = "Lists",
-                        route = NavTarget.ListsScreen,
-                        icon = Icons.Default.Notifications,
-                        badgeCount = 23
-                    ),
-                    BottomNavItem(
-                        name = "Bonds",
-                        route = NavTarget.BondsScreen,
-                        icon = Icons.Default.Settings,
-                        badgeCount = 214
-                    ),
-                    BottomNavItem(
-                        name = "Setting",
-                        route = NavTarget.SettingScreen,
-                        icon = Icons.Default.Settings,
-                        badgeCount = 214
-                    ),
-                ),
-                navController = navTargetName,
-                onItemClick = {
-                    Log.d("MyLog", "back: ${navModel}")
-                    backStack.push( it.route)
-
-
-
-                    Log.d("MyLog", "back2: ${navTargetName?.name()}")
-                }
-            )
-        }) {
+//        Scaffold(
+//            topBar = {
+//                if (navTargetName != NavTarget.SplashScreen && navTargetName != NavTarget.PlaceScreen)
+//                TopBarNavigation()
+//                     },
+//            bottomBar = {
+//            if (navTargetName != NavTarget.SplashScreen)
+//            BottomNavigationBar(
+//                items = listOf(
+//                    BottomNavItem(
+//                        name = "Place",
+//                        route = NavTarget.PlaceScreen,
+//                        icon = Icons.Default.Home
+//                    ),
+//                    BottomNavItem(
+//                        name = "Lists",
+//                        route = NavTarget.ListsScreen,
+//                        icon = Icons.Default.Notifications,
+//                        badgeCount = 23
+//                    ),
+//                    BottomNavItem(
+//                        name = "Bonds",
+//                        route = NavTarget.BondsScreen,
+//                        icon = Icons.Default.Settings,
+//                        badgeCount = 214
+//                    ),
+//                    BottomNavItem(
+//                        name = "Setting",
+//                        route = NavTarget.SettingScreen,
+//                        icon = Icons.Default.Settings,
+//                        badgeCount = 214
+//                    ),
+//                ),
+//                navController = navTargetName,
+//                onItemClick = {
+//                    Log.d("MyLog", "back: ${navModel}")
+//                    backStack.push( it.route)
+//
+//
+//
+//                    Log.d("MyLog", "back2: ${navTargetName?.name()}")
+//                }
+//            )
+//        }) {
             Children(
                 navModel = backStack,
                 transitionHandler = rememberBackstackFader(),
-                modifier = modifier.fillMaxSize().padding(top = it.calculateTopPadding())
+                modifier = modifier.fillMaxSize()
+                   // .padding(top = it.calculateTopPadding())
             )
         }
 
-        }
+ //       }
 
 }

@@ -1,5 +1,7 @@
 package com.defey.onepiecestorybase.presentation.screens.place
 
-sealed class PlaceUiEvent{
+import com.defey.onepiecestorybase.presentation.screens.UiEvent
+
+sealed class PlaceUiEvent: UiEvent{
 
 }

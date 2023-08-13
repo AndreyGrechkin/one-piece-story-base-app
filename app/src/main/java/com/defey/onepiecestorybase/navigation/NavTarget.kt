@@ -21,7 +21,7 @@ sealed class NavTarget : Parcelable {
     object BondsScreen : NavTarget()
 
     @Parcelize
-    object SettingScreen : NavTarget()
+    object InfoScreen : NavTarget()
 
     @Parcelize
     class IslandScreen(val islandId: Int): NavTarget()

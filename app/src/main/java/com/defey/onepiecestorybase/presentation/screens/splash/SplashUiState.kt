@@ -1,5 +1,7 @@
 package com.defey.onepiecestorybase.presentation.screens.splash
 
-data class SplashState(
+import com.defey.onepiecestorybase.presentation.screens.UiState
+
+data class SplashUiState(
     val onboardingKey: Boolean = false
-)
+): UiState

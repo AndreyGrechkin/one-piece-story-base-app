@@ -9,6 +9,7 @@ import com.bumble.appyx.navmodel.backstack.BackStack
 import com.defey.onepiecestorybase.navigation.HiltComposeNode
 import com.defey.onepiecestorybase.navigation.NavTarget
 import com.defey.onepiecestorybase.navigation.appyxHiltViewModel
+import com.defey.onepiecestorybase.presentation.screens.AppScreen
 
 class OnboardingNode(
     buildContext: BuildContext,
@@ -19,10 +20,16 @@ class OnboardingNode(
     @SuppressLint("SuspiciousIndentation")
     @Composable
     override fun View(modifier: Modifier) {
-    val viewModel = appyxHiltViewModel<OnboardingViewModel>()
-        OnboardingScreen(
-            onEvent = viewModel::onEvent,
-            backstack = backStack
-        )
+        val viewModel = appyxHiltViewModel<OnboardingViewModel>()
+
+        AppScreen(
+            viewModel = viewModel,
+            backStack = backStack
+        ) { state, onEvent ->
+            OnboardingScreen(
+                state = state,
+                onEvent = onEvent
+            )
+        }
     }
 }

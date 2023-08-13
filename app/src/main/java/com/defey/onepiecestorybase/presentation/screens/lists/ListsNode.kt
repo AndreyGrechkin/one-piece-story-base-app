@@ -8,19 +8,26 @@ import com.bumble.appyx.navmodel.backstack.BackStack
 import com.defey.onepiecestorybase.navigation.HiltComposeNode
 import com.defey.onepiecestorybase.navigation.NavTarget
 import com.defey.onepiecestorybase.navigation.appyxHiltViewModel
+import com.defey.onepiecestorybase.presentation.screens.AppScreen
 
 class ListsNode(
     buildContext: BuildContext,
     application: Application,
     private val backStack: BackStack<NavTarget>
-): HiltComposeNode(buildContext, application) {
+) : HiltComposeNode(buildContext, application) {
     @Composable
-    override fun View(modifier: Modifier){
+    override fun View(modifier: Modifier) {
         val viewModel = appyxHiltViewModel<ListsViewModel>()
-       ListsScreen(
-            state = viewModel.state.value,
-            onEvent = viewModel::onEvent,
-            backstack = backStack
-        )
+
+        AppScreen(
+            viewModel = viewModel,
+            backStack = backStack
+        ) { state, onEvent ->
+            ListsScreen(
+                state = state,
+                onEvent = onEvent
+            )
+        }
+
     }
 }

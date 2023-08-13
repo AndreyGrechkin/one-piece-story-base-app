@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">OnePieceStoryBase</string>
+    <string name="title_place">Карта мира</string>
+    <string name="title_list">Списки</string>
+    <string name="title_bond">Связи</string>
+    <string name="title_setting">Настройки</string>
+    <string name="back">Назад</string>
+    <string name="search">Поиск</string>
+    <string name="close">Закрыть</string>
+    <string name="maps">Карта</string>
+    <string name="lists">Списки</string>
+    <string name="bonds">Связи</string>
+    <string name="info">Инфо</string>
 </resources>

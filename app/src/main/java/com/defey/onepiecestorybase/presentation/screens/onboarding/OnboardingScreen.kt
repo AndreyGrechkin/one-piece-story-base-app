@@ -31,15 +31,11 @@ import com.google.accompanist.pager.rememberPagerState
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun OnboardingScreen(
+    state: OnboardingUiState,
     onEvent: (OnboardingUiEvent) -> Unit,
-    backstack: BackStack<NavTarget>
 ) {
 
-    val pages = listOf(
-        OnboardingPage.First,
-        OnboardingPage.Second,
-        OnboardingPage.Third
-    )
+
     val pagerState = rememberPagerState()
     Log.d("MyLog", "Onboarding Screen")
     Surface(
@@ -57,7 +53,7 @@ fun OnboardingScreen(
                 count = ONBOARDING_PAGE_COUNT,
                 verticalAlignment = Alignment.Top,
             ) { page ->
-                PagerScreen(onboardingPage = pages[page])
+                PagerScreen(onboardingPage = state.list[page])
             }
             HorizontalPagerIndicator(
                 pagerState = pagerState,
@@ -73,8 +69,9 @@ fun OnboardingScreen(
                 .weight(1f)
                 .align(Alignment.CenterHorizontally),
                 pagerState = pagerState) {
-                backstack.pop()
+             //   backstack.pop()
                 onEvent(OnboardingUiEvent.SaveKey(complete = true))
+                onEvent(OnboardingUiEvent.NavigateTo(NavTarget.PlaceScreen))
             }
         }
     }

@@ -5,24 +5,28 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
-import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.defey.onepiecestorybase.R
 import com.defey.onepiecestorybase.data.remote.model.MapResponse
 import com.defey.onepiecestorybase.domain.model.IslandPlace
 import com.defey.onepiecestorybase.domain.repository.MapsRepository
 import com.defey.onepiecestorybase.domain.repository.PlaceRepository
+import com.defey.onepiecestorybase.presentation.screens.AppViewModel
+import com.defey.onepiecestorybase.presentation.utils.UiText
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addMarker
@@ -39,8 +43,8 @@ import kotlin.math.sin
 @HiltViewModel
 class PlaceViewModel @Inject constructor(
     private val repo: PlaceRepository,
-    private val maps: MapsRepository
-) : ViewModel() {
+    private val maps: MapsRepository,
+) : AppViewModel<PlaceUiState, PlaceUiEvent>() {
 
     private val tileStreamProvider = maps.getFullMap()
     var p1x by mutableStateOf(0.5)
@@ -56,8 +60,12 @@ class PlaceViewModel @Inject constructor(
             Pair(0.5, 0.33)
         )
     )
-    private val _state = mutableStateOf(PlaceUiState())
-    val state: State<PlaceUiState> = _state
+    private val _state = MutableStateFlow(PlaceUiState())
+ //   val state: State<PlaceUiState> = _state
+
+    override val uiState: StateFlow<PlaceUiState> = _state
+
+
 
     var animated by mutableStateOf(false)
 //    val rotation by mutableStateOf(Animatable(initialValue = 0f))
@@ -86,10 +94,18 @@ class PlaceViewModel @Inject constructor(
     )
 
     init {
-
+        setupTopBar(title = UiText.StringResource(R.string.title_place), showTopBar = false)
+        setupBottomBar(
+            isVisible = true
+//            Brush.linearGradient(
+//            colors = listOf(Color.Red, Color.Yellow),
+//            start = Offset(0f, 0f),
+//            end = Offset(100f, 100f)
+//        )
+        )
     }
 
-    fun onEvent(event: PlaceUiEvent){
+  override fun onEvent(event: PlaceUiEvent){
 
     }
 
