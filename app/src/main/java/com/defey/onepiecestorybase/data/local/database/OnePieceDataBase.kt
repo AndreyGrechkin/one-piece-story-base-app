@@ -8,6 +8,7 @@ import com.defey.onepiecestorybase.data.local.database.dao.BandPersonageDao
 import com.defey.onepiecestorybase.data.local.database.dao.BondDao
 import com.defey.onepiecestorybase.data.local.database.dao.FruitDao
 import com.defey.onepiecestorybase.data.local.database.dao.InventoryDao
+import com.defey.onepiecestorybase.data.local.database.dao.IslandDao
 import com.defey.onepiecestorybase.data.local.database.dao.MangaDao
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageDao
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageDescriptionDao
@@ -25,9 +26,12 @@ import com.defey.onepiecestorybase.data.local.model.BandPersonageEntity
 import com.defey.onepiecestorybase.data.local.model.BondEntity
 import com.defey.onepiecestorybase.data.local.model.FruitEntity
 import com.defey.onepiecestorybase.data.local.model.InventoryEntity
+import com.defey.onepiecestorybase.data.local.model.IslandEntity
+import com.defey.onepiecestorybase.data.local.model.IslandTransitEntity
 import com.defey.onepiecestorybase.data.local.model.MangaEntity
 import com.defey.onepiecestorybase.data.local.model.PersonageDescriptionEntity
 import com.defey.onepiecestorybase.data.local.model.PersonageEntity
+import com.defey.onepiecestorybase.data.local.model.PersonageIslandEntity
 import com.defey.onepiecestorybase.data.local.model.PersonageRewardEntity
 import com.defey.onepiecestorybase.data.local.model.PersonageSkillEntity
 import com.defey.onepiecestorybase.data.local.model.PersonageWeaponsEntity
@@ -55,7 +59,10 @@ import com.defey.onepiecestorybase.data.local.model.ShipEntity
         PlaceDescriptionEntity::class,
         PlaceItemEntity::class,
         PlaceTransitItemEntity::class,
-        ShipEntity::class
+        ShipEntity::class,
+        IslandEntity::class,
+        PersonageIslandEntity::class,
+        IslandTransitEntity::class
     ], version = 1
 )
 abstract class OnePieceDataBase : RoomDatabase() {
@@ -77,4 +84,5 @@ abstract class OnePieceDataBase : RoomDatabase() {
     abstract fun placeItemDao(): PlaceItemDao
     abstract fun placeTransitItemDao(): PlaceTransitItemDao
     abstract fun shipDao(): ShipDao
+    abstract fun islandDao(): IslandDao
 }

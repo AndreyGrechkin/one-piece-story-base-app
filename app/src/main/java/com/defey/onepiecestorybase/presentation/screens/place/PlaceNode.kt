@@ -14,19 +14,17 @@ class PlaceNode(
     buildContext: BuildContext,
     application: Application,
     private val backStack: BackStack<NavTarget>
-): HiltComposeNode(buildContext, application) {
+) : HiltComposeNode(buildContext, application) {
 
     @Composable
-    override fun View(modifier: Modifier){
+    override fun View(modifier: Modifier) {
         val viewModel = appyxHiltViewModel<PlaceViewModel>()
 
-     AppScreen(viewModel = viewModel, backStack = backStack) {state, onEvent ->
-         PlaceScreen(
-             stateMap = viewModel.stateMap,
-             state = state,
-             onEvent = onEvent
-         )
-     }
-
+        AppScreen(viewModel = viewModel, backStack = backStack) { state, onEvent ->
+            PlaceScreen(
+                state = state,
+                onEvent = onEvent
+            )
+        }
     }
 }

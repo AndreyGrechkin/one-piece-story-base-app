@@ -1,6 +1,5 @@
 package com.defey.onepiecestorybase.presentation.screens.onboarding
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -16,9 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.bumble.appyx.navmodel.backstack.BackStack
-import com.bumble.appyx.navmodel.backstack.operation.pop
+import com.defey.onepiecestorybase.R
 import com.defey.onepiecestorybase.domain.model.OnboardingPage
 import com.defey.onepiecestorybase.navigation.NavTarget
 import com.defey.onepiecestorybase.presentation.utils.Constants.ONBOARDING_PAGE_COUNT
@@ -34,10 +33,7 @@ fun OnboardingScreen(
     state: OnboardingUiState,
     onEvent: (OnboardingUiEvent) -> Unit,
 ) {
-
-
     val pagerState = rememberPagerState()
-    Log.d("MyLog", "Onboarding Screen")
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -64,12 +60,13 @@ fun OnboardingScreen(
                     .align(Alignment.CenterHorizontally),
                 indicatorWidth = 16.dp,
                 spacing = 8.dp
-                )
-            StartButton(modifier = Modifier
-                .weight(1f)
-                .align(Alignment.CenterHorizontally),
-                pagerState = pagerState) {
-             //   backstack.pop()
+            )
+            StartButton(
+                modifier = Modifier
+                    .weight(1f)
+                    .align(Alignment.CenterHorizontally),
+                pagerState = pagerState
+            ) {
                 onEvent(OnboardingUiEvent.SaveKey(complete = true))
                 onEvent(OnboardingUiEvent.NavigateTo(NavTarget.PlaceScreen))
             }
@@ -84,8 +81,11 @@ fun PagerScreen(onboardingPage: OnboardingPage) {
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
-    ){
-        Image(painter = painterResource(id = onboardingPage.image), contentDescription = "image page")
+    ) {
+        Image(
+            painter = painterResource(id = onboardingPage.image),
+            contentDescription = "image page"
+        )
         Text(text = onboardingPage.title)
         Text(text = onboardingPage.description)
     }
@@ -97,7 +97,7 @@ fun StartButton(
     modifier: Modifier,
     pagerState: PagerState,
     onClick: () -> Unit
-){
+) {
     Row(
         modifier = modifier,
         verticalAlignment = Alignment.Top,
@@ -106,7 +106,7 @@ fun StartButton(
 
         AnimatedVisibility(visible = pagerState.currentPage == 2) {
             Button(onClick = onClick) {
-                Text(text = "Старт")
+                Text(text = stringResource(id = R.string.start))
             }
         }
     }

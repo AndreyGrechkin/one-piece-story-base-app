@@ -59,7 +59,7 @@ fun <S : UiState, E : UiEvent> AppScreen(
                     items = viewModel.bottomList.value,
                     navController = backStack,
                     color = viewModel.bottomBarData.colorBackground,
-                    onItemClick = {backStack.push(it.route) })
+                    onItemClick = { backStack.push(it.route) })
         },
         snackbarHost = {}
     ) { padding ->

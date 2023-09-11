@@ -12,7 +12,6 @@ class MapsRepositoryImpl @Inject constructor(
     override fun getFullMap(): TileStreamProvider =
     TileStreamProvider { row, col, zoomLvl ->
         try {
-            //Log.d("MyLog", "zoomLvl: $zoomLvl, row: $row, col: $col")
             context.assets?.open("map/plan/$zoomLvl/$row/$col.jpg")
         } catch (e: Exception) {
             null

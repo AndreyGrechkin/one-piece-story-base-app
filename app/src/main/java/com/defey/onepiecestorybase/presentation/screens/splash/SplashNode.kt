@@ -1,7 +1,6 @@
 package com.defey.onepiecestorybase.presentation.screens.splash
 
 import android.app.Application
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.bumble.appyx.core.modality.BuildContext

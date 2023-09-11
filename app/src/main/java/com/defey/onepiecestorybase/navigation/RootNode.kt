@@ -40,9 +40,9 @@ class RootNode(
     private var navTargetName: NavTarget? by mutableStateOf(null)
 
     override fun resolve(navTarget: NavTarget, buildContext: BuildContext): Node {
-        Log.d("MyLog", "navigate1: ${navTarget.name()}")
+    //    Log.d("MyLog", "navigate1: ${navTarget.name()}")
         navTargetName = navTarget
-        Log.d("MyLog", "navigate: ${navTarget.name()}")
+    //    Log.d("MyLog", "navigate: ${navTarget.name()}")
         return when (navTarget) {
             NavTarget.SplashScreen -> SplashNode(
                 buildContext,

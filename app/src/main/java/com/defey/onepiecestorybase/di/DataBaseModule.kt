@@ -9,6 +9,7 @@ import com.defey.onepiecestorybase.data.local.database.dao.BandPersonageDao
 import com.defey.onepiecestorybase.data.local.database.dao.BondDao
 import com.defey.onepiecestorybase.data.local.database.dao.FruitDao
 import com.defey.onepiecestorybase.data.local.database.dao.InventoryDao
+import com.defey.onepiecestorybase.data.local.database.dao.IslandDao
 import com.defey.onepiecestorybase.data.local.database.dao.MangaDao
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageDao
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageDescriptionDao
@@ -93,5 +94,6 @@ class DataBaseModule {
     @Provides
     fun provideShipDao(dataBase: OnePieceDataBase): ShipDao = dataBase.shipDao()
 
-
+    @Provides
+    fun provideIslandDao(dataBase: OnePieceDataBase): IslandDao = dataBase.islandDao()
 }

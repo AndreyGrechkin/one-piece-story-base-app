@@ -1,11 +1,9 @@
 package com.defey.onepiecestorybase.presentation.screens.onboarding
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.defey.onepiecestorybase.domain.model.OnboardingPage
 import com.defey.onepiecestorybase.domain.repository.DataStorePreferences
 import com.defey.onepiecestorybase.presentation.screens.AppViewModel
-import com.defey.onepiecestorybase.presentation.screens.bonds.BondsUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -29,6 +27,7 @@ class OnboardingViewModel @Inject constructor(
             is OnboardingUiEvent.SaveKey -> {
                 saveOnboardingKey(complete = event.complete)
             }
+
             is OnboardingUiEvent.NavigateTo -> navigateTo(event.naveTarget)
         }
     }
@@ -38,6 +37,4 @@ class OnboardingViewModel @Inject constructor(
             dataStore.saveOnboardingComplete(complete)
         }
     }
-
-
 }

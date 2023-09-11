@@ -5,4 +5,4 @@ import com.defey.onepiecestorybase.presentation.screens.UiState
 
 data class OnboardingUiState(
     val list: List<OnboardingPage>
-): UiState
+) : UiState

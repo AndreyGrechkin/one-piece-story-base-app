@@ -91,7 +91,7 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 
     // Coil
-    implementation("io.coil-kt:coil-compose:1.4.0")
+    implementation("io.coil-kt:coil-compose:2.2.2")
 
     // System UI Controller - Accompanist
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.17.0"
@@ -119,5 +119,5 @@ dependencies {
     implementation "androidx.datastore:datastore-preferences:1.0.0"
 
     // Maps Compose
-    implementation 'ovh.plrapps:mapcompose:2.7.1'
+    implementation 'ovh.plrapps:mapcompose:2.8.1'
 }

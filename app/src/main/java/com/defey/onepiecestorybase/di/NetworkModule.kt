@@ -1,6 +1,8 @@
 package com.defey.onepiecestorybase.di
 
 import com.defey.onepiecestorybase.data.remote.api.OnePieceApi
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -36,8 +38,13 @@ class NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")
-            .addConverterFactory(MoshiConverterFactory.create())
+ //         .baseUrl("http://10.0.2.2:8080/")
+            .baseUrl("http://192.168.1.59:8080/")
+            .addConverterFactory(
+                MoshiConverterFactory.create(
+                    Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+                )
+            )
             .client(okHttpClient)
             .build()
     }

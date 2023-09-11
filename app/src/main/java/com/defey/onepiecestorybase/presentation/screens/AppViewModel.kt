@@ -1,8 +1,5 @@
 package com.defey.onepiecestorybase.presentation.screens
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Settings
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,7 +37,6 @@ abstract class AppViewModel<S : UiState, E : UiEvent> : ViewModel() {
 
     private var updateScreenData by mutableStateOf(UpdateEventsScreen())
 
-
     var currentTab by mutableStateOf(0)
 
     val searchAppBarState: MutableState<SearchAppBarState> =
@@ -76,7 +72,6 @@ abstract class AppViewModel<S : UiState, E : UiEvent> : ViewModel() {
             ),
         )
     )
-
 
     private val _navigationFlow = MutableSharedFlow<NavigationIntent>(extraBufferCapacity = 1)
     val navigationFlow = _navigationFlow.asSharedFlow()
@@ -160,7 +155,6 @@ data class TopBarData(
     val actionIconResId: Int? = null,
     val onAction: (String) -> Unit = {}
 )
-
 
 interface UiState
 interface UiEvent
