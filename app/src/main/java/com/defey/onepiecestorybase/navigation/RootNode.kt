@@ -3,7 +3,6 @@ package com.defey.onepiecestorybase.navigation
 import android.annotation.SuppressLint
 import android.app.Application
 import android.os.Bundle
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.runtime.Composable
@@ -18,7 +17,8 @@ import com.bumble.appyx.core.node.ParentNode
 import com.bumble.appyx.navmodel.backstack.BackStack
 import com.bumble.appyx.navmodel.backstack.transitionhandler.rememberBackstackFader
 import com.defey.onepiecestorybase.presentation.screens.bonds.BondsNode
-import com.defey.onepiecestorybase.presentation.screens.island.IslandNode
+import com.defey.onepiecestorybase.presentation.screens.detail.location.IslandNode
+import com.defey.onepiecestorybase.presentation.screens.detail.personage.PersonageNode
 import com.defey.onepiecestorybase.presentation.screens.lists.ListsNode
 import com.defey.onepiecestorybase.presentation.screens.onboarding.OnboardingNode
 import com.defey.onepiecestorybase.presentation.screens.place.PlaceNode
@@ -86,6 +86,15 @@ class RootNode(
                 backStack,
                 defaultArgs = Bundle().apply {
                     putInt("islandId", navTarget.islandId)
+                }
+            )
+
+            is NavTarget.PersonageScreen -> PersonageNode(
+                buildContext,
+                application,
+                backStack,
+                defaultArgs = Bundle().apply {
+                    putInt("personageId", navTarget.personageId)
                 }
             )
 

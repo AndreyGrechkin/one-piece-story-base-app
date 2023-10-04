@@ -1,9 +1,6 @@
-package com.defey.onepiecestorybase.presentation.screens.island
+package com.defey.onepiecestorybase.presentation.screens.detail.location
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
-import androidx.lifecycle.ViewModel
 import com.defey.onepiecestorybase.presentation.screens.AppViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

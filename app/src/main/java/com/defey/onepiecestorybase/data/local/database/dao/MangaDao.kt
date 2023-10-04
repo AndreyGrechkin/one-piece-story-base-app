@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.defey.onepiecestorybase.data.local.model.MangaEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface MangaDao {
@@ -12,6 +13,8 @@ interface MangaDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addManga(manga: List<MangaEntity>)
 
-    @Query("SELECT * FROM manga")
-    suspend fun getManga(): List<MangaEntity>
+    @Query("SELECT * FROM manga WHERE id =:mangaId")
+    fun getManga(mangaId: Int): Flow<MangaEntity?>
+
+
 }

@@ -91,12 +91,12 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 
     // Coil
-    implementation("io.coil-kt:coil-compose:2.2.2")
+    implementation("io.coil-kt:coil-compose:2.4.0")
 
     // System UI Controller - Accompanist
     implementation "com.google.accompanist:accompanist-systemuicontroller:0.17.0"
-    implementation "com.google.accompanist:accompanist-pager:0.23.1"
-    implementation "com.google.accompanist:accompanist-pager-indicators:0.23.1"
+    implementation "com.google.accompanist:accompanist-pager:0.29.1-alpha"
+    implementation "com.google.accompanist:accompanist-pager-indicators:0.29.1-alpha"
 
     //ROOM DB
     implementation "androidx.room:room-runtime:$room_version"

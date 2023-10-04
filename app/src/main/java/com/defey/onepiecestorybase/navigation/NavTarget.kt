@@ -25,6 +25,9 @@ sealed class NavTarget : Parcelable {
 
     @Parcelize
     class IslandScreen(val islandId: Int): NavTarget()
+
+    @Parcelize
+    class PersonageScreen(val personageId: Int): NavTarget()
 }
 
 fun NavTarget.name(): String = this.javaClass.kotlin.simpleName.orEmpty()

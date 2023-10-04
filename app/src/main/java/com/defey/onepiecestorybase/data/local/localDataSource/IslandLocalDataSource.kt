@@ -7,7 +7,7 @@ import com.defey.onepiecestorybase.data.local.model.PersonageIslandEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-interface IslandLocalDS {
+interface IslandLocalDataSource {
     suspend fun insertIsland(island: List<IslandEntity>)
     fun getIsland(): Flow<List<IslandEntity>>
     suspend fun insertPersonageIsland(personageIsland: List<PersonageIslandEntity>)
@@ -17,9 +17,9 @@ interface IslandLocalDS {
     suspend fun deleteLocalOldAvatarPlace(lastPlaceId: Int, avatarName: String)
 }
 
-class IslandLocalDSImpl @Inject constructor(
+class IslandLocalDataSourceImpl @Inject constructor(
     private val dao: IslandDao
-) : IslandLocalDS {
+) : IslandLocalDataSource {
     override suspend fun insertIsland(island: List<IslandEntity>) {
         dao.addIsland(island)
     }

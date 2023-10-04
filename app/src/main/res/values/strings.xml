@@ -12,4 +12,9 @@
     <string name="bonds">Связи</string>
     <string name="info">Инфо</string>
     <string name="start">Старт</string>
+    <string name="title_list_personage">Персонажи</string>
+    <string name="title_list_band">Команды</string>
+    <string name="title_list_location">Локация</string>
+    <string name="title_list_subject">Предметы</string>
+    <string name="title_list_fruit">Фрукты</string>
 </resources>

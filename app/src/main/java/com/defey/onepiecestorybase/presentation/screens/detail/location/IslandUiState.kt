@@ -1,4 +1,4 @@
-package com.defey.onepiecestorybase.presentation.screens.island
+package com.defey.onepiecestorybase.presentation.screens.detail.location
 
 import com.defey.onepiecestorybase.presentation.screens.UiState
 
