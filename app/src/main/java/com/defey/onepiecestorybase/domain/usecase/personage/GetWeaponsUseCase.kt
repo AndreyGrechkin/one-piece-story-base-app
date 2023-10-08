@@ -13,7 +13,10 @@ class GetWeaponsUseCase(
     override fun execute(parameters: Int?): Flow<Response<List<Weapons>>> {
         val param = parameters ?: throw NullPointerException("personageId can't be null")
         return repo.getWeapons(param).map { value ->
-            Response.Success(value)
+            val response = value.filter { item ->
+                value.none { it.personageDescriptionId == item.id }
+            }
+            Response.Success(response)
         }
     }
 }

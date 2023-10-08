@@ -61,7 +61,7 @@ fun OPTheme(
                 OPSize.Big -> 20.sp
                 OPSize.Biggest -> 22.sp
             },
-            fontWeight = FontWeight.Normal,
+            fontWeight = FontWeight.Bold,
             fontFamily = Cormorant
         ),
         caption = TextStyle(

@@ -17,4 +17,16 @@
     <string name="title_list_location">Локация</string>
     <string name="title_list_subject">Предметы</string>
     <string name="title_list_fruit">Фрукты</string>
+    <string name="reward_title">Награда:</string>
+    <string name="description_icon_belli">icon belli</string>
+    <string name="description_icon_old_reward">old reward</string>
+    <string name="title_manga_in">Появляется в:</string>
+    <string name="title_manga">Манга:</string>
+    <string name="title_chapter">Глава</string>
+    <string name="title_anime">Аниме:</string>
+    <string name="title_description">Описание:</string>
+    <string name="title_fruit">Фрукт</string>
+    <string name="title_weapons">Оружие</string>
+    <string name="title_skills">Способности</string>
+    <string name="icon_description_arrow_expand">arrow</string>
 </resources>

@@ -47,7 +47,9 @@ class PersonageViewModel @Inject constructor(
     }
 
     override fun onEvent(event: PersonageUiEvent) {
-        TODO("Not yet implemented")
+       when(event) {
+           PersonageUiEvent.ClosePersonage -> navigateBack()
+       }
     }
 
     private fun observePersonage() {

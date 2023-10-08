@@ -14,8 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
+import java.text.NumberFormat
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 enum class ButtonState { Pressed, Idle }
 
@@ -78,4 +80,9 @@ fun String.convertDateFormat(inputFormat: String, outputFormat: String): String 
     } catch (e: Throwable) {
         ""
     }
+}
+
+fun formatNumberWithSeparators(number: Int): String {
+    val numberFormat = NumberFormat.getInstance(Locale.US)
+    return numberFormat.format(number).replace(",", ", ")
 }
