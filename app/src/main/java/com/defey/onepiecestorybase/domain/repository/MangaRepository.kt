@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface MangaRepository {
     fun getManga(mangaId: Int): Flow<Manga?>
+    fun getMangaInPlace(placeId: Int): Flow<List<Manga>>
 }

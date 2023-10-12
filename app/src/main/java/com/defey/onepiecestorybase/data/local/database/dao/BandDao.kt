@@ -25,4 +25,7 @@ interface BandDao {
 
     @Query("SELECT * FROM band WHERE id IN (:bandsId)")
     suspend fun getBandList(bandsId: List<Int>): List<BandEntity>
+
+    @Query("SELECT * FROM band WHERE id =:bandId")
+    fun getBandFlow(bandId: Int): Flow<BandEntity>
 }

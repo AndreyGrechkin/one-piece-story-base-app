@@ -29,4 +29,8 @@ class BandRepositoryImpl @Inject constructor(
        return local.getBandList(bandsId).map { it.asDomainModel() }
     }
 
+    override fun getBandFlow(bandId: Int): Flow<Band> {
+        return local.getBandFlow(bandId).map { value -> value.asDomainModel() }
+    }
+
 }

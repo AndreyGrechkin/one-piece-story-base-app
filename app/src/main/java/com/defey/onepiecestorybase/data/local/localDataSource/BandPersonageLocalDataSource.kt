@@ -8,6 +8,7 @@ import javax.inject.Inject
 interface BandPersonageLocalDataSource {
     fun getAllBandPersonage(): Flow<List<BandPersonageEntity>>
     fun getBandPersonage(personageId: Int): Flow<List<BandPersonageEntity>>
+    fun getBandPersonageByBand(bandId: Int): Flow<List<BandPersonageEntity>>
 
 }
 
@@ -20,6 +21,10 @@ class BandPersonageLocalDataSourceImpl @Inject constructor(
 
     override fun getBandPersonage(personageId: Int): Flow<List<BandPersonageEntity>> {
         return dao.getBandPersonage(personageId)
+    }
+
+    override fun getBandPersonageByBand(bandId: Int): Flow<List<BandPersonageEntity>> {
+        return dao.getBandPersonageByBand(bandId)
     }
 
 }

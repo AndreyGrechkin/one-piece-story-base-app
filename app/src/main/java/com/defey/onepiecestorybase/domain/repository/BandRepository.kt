@@ -8,4 +8,5 @@ interface BandRepository {
     fun getBands(bandsId: List<Int>): Flow<List<Band>>
     suspend fun getBand(bandId: Int): Band?
     suspend fun getBandList(bandsId: List<Int>): List<Band>
+    fun getBandFlow(bandId: Int): Flow<Band>
 }

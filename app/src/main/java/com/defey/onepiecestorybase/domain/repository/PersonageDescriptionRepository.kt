@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface PersonageDescriptionRepository {
     fun getAllPersonageDescription(): Flow<List<PersonageDescription>>
     fun getPersonageDescription(personageId: Int): Flow<List<PersonageDescription>>
+    suspend fun getPersonageDescriptionInPlace(personageIdList: List<Int>): List<PersonageDescription>
 }

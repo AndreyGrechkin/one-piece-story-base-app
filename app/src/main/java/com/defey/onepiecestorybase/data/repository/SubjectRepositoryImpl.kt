@@ -12,9 +12,13 @@ import javax.inject.Inject
 class SubjectRepositoryImpl @Inject constructor(
     private val remote: SubjectRemoteDataSource,
     private val local: SubjectLocalDataSource
-): SubjectRepository {
+) : SubjectRepository {
     override fun getAllSubject(): Flow<List<Subject>> {
         return local.getAllSubject().map { list -> list.map { it.asDomainModel() } }
+    }
+
+    override fun getSubjectInPlace(placeId: Int): Flow<List<Subject>> {
+        return local.getSubjectInPlace(placeId).map { list -> list.map { it.asDomainModel() } }
     }
 
 }

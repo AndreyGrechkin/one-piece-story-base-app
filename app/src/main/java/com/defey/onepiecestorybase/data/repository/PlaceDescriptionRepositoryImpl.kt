@@ -18,4 +18,10 @@ class PlaceDescriptionRepositoryImpl @Inject constructor(
             list.map { it.asDomainModel() }
         }
     }
+
+    override fun getLocationDescription(placeId: Int): Flow<List<PlaceDescription>> {
+        return local.getLocationDescription(placeId).map { list ->
+            list.map { it.asDomainModel() }
+        }
+    }
 }

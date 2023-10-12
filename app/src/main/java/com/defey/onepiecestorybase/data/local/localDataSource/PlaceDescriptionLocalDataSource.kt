@@ -7,6 +7,7 @@ import javax.inject.Inject
 
 interface PlaceDescriptionLocalDataSource {
     fun getAllPlaceDescription(): Flow<List<PlaceDescriptionEntity>>
+    fun getLocationDescription(placeId: Int): Flow<List<PlaceDescriptionEntity>>
 }
 
 class PlaceDescriptionLocalDataSourceImpl @Inject constructor(
@@ -14,6 +15,10 @@ class PlaceDescriptionLocalDataSourceImpl @Inject constructor(
 ) : PlaceDescriptionLocalDataSource {
     override fun getAllPlaceDescription(): Flow<List<PlaceDescriptionEntity>> {
         return dao.getAllDescription()
+    }
+
+    override fun getLocationDescription(placeId: Int): Flow<List<PlaceDescriptionEntity>> {
+        return dao.getLocationDescription(placeId)
     }
 
 }

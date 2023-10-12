@@ -1,5 +1,7 @@
 package com.defey.onepiecestorybase.di
 
+import com.defey.onepiecestorybase.data.local.localDataSource.BandDescriptionLocalDataSource
+import com.defey.onepiecestorybase.data.local.localDataSource.BandDescriptionLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.BandLocalDataSource
 import com.defey.onepiecestorybase.data.local.localDataSource.BandLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.BandPersonageLocalDataSource
@@ -16,14 +18,20 @@ import com.defey.onepiecestorybase.data.local.localDataSource.PersonageLocalData
 import com.defey.onepiecestorybase.data.local.localDataSource.PersonageLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.PlaceDescriptionLocalDataSource
 import com.defey.onepiecestorybase.data.local.localDataSource.PlaceDescriptionLocalDataSourceImpl
+import com.defey.onepiecestorybase.data.local.localDataSource.PlaceLocalDataSource
+import com.defey.onepiecestorybase.data.local.localDataSource.PlaceLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.RewardLocalDataSource
 import com.defey.onepiecestorybase.data.local.localDataSource.RewardLocalDataSourceImpl
+import com.defey.onepiecestorybase.data.local.localDataSource.ShipLocalDataSource
+import com.defey.onepiecestorybase.data.local.localDataSource.ShipLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.SkillLocalDataSource
 import com.defey.onepiecestorybase.data.local.localDataSource.SkillLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.SubjectLocalDataSource
 import com.defey.onepiecestorybase.data.local.localDataSource.SubjectLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.WeaponsLocalDataSource
 import com.defey.onepiecestorybase.data.local.localDataSource.WeaponsLocalDataSourceImpl
+import com.defey.onepiecestorybase.data.remote.remoteDataSource.BandDescriptionRemoteDataSource
+import com.defey.onepiecestorybase.data.remote.remoteDataSource.BandDescriptionRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.BandPersonageRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.BandPersonageRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.BandRemoteDataSource
@@ -42,12 +50,15 @@ import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceDescription
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceDescriptionRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.RewardRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.RewardRemoteDataSourceImpl
+import com.defey.onepiecestorybase.data.remote.remoteDataSource.ShipRemoteDataSource
+import com.defey.onepiecestorybase.data.remote.remoteDataSource.ShipRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.SkillRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.SkillRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.SubjectRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.SubjectRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.WeaponsRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.WeaponsRemoteDataSourceImpl
+import com.defey.onepiecestorybase.data.repository.BandDescriptionRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.BandPersonageRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.BandRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.FruitRepositoryImpl
@@ -58,9 +69,11 @@ import com.defey.onepiecestorybase.data.repository.PersonageRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.PlaceDescriptionRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.PlaceRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.RewardRepositoryImpl
+import com.defey.onepiecestorybase.data.repository.ShipRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.SkillRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.SubjectRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.WeaponsRepositoryImpl
+import com.defey.onepiecestorybase.domain.repository.BandDescriptionRepository
 import com.defey.onepiecestorybase.domain.repository.BandPersonageRepository
 import com.defey.onepiecestorybase.domain.repository.BandRepository
 import com.defey.onepiecestorybase.domain.repository.FruitRepository
@@ -71,6 +84,7 @@ import com.defey.onepiecestorybase.domain.repository.PersonageRepository
 import com.defey.onepiecestorybase.domain.repository.PlaceDescriptionRepository
 import com.defey.onepiecestorybase.domain.repository.PlaceRepository
 import com.defey.onepiecestorybase.domain.repository.RewardRepository
+import com.defey.onepiecestorybase.domain.repository.ShipRepository
 import com.defey.onepiecestorybase.domain.repository.SkillRepository
 import com.defey.onepiecestorybase.domain.repository.SubjectRepository
 import com.defey.onepiecestorybase.domain.repository.WeaponsRepository
@@ -231,4 +245,32 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideWeaponsRepository(impl: WeaponsRepositoryImpl): WeaponsRepository
+
+    @Binds
+    @Singleton
+    abstract fun providePlaceLocalDataSource(impl: PlaceLocalDataSourceImpl): PlaceLocalDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideBandDescriptionLocalDataSource(impl: BandDescriptionLocalDataSourceImpl): BandDescriptionLocalDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideBandDescriptionRemoteDataSource(impl: BandDescriptionRemoteDataSourceImpl): BandDescriptionRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideBandDescriptionRepository(impl: BandDescriptionRepositoryImpl): BandDescriptionRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideShipLocalDataSource(impl: ShipLocalDataSourceImpl): ShipLocalDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideShipRemoteDataSource(impl: ShipRemoteDataSourceImpl): ShipRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideShipRepository(impl: ShipRepositoryImpl): ShipRepository
 }

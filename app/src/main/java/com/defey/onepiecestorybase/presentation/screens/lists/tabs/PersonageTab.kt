@@ -1,6 +1,5 @@
 package com.defey.onepiecestorybase.presentation.screens.lists.tabs
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,9 +18,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.defey.onepiecestorybase.R
 import com.defey.onepiecestorybase.domain.model.PersonageCompact
 import com.defey.onepiecestorybase.presentation.screens.lists.ListsUiEvent
 import com.defey.onepiecestorybase.presentation.theme.OPTheme
@@ -34,7 +35,6 @@ fun PersonageTab(
 ) {
     LazyColumn {
         items(personageList) { personage ->
-        //    Log.d("MyLog", "pers: $personage")
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -55,8 +55,9 @@ fun PersonageTab(
                 ) {
                     AsyncImage(
                         model = personage.personageImage,
-                        contentDescription = "avatar",
+                        contentDescription = stringResource(R.string.image_description_avatar),
                         contentScale = ContentScale.Crop,
+                        alignment = Alignment.TopCenter,
                         modifier = Modifier
                             .size(70.dp)
                     )
@@ -95,7 +96,7 @@ fun PersonageTab(
                         if (personage.bandImage != null) {
                             AsyncImage(
                                 model = personage.bandImage,
-                                contentDescription = "flag",
+                                contentDescription = stringResource(R.string.image_description_flag),
                                 contentScale = ContentScale.Fit,
                                 modifier = Modifier.size(45.dp, 40.dp)
                             )

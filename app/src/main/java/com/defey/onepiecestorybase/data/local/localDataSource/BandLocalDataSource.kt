@@ -10,6 +10,7 @@ interface BandLocalDataSource {
     fun getAllBand(): Flow<List<BandEntity>>
     fun getBands(bandsId: List<Int>): Flow<List<BandEntity>>
     suspend fun getBand(bandId: Int): BandEntity?
+    fun getBandFlow(bandId: Int): Flow<BandEntity>
     suspend fun getBandList(bandsId: List<Int>): List<BandEntity>
 }
 
@@ -26,6 +27,10 @@ class BandLocalDataSourceImpl @Inject constructor(
 
     override suspend fun getBand(bandId: Int): BandEntity? {
         return dao.getBand(bandId)
+    }
+
+    override fun getBandFlow(bandId: Int): Flow<BandEntity> {
+        return dao.getBandFlow(bandId)
     }
 
     override suspend fun getBandList(bandsId: List<Int>): List<BandEntity> {

@@ -18,4 +18,10 @@ interface PersonageDao {
 
     @Query("SELECT * FROM personage WHERE id =:personageId")
     fun getPersonage(personageId: Int): Flow<PersonageEntity>
+
+    @Query("SELECT * FROM personage WHERE placeId=:placeId")
+    fun getPersonageByPlace(placeId: Int): Flow<List<PersonageEntity>>
+
+    @Query("SELECT * FROM personage WHERE id IN(:personagesId)")
+    suspend fun getPersonageInBand(personagesId: List<Int>): List<PersonageEntity>
 }

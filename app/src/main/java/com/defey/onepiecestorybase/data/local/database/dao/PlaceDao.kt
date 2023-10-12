@@ -22,4 +22,7 @@ interface PlaceDao {
 
     @Query("SELECT * FROM place")
     fun getAllPlaceFlow(): Flow<List<PlaceEntity>>
+
+    @Query("SELECT * FROM place WHERE id=:id")
+    fun getLocation(id: Int): Flow<PlaceEntity>
 }

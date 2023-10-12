@@ -7,6 +7,7 @@ import javax.inject.Inject
 
 interface SubjectLocalDataSource {
     fun getAllSubject(): Flow<List<InventoryEntity>>
+    fun getSubjectInPlace(placeId: Int): Flow<List<InventoryEntity>>
 }
 
 class SubjectLocalDataSourceImpl @Inject constructor(
@@ -14,6 +15,10 @@ class SubjectLocalDataSourceImpl @Inject constructor(
 ): SubjectLocalDataSource {
     override fun getAllSubject(): Flow<List<InventoryEntity>> {
         return dao.getAllSubject()
+    }
+
+    override fun getSubjectInPlace(placeId: Int): Flow<List<InventoryEntity>> {
+        return dao.getSubjectInPlace(placeId)
     }
 
 }

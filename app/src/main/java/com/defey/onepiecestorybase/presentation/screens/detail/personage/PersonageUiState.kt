@@ -12,7 +12,6 @@ data class PersonageUiState(
     val namePersonage: String = "",
     val surnamePersonage: String? = null,
     val personageImage: String? = null,
-  //  val bandName: String? = null,
     val description: String? = null,
     val careerList: List<Career> = emptyList(),
     val rewardList: List<Reward> = emptyList(),

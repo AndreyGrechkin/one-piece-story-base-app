@@ -8,6 +8,7 @@ import javax.inject.Inject
 interface PersonageDescriptionLocalDataSource {
     fun getAllPersonageDescription(): Flow<List<PersonageDescriptionEntity>>
     fun getPersonageDescription(personageId: Int): Flow<List<PersonageDescriptionEntity>>
+    suspend fun getPersonageDescriptionInPlace(personageIdList: List<Int>): List<PersonageDescriptionEntity>
 }
 
 class PersonageDescriptionLocalDataSourceImpl @Inject constructor(
@@ -19,6 +20,10 @@ class PersonageDescriptionLocalDataSourceImpl @Inject constructor(
 
     override fun getPersonageDescription(personageId: Int): Flow<List<PersonageDescriptionEntity>> {
         return dao.getPersonageDescription(personageId)
+    }
+
+    override suspend fun getPersonageDescriptionInPlace(personageIdList: List<Int>): List<PersonageDescriptionEntity> {
+        return dao.getPersonageDescriptionInPlace(personageIdList)
     }
 
 }

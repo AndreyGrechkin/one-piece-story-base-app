@@ -16,5 +16,7 @@ interface MangaDao {
     @Query("SELECT * FROM manga WHERE id =:mangaId")
     fun getManga(mangaId: Int): Flow<MangaEntity?>
 
+    @Query("SELECT * FROM manga WHERE placeId =:placeId")
+    fun getMangaInPlace(placeId: Int): Flow<List<MangaEntity>>
 
 }

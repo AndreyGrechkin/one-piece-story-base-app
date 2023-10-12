@@ -16,4 +16,8 @@ class MangaRepositoryImpl @Inject constructor(
     override fun getManga(mangaId: Int): Flow<Manga?> {
         return local.getManga(mangaId).map { it?.asDomainModel() }
     }
+
+    override fun getMangaInPlace(placeId: Int): Flow<List<Manga>> {
+        return local.getMangaInPlace(placeId).map { list -> list.map { it.asDomainModel() } }
+    }
 }

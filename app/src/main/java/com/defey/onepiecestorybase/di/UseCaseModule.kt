@@ -1,5 +1,6 @@
 package com.defey.onepiecestorybase.di
 
+import com.defey.onepiecestorybase.domain.repository.BandDescriptionRepository
 import com.defey.onepiecestorybase.domain.repository.BandPersonageRepository
 import com.defey.onepiecestorybase.domain.repository.BandRepository
 import com.defey.onepiecestorybase.domain.repository.DataStorePreferences
@@ -11,14 +12,24 @@ import com.defey.onepiecestorybase.domain.repository.PersonageRepository
 import com.defey.onepiecestorybase.domain.repository.PlaceDescriptionRepository
 import com.defey.onepiecestorybase.domain.repository.PlaceRepository
 import com.defey.onepiecestorybase.domain.repository.RewardRepository
+import com.defey.onepiecestorybase.domain.repository.ShipRepository
 import com.defey.onepiecestorybase.domain.repository.SkillRepository
 import com.defey.onepiecestorybase.domain.repository.SubjectRepository
 import com.defey.onepiecestorybase.domain.repository.WeaponsRepository
+import com.defey.onepiecestorybase.domain.usecase.band.GetBandDescriptionUseCase
+import com.defey.onepiecestorybase.domain.usecase.band.GetBandPersonageUseCase
+import com.defey.onepiecestorybase.domain.usecase.band.GetBandUseCase
+import com.defey.onepiecestorybase.domain.usecase.band.GetShipBandUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetBandListUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetFruitListUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetLocationListUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetPersonageListUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetSubjectListUseCase
+import com.defey.onepiecestorybase.domain.usecase.location.GetLocationDescriptionUseCase
+import com.defey.onepiecestorybase.domain.usecase.location.GetLocationUseCase
+import com.defey.onepiecestorybase.domain.usecase.location.GetMangaLocationUseCase
+import com.defey.onepiecestorybase.domain.usecase.location.GetPersonageLocationUseCase
+import com.defey.onepiecestorybase.domain.usecase.location.GetSubjectLocationUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetCareerUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetMangaUseCase
@@ -91,7 +102,12 @@ class UseCaseModule {
         bandRepo: BandRepository,
         bandPersonageRepo: BandPersonageRepository
     ): GetPersonageListUseCase =
-        GetPersonageListUseCase(personageRepo, personageDescriptionRepo, bandRepo, bandPersonageRepo)
+        GetPersonageListUseCase(
+            personageRepo,
+            personageDescriptionRepo,
+            bandRepo,
+            bandPersonageRepo
+        )
 
     @Provides
     fun provideGetBandListUseCase(
@@ -155,4 +171,53 @@ class UseCaseModule {
     fun provideGetWeaponsUseCase(
         repo: WeaponsRepository
     ): GetWeaponsUseCase = GetWeaponsUseCase(repo)
+
+    @Provides
+    fun provideGetLocationUseCase(
+        repo: PlaceRepository
+    ): GetLocationUseCase = GetLocationUseCase(repo)
+
+    @Provides
+    fun provideGetLocationDescriptionUseCase(
+        repo: PlaceDescriptionRepository
+    ): GetLocationDescriptionUseCase = GetLocationDescriptionUseCase(repo)
+
+    @Provides
+    fun provideGetPersonageLocationUseCase(
+        repo: PersonageRepository,
+        repoDescription: PersonageDescriptionRepository
+    ): GetPersonageLocationUseCase = GetPersonageLocationUseCase(repo, repoDescription)
+
+    @Provides
+    fun provideGetSubjectLocationUseCase(
+        repo: SubjectRepository
+    ): GetSubjectLocationUseCase = GetSubjectLocationUseCase(repo)
+
+    @Provides
+    fun provideGetMangaLocationUseCase(
+        repo: MangaRepository
+    ): GetMangaLocationUseCase = GetMangaLocationUseCase(repo)
+
+    @Provides
+    fun provideGetBandUseCase(
+        repo: BandRepository
+    ): GetBandUseCase = GetBandUseCase(repo)
+
+    @Provides
+    fun provideGetBandDescriptionUseCase(
+        repo: BandDescriptionRepository
+    ): GetBandDescriptionUseCase = GetBandDescriptionUseCase(repo)
+
+    @Provides
+    fun provideGetBandPersonageUseCase(
+        repo: BandPersonageRepository,
+        personageRepo: PersonageRepository,
+        personageDescriptionRepo: PersonageDescriptionRepository
+    ): GetBandPersonageUseCase = GetBandPersonageUseCase(repo, personageRepo, personageDescriptionRepo)
+
+    @Provides
+    fun provideGetShipBandUseCase(
+        repo: ShipRepository
+    ): GetShipBandUseCase = GetShipBandUseCase(repo)
+
 }

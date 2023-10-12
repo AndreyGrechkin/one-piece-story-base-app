@@ -18,4 +18,7 @@ interface PersonageDescriptionDao {
 
     @Query("SELECT * FROM personage_description WHERE personageId =:personageId")
     fun getPersonageDescription(personageId: Int): Flow<List<PersonageDescriptionEntity>>
+
+    @Query("SELECT * FROM personage_description WHERE personageId IN(:personageId)")
+    suspend fun getPersonageDescriptionInPlace(personageId: List<Int>): List<PersonageDescriptionEntity>
 }

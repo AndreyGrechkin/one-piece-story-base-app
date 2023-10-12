@@ -29,4 +29,14 @@
     <string name="title_weapons">Оружие</string>
     <string name="title_skills">Способности</string>
     <string name="icon_description_arrow_expand">arrow</string>
+    <string name="image_description_avatar">avatar</string>
+    <string name="image_description_flag">flag</string>
+    <string name="title_charpters">Главы</string>
+    <string name="title_whereabouts">Местонахождение:</string>
+    <string name="title_type">Тип:</string>
+    <string name="title_event">Событие:</string>
+    <string name="title_personages">Персонажи:</string>
+    <string name="title_team">Команда:</string>
+    <string name="title_subject">Предметы:</string>
+    <string name="title_ship">Корабли:</string>
 </resources>

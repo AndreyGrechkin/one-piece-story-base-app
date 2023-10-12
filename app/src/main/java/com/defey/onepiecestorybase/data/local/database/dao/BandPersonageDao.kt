@@ -18,4 +18,7 @@ interface BandPersonageDao {
 
     @Query("SELECT * FROM band_personage WHERE personageId =:personageId")
     fun getBandPersonage(personageId: Int): Flow<List<BandPersonageEntity>>
+
+    @Query("SELECT * FROM band_personage WHERE bandId =:bandId")
+    fun getBandPersonageByBand(bandId: Int): Flow<List<BandPersonageEntity>>
 }

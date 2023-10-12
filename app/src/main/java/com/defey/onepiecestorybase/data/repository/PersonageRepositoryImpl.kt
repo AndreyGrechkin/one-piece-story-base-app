@@ -20,4 +20,12 @@ class PersonageRepositoryImpl @Inject constructor(
     override fun getPersonage(personageId: Int): Flow<Personage> {
         return local.getPersonage(personageId).map { value -> value.asDomainModel() }
     }
+
+    override fun getPersonageByPlace(placeId: Int): Flow<List<Personage>> {
+        return local.getPersonageByPlace(placeId).map { list -> list.map { it.asDomainModel() } }
+    }
+
+    override suspend fun getPersonageInBand(personagesId: List<Int>): List<Personage> {
+       return local.getPersonageInBand(personagesId).map { it.asDomainModel() }
+    }
 }

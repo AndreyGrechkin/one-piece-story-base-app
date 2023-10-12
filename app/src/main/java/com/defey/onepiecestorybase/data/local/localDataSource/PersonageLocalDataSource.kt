@@ -8,6 +8,8 @@ import javax.inject.Inject
 interface PersonageLocalDataSource {
     fun getAllPersonage(): Flow<List<PersonageEntity>>
     fun getPersonage(personageId: Int): Flow<PersonageEntity>
+    fun getPersonageByPlace(placeId: Int): Flow<List<PersonageEntity>>
+    suspend fun getPersonageInBand(personagesId: List<Int>): List<PersonageEntity>
 }
 
 class PersonageLocalDataSourceImpl @Inject constructor(
@@ -19,6 +21,14 @@ class PersonageLocalDataSourceImpl @Inject constructor(
 
     override fun getPersonage(personageId: Int): Flow<PersonageEntity> {
         return dao.getPersonage(personageId)
+    }
+
+    override fun getPersonageByPlace(placeId: Int): Flow<List<PersonageEntity>> {
+        return dao.getPersonageByPlace(placeId)
+    }
+
+    override suspend fun getPersonageInBand(personagesId: List<Int>): List<PersonageEntity> {
+        return dao.getPersonageInBand(personagesId)
     }
 
 }

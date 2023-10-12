@@ -75,10 +75,12 @@ class ListsViewModel @Inject constructor(
             }
 
             is ListsUiEvent.BandClick -> {
+                navigateTo(NavTarget.BandScreen(event.bandId))
                 Log.d("MyLog", "card band: ${event.bandId}")
             }
 
             is ListsUiEvent.LocationClick -> {
+                navigateTo(NavTarget.IslandScreen(event.locationId))
                 Log.d("MyLog", "card location: ${event.locationId}")
             }
 

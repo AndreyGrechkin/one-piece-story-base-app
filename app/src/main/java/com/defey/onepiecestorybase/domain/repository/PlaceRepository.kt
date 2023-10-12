@@ -12,5 +12,6 @@ interface PlaceRepository: SafeApiCall {
     suspend fun syncMapById(id: Int): Response<Unit>
     fun getLastPlace(): Flow<Place?>
     fun getAllPlaceFlow(): Flow<List<Place>>
+    fun getLocation(id: Int): Flow<Place>
 
 }

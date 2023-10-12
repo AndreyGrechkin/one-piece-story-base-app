@@ -1,6 +1,5 @@
 package com.defey.onepiecestorybase.presentation.screens.lists.tabs
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -17,9 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import com.defey.onepiecestorybase.R
 import com.defey.onepiecestorybase.domain.model.LocationCompact
 import com.defey.onepiecestorybase.presentation.screens.lists.ListsUiEvent
 import com.defey.onepiecestorybase.presentation.theme.OPTheme
@@ -29,10 +30,9 @@ import com.defey.onepiecestorybase.presentation.utils.bounceClick
 fun LocationTab(
     locationList: List<LocationCompact>,
     onEvent: (ListsUiEvent) -> Unit
-){
+) {
     LazyColumn {
         items(locationList) { location ->
-          //  Log.d("MyLog", "band: $location")
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -53,7 +53,7 @@ fun LocationTab(
                 ) {
                     AsyncImage(
                         model = location.locationImage,
-                        contentDescription = "avatar",
+                        contentDescription = stringResource(id = R.string.image_description_avatar),
                         contentScale = ContentScale.Crop,
                         modifier = Modifier
                             .size(70.dp)
@@ -63,13 +63,13 @@ fun LocationTab(
                             .padding(start = 8.dp)
                             .weight(1f)
                     ) {
-                        if (location.placeName != null){
-                        Text(
-                            text = location.placeName,
-                            style = OPTheme.typography.title,
-                            fontWeight = FontWeight.ExtraBold,
-                            modifier = Modifier.fillMaxWidth()
-                        )
+                        if (location.placeName != null) {
+                            Text(
+                                text = location.placeName,
+                                style = OPTheme.typography.title,
+                                fontWeight = FontWeight.ExtraBold,
+                                modifier = Modifier.fillMaxWidth()
+                            )
                         }
                         if (location.locationName != null) {
                             Text(
@@ -87,5 +87,8 @@ fun LocationTab(
                             )
                         }
                     }
-                    }}}}
+                }
+            }
+        }
+    }
 }

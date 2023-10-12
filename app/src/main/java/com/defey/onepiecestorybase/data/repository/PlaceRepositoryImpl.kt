@@ -17,6 +17,7 @@ import com.defey.onepiecestorybase.data.local.database.dao.PlaceDescriptionDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceItemDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceTransitItemDao
 import com.defey.onepiecestorybase.data.local.database.dao.ShipDao
+import com.defey.onepiecestorybase.data.local.localDataSource.PlaceLocalDataSource
 import com.defey.onepiecestorybase.data.local.model.asDomain
 import com.defey.onepiecestorybase.data.remote.api.OnePieceApi
 import com.defey.onepiecestorybase.data.remote.model.MapResponse
@@ -46,7 +47,8 @@ class PlaceRepositoryImpl @Inject constructor(
     private val placeDescriptionDao: PlaceDescriptionDao,
     private val placeItemDao: PlaceItemDao,
     private val placeTransitItemDao: PlaceTransitItemDao,
-    private val shipDao: ShipDao
+    private val shipDao: ShipDao,
+    private val local: PlaceLocalDataSource
 ) : PlaceRepository {
     override suspend fun getMapById(id: Int): MapResponse {
         return api.getMapById(id)
@@ -98,5 +100,9 @@ class PlaceRepositoryImpl @Inject constructor(
 
     override fun getAllPlaceFlow(): Flow<List<Place>> {
         return placeDao.getAllPlaceFlow().map { value -> value.map { it.asDomain() } }
+    }
+
+    override fun getLocation(id: Int): Flow<Place> {
+       return local.getLocation(id).map { it.asDomain() }
     }
 }

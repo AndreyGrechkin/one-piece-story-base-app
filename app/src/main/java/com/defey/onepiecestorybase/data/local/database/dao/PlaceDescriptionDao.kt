@@ -15,4 +15,7 @@ interface PlaceDescriptionDao {
 
     @Query("SELECT * FROM place_description")
     fun getAllDescription(): Flow<List<PlaceDescriptionEntity>>
+
+    @Query("SELECT * FROM place_description WHERE placeId=:placeId")
+    fun getLocationDescription(placeId: Int): Flow<List<PlaceDescriptionEntity>>
 }

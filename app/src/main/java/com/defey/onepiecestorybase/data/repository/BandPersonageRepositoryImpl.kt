@@ -22,4 +22,9 @@ class BandPersonageRepositoryImpl @Inject constructor(
         return local.getBandPersonage(personageId)
             .map { list -> list.map { it.asDomainModel() } }
     }
+
+    override fun getBandPersonageByBand(bandId: Int): Flow<List<BandPersonage>> {
+        return local.getBandPersonageByBand(bandId)
+            .map { list -> list.map { it.asDomainModel() } }
+    }
 }

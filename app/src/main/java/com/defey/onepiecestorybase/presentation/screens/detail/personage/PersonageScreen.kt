@@ -280,49 +280,53 @@ fun PersonageScreen(
 
             if (state.description != null) {
                 item {
-                    var expanded by remember { mutableStateOf(false) }
-                    var isTextBig by remember { mutableStateOf(false) }
-                    CardBlock {
-                        Text(
-                            text = stringResource(R.string.title_description),
-                            style = OPTheme.typography.title,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 8.dp)
-                        )
-
-                        AnimatedVisibility(visible = !expanded) {
-                            Text(
-                                text = state.description,
-                                style = OPTheme.typography.body,
-                                maxLines = 5,
-                                overflow = TextOverflow.Ellipsis,
-                                modifier = Modifier
-                                    .padding(horizontal = 16.dp),
-                                onTextLayout = {
-                                    isTextBig = it.didOverflowHeight
-                                }
-                            )
-                        }
-                        AnimatedVisibility(visible = expanded) {
-                            Text(
-                                text = state.description,
-                                style = OPTheme.typography.body,
-                                modifier = Modifier
-                                    .padding(horizontal = 16.dp)
-                            )
-                        }
-                        if (isTextBig) {
-                            ExpandButton(
-                                expanded = expanded,
-                                modifier = Modifier.align(Alignment.CenterHorizontally),
-                                onClick = { expanded = it }
-                            )
-                        } else {
-                            Spacer(modifier = Modifier.padding(bottom = 8.dp))
-                        }
-                    }
+                    CardDescriptionBlock(
+                        title = stringResource(R.string.title_description),
+                        description = state.description
+                    )
+//                    var expanded by remember { mutableStateOf(false) }
+//                    var isTextBig by remember { mutableStateOf(false) }
+//                    CardBlock {
+//                        Text(
+//                            text = stringResource(R.string.title_description),
+//                            style = OPTheme.typography.title,
+//                            textAlign = TextAlign.Center,
+//                            modifier = Modifier
+//                                .fillMaxWidth()
+//                                .padding(top = 8.dp)
+//                        )
+//
+//                        AnimatedVisibility(visible = !expanded) {
+//                            Text(
+//                                text = state.description,
+//                                style = OPTheme.typography.body,
+//                                maxLines = 5,
+//                                overflow = TextOverflow.Ellipsis,
+//                                modifier = Modifier
+//                                    .padding(horizontal = 16.dp),
+//                                onTextLayout = {
+//                                    isTextBig = it.didOverflowHeight
+//                                }
+//                            )
+//                        }
+//                        AnimatedVisibility(visible = expanded) {
+//                            Text(
+//                                text = state.description,
+//                                style = OPTheme.typography.body,
+//                                modifier = Modifier
+//                                    .padding(horizontal = 16.dp)
+//                            )
+//                        }
+//                        if (isTextBig) {
+//                            ExpandButton(
+//                                expanded = expanded,
+//                                modifier = Modifier.align(Alignment.CenterHorizontally),
+//                                onClick = { expanded = it }
+//                            )
+//                        } else {
+//                            Spacer(modifier = Modifier.padding(bottom = 8.dp))
+//                        }
+//                    }
                 }
             }
 
@@ -609,5 +613,52 @@ fun CareerExpandItemBlocK(career: Career, textDecoration: TextDecoration? = null
                         alignment = Alignment.CenterEnd
                     )
             )
+    }
+}
+
+@Composable
+fun CardDescriptionBlock(title: String, description: String) {
+    var expanded by remember { mutableStateOf(false) }
+    var isTextBig by remember { mutableStateOf(false) }
+    CardBlock {
+        Text(
+            text = title,
+            style = OPTheme.typography.title,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        )
+
+        AnimatedVisibility(visible = !expanded) {
+            Text(
+                text = description,
+                style = OPTheme.typography.body,
+                maxLines = 5,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp),
+                onTextLayout = {
+                    isTextBig = it.didOverflowHeight
+                }
+            )
+        }
+        AnimatedVisibility(visible = expanded) {
+            Text(
+                text = description,
+                style = OPTheme.typography.body,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
+            )
+        }
+        if (isTextBig) {
+            ExpandButton(
+                expanded = expanded,
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                onClick = { expanded = it }
+            )
+        } else {
+            Spacer(modifier = Modifier.padding(bottom = 8.dp))
+        }
     }
 }

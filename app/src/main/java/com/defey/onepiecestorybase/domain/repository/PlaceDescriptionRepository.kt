@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface PlaceDescriptionRepository {
     fun getAllPlaceDescription(): Flow<List<PlaceDescription>>
+    fun getLocationDescription(placeId: Int): Flow<List<PlaceDescription>>
 }

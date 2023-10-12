@@ -7,13 +7,18 @@ import javax.inject.Inject
 
 interface MangaLocalDataSource {
     fun getManga(mangaId: Int): Flow<MangaEntity?>
+    fun getMangaInPlace(placeId: Int): Flow<List<MangaEntity>>
 }
 
 class MangaLocalDataSourceImpl @Inject constructor(
     private val dao: MangaDao
-): MangaLocalDataSource {
+) : MangaLocalDataSource {
     override fun getManga(mangaId: Int): Flow<MangaEntity?> {
         return dao.getManga(mangaId)
+    }
+
+    override fun getMangaInPlace(placeId: Int): Flow<List<MangaEntity>> {
+        return dao.getMangaInPlace(placeId)
     }
 
 }
