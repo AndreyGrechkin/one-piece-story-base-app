@@ -13,7 +13,16 @@ class GetShipBandUseCase(
     override fun execute(parameters: Int?): Flow<Response<List<Ship>>> {
         val param = parameters ?: throw NullPointerException("bandId can't be null")
         return repo.getShipByBand(param).map { value ->
-            Response.Success(value)
+            val filterShip = value.filter { ship ->
+                value.none {
+                    if (it.id == it.oldShip)
+                        false
+                    else
+                        it.id == ship.oldShip
+                }
+
+            }
+            Response.Success(filterShip)
         }
     }
 }

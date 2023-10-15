@@ -198,7 +198,7 @@ fun BandScreen(
                                     contentDescription = ship.nameShip,
                                     contentScale = ContentScale.Crop,
                                     alignment = Alignment.TopCenter,
-                                    modifier = if (ship.oldShip) {
+                                    modifier = if (ship.oldShip != null) {
                                         Modifier
                                             .size(60.dp)
                                             .clip(ShapeDefaults.Medium)
@@ -214,7 +214,7 @@ fun BandScreen(
                                     text = ship.nameShip.toString(),
                                     style = OPTheme.typography.title,
                                     modifier = Modifier.padding(start = 16.dp),
-                                    textDecoration = if (ship.oldShip) TextDecoration.LineThrough else null,
+                                    textDecoration = if (ship.oldShip != null) TextDecoration.LineThrough else null,
                                 )
                             }
                         }

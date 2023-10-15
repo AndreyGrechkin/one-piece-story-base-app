@@ -15,7 +15,7 @@ data class ShipResponse(
     val mangaId: Int,
     val nameShip: String?,
     val description: String?,
-    val oldShip: Boolean,
+    val oldShip: Int?,
     val nameJp: String?,
     val transcriptionJp: String?,
     val image: String?,

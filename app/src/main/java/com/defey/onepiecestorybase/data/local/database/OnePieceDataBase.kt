@@ -63,7 +63,7 @@ import com.defey.onepiecestorybase.data.local.model.ShipEntity
         IslandEntity::class,
         PersonageIslandEntity::class,
         IslandTransitEntity::class
-    ], version = 1
+    ], version = 1, exportSchema = true
 )
 abstract class OnePieceDataBase : RoomDatabase() {
 
