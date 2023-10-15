@@ -17,8 +17,10 @@ import com.bumble.appyx.navmodel.backstack.BackStack
 import com.bumble.appyx.navmodel.backstack.transitionhandler.rememberBackstackFader
 import com.defey.onepiecestorybase.presentation.screens.bonds.BondsNode
 import com.defey.onepiecestorybase.presentation.screens.detail.band.BandNode
+import com.defey.onepiecestorybase.presentation.screens.detail.fruit.FruitNode
 import com.defey.onepiecestorybase.presentation.screens.detail.location.IslandNode
 import com.defey.onepiecestorybase.presentation.screens.detail.personage.PersonageNode
+import com.defey.onepiecestorybase.presentation.screens.detail.subject.SubjectNode
 import com.defey.onepiecestorybase.presentation.screens.info.InfoNode
 import com.defey.onepiecestorybase.presentation.screens.lists.ListsNode
 import com.defey.onepiecestorybase.presentation.screens.onboarding.OnboardingNode
@@ -102,6 +104,24 @@ class RootNode(
                 backStack,
                 defaultArgs = Bundle().apply {
                     putInt("bandId", navTarget.bandId)
+                }
+            )
+
+            is NavTarget.FruitScreen -> FruitNode(
+                buildContext,
+                application,
+                backStack,
+                defaultArgs = Bundle().apply {
+                    putInt("fruitId", navTarget.fruitId)
+                }
+            )
+
+            is NavTarget.SubjectScreen -> SubjectNode(
+                buildContext,
+                application,
+                backStack,
+                defaultArgs = Bundle().apply {
+                    putInt("subjectId", navTarget.subjectId)
                 }
             )
 

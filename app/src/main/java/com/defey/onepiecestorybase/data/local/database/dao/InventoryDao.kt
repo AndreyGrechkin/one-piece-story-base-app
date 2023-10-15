@@ -18,4 +18,7 @@ interface InventoryDao {
 
     @Query("SELECT * FROM inventory WHERE placeId=:placeId")
     fun getSubjectInPlace(placeId: Int): Flow<List<InventoryEntity>>
+
+    @Query("SELECT * FROM inventory WHERE Id=:subjectId")
+    fun getSubject(subjectId: Int): Flow<InventoryEntity?>
 }

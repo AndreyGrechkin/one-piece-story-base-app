@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.defey.onepiecestorybase.R
 import com.defey.onepiecestorybase.domain.model.Career
+import com.defey.onepiecestorybase.domain.model.Manga
 import com.defey.onepiecestorybase.presentation.theme.OPTheme
 import com.defey.onepiecestorybase.presentation.utils.bounceClick
 import com.defey.onepiecestorybase.presentation.utils.formatNumberWithSeparators
@@ -68,36 +69,11 @@ fun PersonageScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp)
-                ) {
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        AsyncImage(
-                            model = state.personageImage,
-                            contentDescription = state.namePersonage,
-                            contentScale = ContentScale.Crop,
-                            alignment = Alignment.TopCenter,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .aspectRatio(4f / 3f),
-                        )
-                        Icon(
-                            imageVector = ImageVector.vectorResource(id = R.drawable.close_icon),
-                            contentDescription = stringResource(id = R.string.close),
-                            tint = OPTheme.colors.blackColor,
-                            modifier = Modifier
-                                .padding(top = 8.dp, end = 8.dp)
-                                .align(Alignment.TopEnd)
-                                .bounceClick {
-                                    onEvent(PersonageUiEvent.ClosePersonage)
-                                },
-                        )
-                    }
-                }
+                CardImageBlock(
+                    image = state.personageImage,
+                    imageDescription = state.namePersonage,
+                    onEvent = { onEvent(PersonageUiEvent.ClosePersonage) }
+                )
             }
 
             item {
@@ -217,65 +193,7 @@ fun PersonageScreen(
             }
 
             item {
-                CardBlock {
-                    Text(
-                        text = stringResource(R.string.title_manga_in),
-                        style = OPTheme.typography.title,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 8.dp)
-                    )
-                    if (state.manga?.chapter != null) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 16.dp)
-                        ) {
-                            Text(
-                                text = stringResource(R.string.title_manga),
-                                style = OPTheme.typography.title,
-                                modifier = Modifier
-                                    .padding(end = 4.dp)
-                            )
-                            Text(
-                                text = state.manga.volume.toString(),
-                                style = OPTheme.typography.title,
-                                modifier = Modifier
-                                    .padding(end = 4.dp)
-                            )
-                            Text(
-                                text = stringResource(R.string.title_chapter),
-                                style = OPTheme.typography.title,
-                                modifier = Modifier
-                                    .padding(end = 4.dp)
-                            )
-                            Text(text = state.manga.chapter, style = OPTheme.typography.title)
-                        }
-                    }
-                    if (state.manga?.animeSeries != null) {
-                        Row(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(horizontal = 16.dp),
-                        ) {
-                            Text(
-                                text = stringResource(R.string.title_anime),
-                                style = OPTheme.typography.title,
-                                modifier = Modifier
-                                    .padding(end = 4.dp)
-                            )
-                            Text(
-                                text = state.manga.animeType.toString(),
-                                style = OPTheme.typography.title,
-                                modifier = Modifier
-                                    .padding(end = 4.dp)
-                            )
-                            Text(text = state.manga.animeSeries, style = OPTheme.typography.title)
-                        }
-                    }
-                    Spacer(modifier = Modifier.padding(bottom = 8.dp))
-                }
+                CardMangaBlock(manga = state.manga)
             }
 
             if (state.description != null) {
@@ -284,49 +202,6 @@ fun PersonageScreen(
                         title = stringResource(R.string.title_description),
                         description = state.description
                     )
-//                    var expanded by remember { mutableStateOf(false) }
-//                    var isTextBig by remember { mutableStateOf(false) }
-//                    CardBlock {
-//                        Text(
-//                            text = stringResource(R.string.title_description),
-//                            style = OPTheme.typography.title,
-//                            textAlign = TextAlign.Center,
-//                            modifier = Modifier
-//                                .fillMaxWidth()
-//                                .padding(top = 8.dp)
-//                        )
-//
-//                        AnimatedVisibility(visible = !expanded) {
-//                            Text(
-//                                text = state.description,
-//                                style = OPTheme.typography.body,
-//                                maxLines = 5,
-//                                overflow = TextOverflow.Ellipsis,
-//                                modifier = Modifier
-//                                    .padding(horizontal = 16.dp),
-//                                onTextLayout = {
-//                                    isTextBig = it.didOverflowHeight
-//                                }
-//                            )
-//                        }
-//                        AnimatedVisibility(visible = expanded) {
-//                            Text(
-//                                text = state.description,
-//                                style = OPTheme.typography.body,
-//                                modifier = Modifier
-//                                    .padding(horizontal = 16.dp)
-//                            )
-//                        }
-//                        if (isTextBig) {
-//                            ExpandButton(
-//                                expanded = expanded,
-//                                modifier = Modifier.align(Alignment.CenterHorizontally),
-//                                onClick = { expanded = it }
-//                            )
-//                        } else {
-//                            Spacer(modifier = Modifier.padding(bottom = 8.dp))
-//                        }
-//                    }
                 }
             }
 
@@ -488,6 +363,38 @@ fun CardBlock(
             ),
         content = content
     )
+}
+
+@Composable
+fun CardImageBlock(image: String?, imageDescription: String?, onEvent: () -> Unit) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 8.dp)
+    ) {
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+        ) {
+            AsyncImage(
+                model = image,
+                contentDescription = imageDescription,
+                contentScale = ContentScale.Crop,
+                alignment = Alignment.TopCenter,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(4f / 3f),
+            )
+            Icon(
+                imageVector = ImageVector.vectorResource(id = R.drawable.close_icon),
+                contentDescription = stringResource(id = R.string.close),
+                tint = OPTheme.colors.blackColor,
+                modifier = Modifier
+                    .padding(top = 8.dp, end = 8.dp)
+                    .align(Alignment.TopEnd)
+                    .bounceClick (onClick = onEvent),
+            )
+        }
+    }
 }
 
 @Composable
@@ -660,5 +567,68 @@ fun CardDescriptionBlock(title: String, description: String) {
         } else {
             Spacer(modifier = Modifier.padding(bottom = 8.dp))
         }
+    }
+}
+
+@Composable
+fun CardMangaBlock(manga: Manga?) {
+    CardBlock {
+        Text(
+            text = stringResource(R.string.title_manga_in),
+            style = OPTheme.typography.title,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+        )
+        if (manga?.chapter != null) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp)
+            ) {
+                Text(
+                    text = stringResource(R.string.title_manga),
+                    style = OPTheme.typography.title,
+                    modifier = Modifier
+                        .padding(end = 4.dp)
+                )
+                Text(
+                    text = manga.volume.toString(),
+                    style = OPTheme.typography.title,
+                    modifier = Modifier
+                        .padding(end = 4.dp)
+                )
+                Text(
+                    text = stringResource(R.string.title_chapter),
+                    style = OPTheme.typography.title,
+                    modifier = Modifier
+                        .padding(end = 4.dp)
+                )
+                Text(text = manga.chapter, style = OPTheme.typography.title)
+            }
+        }
+        if (manga?.animeSeries != null) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 16.dp),
+            ) {
+                Text(
+                    text = stringResource(R.string.title_anime),
+                    style = OPTheme.typography.title,
+                    modifier = Modifier
+                        .padding(end = 4.dp)
+                )
+                Text(
+                    text = manga.animeType.toString(),
+                    style = OPTheme.typography.title,
+                    modifier = Modifier
+                        .padding(end = 4.dp)
+                )
+                Text(text = manga.animeSeries, style = OPTheme.typography.title)
+            }
+        }
+        Spacer(modifier = Modifier.padding(bottom = 8.dp))
     }
 }

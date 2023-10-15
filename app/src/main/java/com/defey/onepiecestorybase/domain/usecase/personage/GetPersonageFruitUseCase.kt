@@ -7,7 +7,7 @@ import com.defey.onepiecestorybase.domain.usecase.FlowUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
-class GetFruitUseCase(
+class GetPersonageFruitUseCase(
     private val repo: FruitRepository
 ) : FlowUseCase<Int?, Fruit?>() {
     override fun execute(parameters: Int?): Flow<Response<Fruit?>> {

@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.defey.onepiecestorybase.domain.model.Response
 import com.defey.onepiecestorybase.domain.usecase.personage.GetCareerUseCase
-import com.defey.onepiecestorybase.domain.usecase.personage.GetFruitUseCase
+import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetMangaUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageDescriptionUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageUseCase
@@ -29,7 +29,7 @@ class PersonageViewModel @Inject constructor(
     private val getRewardUseCase: GetRewardUseCase,
     private val getMangaUseCase: GetMangaUseCase,
     private val getSkillUseCase: GetSkillUseCase,
-    private val getFruitUseCase: GetFruitUseCase,
+    private val getPersonageFruitUseCase: GetPersonageFruitUseCase,
     private val getWeaponsUseCase: GetWeaponsUseCase
 ) : AppViewModel<PersonageUiState, PersonageUiEvent>() {
 
@@ -113,7 +113,7 @@ class PersonageViewModel @Inject constructor(
     }
 
     private fun observeFruit(fruitId: Int) {
-        getFruitUseCase(fruitId).onEach { response ->
+        getPersonageFruitUseCase(fruitId).onEach { response ->
             if (response is Response.Success) {
             _uiState.update { it.copy(fruit = response.value) }
             }

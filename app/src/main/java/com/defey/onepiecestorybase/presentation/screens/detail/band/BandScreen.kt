@@ -39,8 +39,10 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.defey.onepiecestorybase.R
 import com.defey.onepiecestorybase.domain.model.PersonageBandContent
+import com.defey.onepiecestorybase.presentation.screens.detail.location.IslandUiEvent
 import com.defey.onepiecestorybase.presentation.screens.detail.personage.CardBlock
 import com.defey.onepiecestorybase.presentation.screens.detail.personage.CardDescriptionBlock
+import com.defey.onepiecestorybase.presentation.screens.detail.personage.CardImageBlock
 import com.defey.onepiecestorybase.presentation.screens.detail.personage.ExpandButton
 import com.defey.onepiecestorybase.presentation.theme.OPTheme
 import com.defey.onepiecestorybase.presentation.utils.bounceClick
@@ -64,35 +66,11 @@ fun BandScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp)
-                ) {
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        AsyncImage(
-                            model = state.imageBand,
-                            contentDescription = state.nameBand,
-                            contentScale = ContentScale.Crop,
-                            alignment = Alignment.TopCenter,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .aspectRatio(4f / 3f)
-                        )
-                        Icon(
-                            imageVector = ImageVector.vectorResource(id = R.drawable.close_icon),
-                            contentDescription = stringResource(id = R.string.close),
-                            modifier = Modifier
-                                .padding(top = 8.dp, end = 8.dp)
-                                .align(Alignment.TopEnd)
-                                .bounceClick {
-                                    onEvent(BandUiEvent.CloseBand)
-                                }
-                        )
-                    }
-                }
+                CardImageBlock(
+                    image = state.imageBand,
+                    imageDescription = state.nameBand,
+                    onEvent = { onEvent(BandUiEvent.CloseBand) }
+                )
             }
 
             item {
@@ -113,7 +91,7 @@ fun BandScreen(
                         ) {
 
                             Text(
-                                text = "Капитан:",
+                                text = stringResource(R.string.title_capitan),
                                 style = OPTheme.typography.title,
                                 modifier = Modifier
                                     .padding(end = 4.dp)

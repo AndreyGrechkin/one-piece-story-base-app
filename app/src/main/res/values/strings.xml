@@ -36,7 +36,9 @@
     <string name="title_type">Тип:</string>
     <string name="title_event">Событие:</string>
     <string name="title_personages">Персонажи:</string>
+    <string name="title_owner">Владелец:</string>
     <string name="title_team">Команда:</string>
     <string name="title_subject">Предметы:</string>
     <string name="title_ship">Корабли:</string>
+    <string name="title_capitan">Капитан:</string>
 </resources>

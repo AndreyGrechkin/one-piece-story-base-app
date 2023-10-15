@@ -20,6 +20,9 @@ import com.defey.onepiecestorybase.domain.usecase.band.GetBandDescriptionUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetBandPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetBandUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetShipBandUseCase
+import com.defey.onepiecestorybase.domain.usecase.fruit.GetFruitPersonageUseCase
+import com.defey.onepiecestorybase.domain.usecase.fruit.GetFruitUseCase
+import com.defey.onepiecestorybase.domain.usecase.fruit.GetMangaFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetBandListUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetFruitListUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetLocationListUseCase
@@ -31,7 +34,7 @@ import com.defey.onepiecestorybase.domain.usecase.location.GetMangaLocationUseCa
 import com.defey.onepiecestorybase.domain.usecase.location.GetPersonageLocationUseCase
 import com.defey.onepiecestorybase.domain.usecase.location.GetSubjectLocationUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetCareerUseCase
-import com.defey.onepiecestorybase.domain.usecase.personage.GetFruitUseCase
+import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetMangaUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageDescriptionUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageUseCase
@@ -46,6 +49,8 @@ import com.defey.onepiecestorybase.domain.usecase.place.GetNextTimeUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SyncMapUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizeIslandUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizePersonageIslandUseCase
+import com.defey.onepiecestorybase.domain.usecase.subject.GetMangaSubjectUseCase
+import com.defey.onepiecestorybase.domain.usecase.subject.GetSubjectUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -163,9 +168,9 @@ class UseCaseModule {
     ): GetSkillUseCase = GetSkillUseCase(repo)
 
     @Provides
-    fun provideGetFruitUseCase(
+    fun provideGetPersonageFruitUseCase(
         repo: FruitRepository
-    ): GetFruitUseCase = GetFruitUseCase(repo)
+    ): GetPersonageFruitUseCase = GetPersonageFruitUseCase(repo)
 
     @Provides
     fun provideGetWeaponsUseCase(
@@ -219,5 +224,31 @@ class UseCaseModule {
     fun provideGetShipBandUseCase(
         repo: ShipRepository
     ): GetShipBandUseCase = GetShipBandUseCase(repo)
+
+    @Provides
+    fun provideGetFruitUseCase(
+        repo: FruitRepository
+    ): GetFruitUseCase = GetFruitUseCase(repo)
+
+    @Provides
+    fun provideGetMangaFruitUseCase(
+        repo: MangaRepository
+    ): GetMangaFruitUseCase = GetMangaFruitUseCase(repo)
+
+    @Provides
+    fun provideGetFruitPersonageUseCase(
+        repo: PersonageDescriptionRepository,
+        personageRepo: PersonageRepository
+    ): GetFruitPersonageUseCase = GetFruitPersonageUseCase(repo, personageRepo)
+
+    @Provides
+    fun provideGetSubjectUseCase(
+        repo: SubjectRepository
+    ): GetSubjectUseCase = GetSubjectUseCase(repo)
+
+    @Provides
+    fun provideGetMangaSubjectUseCase(
+        repo: MangaRepository
+    ): GetMangaSubjectUseCase = GetMangaSubjectUseCase(repo)
 
 }

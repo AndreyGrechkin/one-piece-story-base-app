@@ -85,10 +85,12 @@ class ListsViewModel @Inject constructor(
             }
 
             is ListsUiEvent.SubjectClick -> {
+                navigateTo(NavTarget.SubjectScreen(event.subjectId))
                 Log.d("MyLog", "card subject: ${event.subjectId}")
             }
 
             is ListsUiEvent.FruitClick -> {
+                navigateTo(NavTarget.FruitScreen(event.fruitId))
                 Log.d("MyLog", "card fruit: ${event.fruitId}")
             }
         }

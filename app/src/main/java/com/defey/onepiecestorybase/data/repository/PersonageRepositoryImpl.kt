@@ -28,4 +28,5 @@ class PersonageRepositoryImpl @Inject constructor(
     override suspend fun getPersonageInBand(personagesId: List<Int>): List<Personage> {
        return local.getPersonageInBand(personagesId).map { it.asDomainModel() }
     }
+
 }

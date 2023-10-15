@@ -26,4 +26,9 @@ class PersonageDescriptionRepositoryImpl @Inject constructor(
     override suspend fun getPersonageDescriptionInPlace(personageIdList: List<Int>): List<PersonageDescription> {
         return local.getPersonageDescriptionInPlace(personageIdList).map { it.asDomainModel() }
     }
+
+    override fun getPersonageDescriptionByFruit(fruitId: Int): Flow<List<PersonageDescription>> {
+        return local.getPersonageDescriptionByFruit(fruitId)
+            .map { list -> list.map { it.asDomainModel() } }
+    }
 }

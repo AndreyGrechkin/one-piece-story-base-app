@@ -24,4 +24,5 @@ interface PersonageDao {
 
     @Query("SELECT * FROM personage WHERE id IN(:personagesId)")
     suspend fun getPersonageInBand(personagesId: List<Int>): List<PersonageEntity>
+
 }

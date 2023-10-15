@@ -21,4 +21,8 @@ class SubjectRepositoryImpl @Inject constructor(
         return local.getSubjectInPlace(placeId).map { list -> list.map { it.asDomainModel() } }
     }
 
+    override fun getSubject(subjectId: Int): Flow<Subject?> {
+       return local.getSubject(subjectId).map { it?.asDomainModel() }
+    }
+
 }

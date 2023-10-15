@@ -43,7 +43,9 @@ import com.defey.onepiecestorybase.R
 import com.defey.onepiecestorybase.domain.model.LocationPersonage
 import com.defey.onepiecestorybase.presentation.screens.detail.personage.CardBlock
 import com.defey.onepiecestorybase.presentation.screens.detail.personage.CardDescriptionBlock
+import com.defey.onepiecestorybase.presentation.screens.detail.personage.CardImageBlock
 import com.defey.onepiecestorybase.presentation.screens.detail.personage.ExpandButton
+import com.defey.onepiecestorybase.presentation.screens.detail.personage.PersonageUiEvent
 import com.defey.onepiecestorybase.presentation.theme.OPTheme
 import com.defey.onepiecestorybase.presentation.utils.bounceClick
 
@@ -66,36 +68,11 @@ fun IslandScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             item {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 8.dp)
-                ) {
-                    Box(
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        AsyncImage(
-                            model = state.imageLocation,
-                            contentDescription = state.location?.namePlace,
-                            contentScale = ContentScale.Crop,
-                            alignment = Alignment.TopCenter,
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .aspectRatio(4f / 3f)
-                        )
-                        Icon(
-                            imageVector = ImageVector.vectorResource(id = R.drawable.close_icon),
-                            contentDescription = stringResource(id = R.string.close),
-                            tint = OPTheme.colors.blackColor,
-                            modifier = Modifier
-                                .padding(top = 8.dp, end = 8.dp)
-                                .align(Alignment.TopEnd)
-                                .bounceClick {
-                                    onEvent(IslandUiEvent.CloseLocation)
-                                }
-                        )
-                    }
-                }
+                CardImageBlock(
+                    image = state.imageLocation,
+                    imageDescription = state.location?.namePlace,
+                    onEvent = { onEvent(IslandUiEvent.CloseLocation) }
+                )
             }
 
             item {
