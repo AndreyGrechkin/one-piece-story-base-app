@@ -17,10 +17,11 @@ class GetFruitListUseCase(
                     fruitId = it.id,
                     fruitName = it.nameFruit,
                     fruitType = it.fruitType,
-                    fruitImage = it.image
+                    fruitImage = it.image,
+                    isNewFruit = it.isNewFruit
                 )
             }
-            Response.Success(compact)
+            Response.Success(compact.sortedBy { !it.isNewFruit })
         }
     }
 }

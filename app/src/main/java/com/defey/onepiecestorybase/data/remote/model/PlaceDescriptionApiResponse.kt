@@ -24,5 +24,6 @@ fun PlaceDescriptionResponse.toEntity() = PlaceDescriptionEntity(
     mangaId = mangaId,
     description = description,
     event = event,
-    image = image
+    image = image,
+    isNewLocation = true
 )

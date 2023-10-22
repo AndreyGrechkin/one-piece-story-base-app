@@ -14,6 +14,7 @@ data class PlaceDescriptionEntity(
     val description: String?,
     val event: String?,
     val image: String?,
+    val isNewLocation: Boolean
 )
 
 fun PlaceDescriptionEntity.asDomainModel() = PlaceDescription(
@@ -22,5 +23,6 @@ fun PlaceDescriptionEntity.asDomainModel() = PlaceDescription(
     mangaId = mangaId,
     description = description,
     event = event,
-    image = image
+    image = image,
+    isNewLocation = isNewLocation
 )

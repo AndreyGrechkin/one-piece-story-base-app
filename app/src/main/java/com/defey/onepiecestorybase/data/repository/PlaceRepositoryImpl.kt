@@ -18,6 +18,23 @@ import com.defey.onepiecestorybase.data.local.database.dao.PlaceItemDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceTransitItemDao
 import com.defey.onepiecestorybase.data.local.database.dao.ShipDao
 import com.defey.onepiecestorybase.data.local.localDataSource.PlaceLocalDataSource
+import com.defey.onepiecestorybase.data.local.model.BandDescriptionEntity
+import com.defey.onepiecestorybase.data.local.model.BandEntity
+import com.defey.onepiecestorybase.data.local.model.BandPersonageEntity
+import com.defey.onepiecestorybase.data.local.model.BondEntity
+import com.defey.onepiecestorybase.data.local.model.FruitEntity
+import com.defey.onepiecestorybase.data.local.model.InventoryEntity
+import com.defey.onepiecestorybase.data.local.model.MangaEntity
+import com.defey.onepiecestorybase.data.local.model.PersonageDescriptionEntity
+import com.defey.onepiecestorybase.data.local.model.PersonageEntity
+import com.defey.onepiecestorybase.data.local.model.PersonageRewardEntity
+import com.defey.onepiecestorybase.data.local.model.PersonageSkillEntity
+import com.defey.onepiecestorybase.data.local.model.PersonageWeaponsEntity
+import com.defey.onepiecestorybase.data.local.model.PlaceDescriptionEntity
+import com.defey.onepiecestorybase.data.local.model.PlaceEntity
+import com.defey.onepiecestorybase.data.local.model.PlaceItemEntity
+import com.defey.onepiecestorybase.data.local.model.PlaceTransitItemEntity
+import com.defey.onepiecestorybase.data.local.model.ShipEntity
 import com.defey.onepiecestorybase.data.local.model.asDomain
 import com.defey.onepiecestorybase.data.remote.api.OnePieceApi
 import com.defey.onepiecestorybase.data.remote.model.MapResponse
@@ -74,23 +91,127 @@ class PlaceRepositoryImpl @Inject constructor(
             val placeItem = mapAll.placeItem.map { it.toEntity() }
             val placeTransit = mapAll.placeTransit.map { it.toEntity() }
             val ship = mapAll.ship.map { it.toEntity() }
-            bandDao.addBand(band)
-            bandDescriptionDao.addBandDescription(bandDesc)
-            bandPersonageDao.addBandPersonage(bandPerson)
-            bondDao.addBond(bond)
-            fruitDao.addFruit(fruit)
-            inventoryDao.addInventory(inventory)
-            mangaDao.addManga(manga)
-            personageDao.addPersonage(personage)
-            personageDescriptionDao.addPersonageDescription(personDesc)
-            rewardDao.addPersonageReward(reward)
-            skillDao.addPersonageSkill(skill)
-            weaponsDao.addPersonageWeapon(weapon)
-            placeDao.addPlace(place)
-            placeDescriptionDao.addPlaceDescription(placeDesc)
-            placeItemDao.addPlaceItem(placeItem)
-            placeTransitItemDao.addPlaceTransit(placeTransit)
+            addBandDao(band)
+            addBandDescriptionDao(bandDesc)
+            addBandPersonageDao(bandPerson)
+            addBondDao(bond)
+            addFruitDao(fruit)
+            addSubjectDao(inventory)
+            addMangaDao(manga)
+            addPersonageDao(personage)
+            addPersonageDescriptionDao(personDesc)
+            addRewardDao(reward)
+            addSkillDao(skill)
+            addWeaponDao(weapon)
+            addPlaceDao(place)
+            addPlaceDescriptionDao(placeDesc)
+            addPlaceItemDao(placeItem)
+            addPlaceTransitItemDao(placeTransit)
+            addShipDao(ship)
+        }
+    }
+
+    private suspend fun addShipDao(ship: List<ShipEntity>) {
+        if (ship.isNotEmpty()){
             shipDao.addShip(ship)
+        }
+    }
+
+    private suspend fun addPlaceTransitItemDao(placeTransit: List<PlaceTransitItemEntity>) {
+        if (placeTransit.isNotEmpty()){
+            placeTransitItemDao.addPlaceTransit(placeTransit)
+        }
+    }
+
+    private suspend fun addPlaceItemDao(placeItem: List<PlaceItemEntity>) {
+        if (placeItem.isNotEmpty()) {
+            placeItemDao.addPlaceItem(placeItem)
+        }
+    }
+
+    private suspend fun addPlaceDescriptionDao(placeDescription: List<PlaceDescriptionEntity>) {
+        if (placeDescription.isNotEmpty()){
+        placeDescriptionDao.addPlaceDescription(placeDescription)
+        }
+    }
+
+    private suspend fun addPlaceDao(place: PlaceEntity) {
+        placeDao.addPlace(place)
+    }
+
+    private suspend fun addWeaponDao(weapons: List<PersonageWeaponsEntity>) {
+        if (weapons.isNotEmpty()){
+            weaponsDao.addPersonageWeapon(weapons)
+            personageDescriptionDao.updateNewPersonage(weapons.map { it.personageId }.distinct())
+        }
+    }
+
+    private suspend fun addSkillDao(skill: List<PersonageSkillEntity>) {
+        if (skill.isNotEmpty()){
+            skillDao.addPersonageSkill(skill)
+            personageDescriptionDao.updateNewPersonage(skill.map { it.personageId }.distinct())
+        }
+    }
+
+    private suspend fun addRewardDao(reward: List<PersonageRewardEntity>) {
+        if (reward.isNotEmpty()){
+            rewardDao.addPersonageReward(reward)
+            personageDescriptionDao.updateNewPersonage(reward.map { it.personageId }.distinct())
+        }
+    }
+
+    private suspend fun addPersonageDescriptionDao(personageDescription: List<PersonageDescriptionEntity>) {
+        if (personageDescription.isNotEmpty()) {
+            personageDescriptionDao.addPersonageDescription(personageDescription)
+        }
+    }
+
+    private suspend fun addPersonageDao(personage: List<PersonageEntity>) {
+        if (personage.isNotEmpty()) {
+            personageDao.addPersonage(personage)
+        }
+    }
+
+    private suspend fun addMangaDao(manga: List<MangaEntity>) {
+        if (manga.isNotEmpty()) {
+            mangaDao.addManga(manga)
+        }
+    }
+
+    private suspend fun addBandDao(band: List<BandEntity>) {
+        if (band.isNotEmpty()){
+            bandDao.addBand(band)
+        }
+    }
+
+    private suspend fun addBandDescriptionDao(bandDescription: List<BandDescriptionEntity>) {
+        if (bandDescription.isNotEmpty()){
+            bandDescriptionDao.addBandDescription(bandDescription)
+        }
+    }
+
+    private suspend fun addBandPersonageDao(bandPersonage: List<BandPersonageEntity>) {
+        if (bandPersonage.isNotEmpty()){
+            bandPersonageDao.addBandPersonage(bandPersonage)
+            personageDescriptionDao.updateNewPersonage(bandPersonage.map { it.personageId }.distinct())
+        }
+    }
+
+    private suspend fun addBondDao(bond: List<BondEntity>) {
+        if (bond.isNotEmpty()){
+            bondDao.addBond(bond)
+        }
+    }
+
+    private suspend fun addFruitDao(fruit: List<FruitEntity>) {
+        if (fruit.isNotEmpty()) {
+            fruitDao.addFruit(fruit)
+        }
+    }
+
+    private suspend fun addSubjectDao(subject: List<InventoryEntity>) {
+        if (subject.isNotEmpty()) {
+            inventoryDao.addInventory(subject)
         }
     }
 
@@ -103,6 +224,6 @@ class PlaceRepositoryImpl @Inject constructor(
     }
 
     override fun getLocation(id: Int): Flow<Place> {
-       return local.getLocation(id).map { it.asDomain() }
+        return local.getLocation(id).map { it.asDomain() }
     }
 }

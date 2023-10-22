@@ -31,4 +31,8 @@ class PersonageDescriptionRepositoryImpl @Inject constructor(
         return local.getPersonageDescriptionByFruit(fruitId)
             .map { list -> list.map { it.asDomainModel() } }
     }
+
+    override suspend fun sendReadPersonage(personageId: Int) {
+        local.sendReadPersonage(personageId)
+    }
 }

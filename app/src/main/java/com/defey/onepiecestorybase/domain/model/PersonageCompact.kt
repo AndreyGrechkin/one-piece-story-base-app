@@ -6,5 +6,6 @@ data class PersonageCompact(
     val surname: String?,
     val bandName: String?,
     val personageImage: String?,
-    val bandImage: String?
+    val bandImage: String?,
+    val isNewPersonage: Boolean
 )

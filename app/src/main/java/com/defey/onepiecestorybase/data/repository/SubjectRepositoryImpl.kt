@@ -25,4 +25,8 @@ class SubjectRepositoryImpl @Inject constructor(
        return local.getSubject(subjectId).map { it?.asDomainModel() }
     }
 
+    override suspend fun sendReadSubject(subjectId: Int) {
+        local.sendReadSubject(subjectId)
+    }
+
 }

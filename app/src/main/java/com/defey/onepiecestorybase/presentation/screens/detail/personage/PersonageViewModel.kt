@@ -11,6 +11,7 @@ import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetRewardUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetSkillUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetWeaponsUseCase
+import com.defey.onepiecestorybase.domain.usecase.personage.SendReadPersonageUseCase
 import com.defey.onepiecestorybase.presentation.screens.AppViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -18,6 +19,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -30,7 +32,8 @@ class PersonageViewModel @Inject constructor(
     private val getMangaUseCase: GetMangaUseCase,
     private val getSkillUseCase: GetSkillUseCase,
     private val getPersonageFruitUseCase: GetPersonageFruitUseCase,
-    private val getWeaponsUseCase: GetWeaponsUseCase
+    private val getWeaponsUseCase: GetWeaponsUseCase,
+    private val sendReadPersonageUseCase: SendReadPersonageUseCase
 ) : AppViewModel<PersonageUiState, PersonageUiEvent>() {
 
     private val _uiState = MutableStateFlow(PersonageUiState())
@@ -44,6 +47,7 @@ class PersonageViewModel @Inject constructor(
         observeReward()
         observeSkill()
         observeWeapons()
+        sendReadPersonage()
     }
 
     override fun onEvent(event: PersonageUiEvent) {
@@ -128,4 +132,9 @@ class PersonageViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
+    private fun sendReadPersonage(){
+        viewModelScope.launch {
+            sendReadPersonageUseCase.execute(personageId)
+        }
+    }
 }

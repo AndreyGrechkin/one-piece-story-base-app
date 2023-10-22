@@ -18,4 +18,7 @@ interface PlaceDescriptionDao {
 
     @Query("SELECT * FROM place_description WHERE placeId=:placeId")
     fun getLocationDescription(placeId: Int): Flow<List<PlaceDescriptionEntity>>
+
+    @Query("UPDATE place_description SET isNewLocation = 0 WHERE placeId=:locationId")
+    suspend fun sendReadLocation(locationId: Int)
 }

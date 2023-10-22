@@ -7,6 +7,8 @@ import javax.inject.Inject
 
 interface BandDescriptionLocalDataSource {
     fun getBandDescription(bandId: Int): Flow<List<BandDescriptionEntity>>
+    fun getAllBandDescription(): Flow<List<BandDescriptionEntity>>
+    suspend fun sendReadBand(bandId: Int)
 }
 
 class BandDescriptionLocalDataSourceImpl @Inject constructor(
@@ -14,6 +16,14 @@ class BandDescriptionLocalDataSourceImpl @Inject constructor(
 ) : BandDescriptionLocalDataSource {
     override fun getBandDescription(bandId: Int): Flow<List<BandDescriptionEntity>> {
         return dao.getBandDescription(bandId)
+    }
+
+    override fun getAllBandDescription(): Flow<List<BandDescriptionEntity>> {
+       return dao.getAllBandDescription()
+    }
+
+    override suspend fun sendReadBand(bandId: Int) {
+        dao.sendReadBand(bandId)
     }
 
 }

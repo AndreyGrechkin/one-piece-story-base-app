@@ -10,4 +10,5 @@ data class PersonageDescription(
     val surname: String?,
     val fruitId: Int?,
     val career: String?,
+    val isNewPersonage: Boolean
 )

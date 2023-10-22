@@ -12,6 +12,7 @@ interface PersonageDescriptionLocalDataSource {
     fun getPersonageDescription(personageId: Int): Flow<List<PersonageDescriptionEntity>>
     suspend fun getPersonageDescriptionInPlace(personageIdList: List<Int>): List<PersonageDescriptionEntity>
     fun getPersonageDescriptionByFruit(fruitId: Int): Flow<List<PersonageDescriptionEntity>>
+    suspend fun sendReadPersonage(personageId: Int)
 }
 
 class PersonageDescriptionLocalDataSourceImpl @Inject constructor(
@@ -33,5 +34,9 @@ class PersonageDescriptionLocalDataSourceImpl @Inject constructor(
         return dao.getPersonageDescriptionByFruit(fruitId).map { descriptionList ->
             dao.getPersonageDescriptionInPlace(descriptionList.map { it.personageId })
         }
+    }
+
+    override suspend fun sendReadPersonage(personageId: Int) {
+       dao.sendReadPersonage(personageId)
     }
 }

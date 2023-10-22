@@ -12,13 +12,16 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -89,16 +92,28 @@ fun PersonageTab(
                     }
                     Box(
                         modifier = Modifier
-                            .size(45.dp, 40.dp)
+                            .size(45.dp, 52.dp)
                             .padding(end = 8.dp),
                         contentAlignment = Alignment.Center
                     ) {
+                        if (personage.isNewPersonage) {
+                            Icon(
+                                imageVector = ImageVector.vectorResource(R.drawable.point),
+                                contentDescription = null,
+                                tint = OPTheme.colors.greenColor,
+                                modifier = Modifier
+                                    .size(8.dp)
+                                    .align(Alignment.TopEnd)
+                            )
+                        }
                         if (personage.bandImage != null) {
                             AsyncImage(
                                 model = personage.bandImage,
                                 contentDescription = stringResource(R.string.image_description_flag),
                                 contentScale = ContentScale.Fit,
-                                modifier = Modifier.size(45.dp, 40.dp)
+                                modifier = Modifier
+                                    .size(45.dp, 40.dp)
+                                    .align(Alignment.Center)
                             )
                         } else {
                             Spacer(
@@ -107,6 +122,7 @@ fun PersonageTab(
                                     .padding(start = 8.dp, end = 16.dp)
                             )
                         }
+
                     }
                 }
             }

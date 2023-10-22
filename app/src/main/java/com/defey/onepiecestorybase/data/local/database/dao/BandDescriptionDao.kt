@@ -14,4 +14,11 @@ interface BandDescriptionDao {
 
     @Query("SELECT * FROM band_description WHERE bandId=:bandId")
     fun getBandDescription(bandId: Int): Flow<List<BandDescriptionEntity>>
+
+    @Query("SELECT * FROM band_description")
+    fun getAllBandDescription(): Flow<List<BandDescriptionEntity>>
+
+    @Query("UPDATE band_description SET isNewBand = 0 WHERE bandId=:bandId")
+    suspend fun sendReadBand(bandId: Int)
+
 }

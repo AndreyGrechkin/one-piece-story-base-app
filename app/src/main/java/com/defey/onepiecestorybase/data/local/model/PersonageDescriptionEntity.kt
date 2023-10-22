@@ -17,6 +17,7 @@ data class PersonageDescriptionEntity(
     val surname: String?,
     val fruitId: Int?,
     val career: String?,
+    val isNewPersonage: Boolean
 )
 
 fun PersonageDescriptionEntity.asDomainModel() = PersonageDescription(
@@ -28,5 +29,6 @@ fun PersonageDescriptionEntity.asDomainModel() = PersonageDescription(
     personageType = personageType,
     surname = surname,
     fruitId = fruitId,
-    career = career
+    career = career,
+    isNewPersonage = isNewPersonage
 )

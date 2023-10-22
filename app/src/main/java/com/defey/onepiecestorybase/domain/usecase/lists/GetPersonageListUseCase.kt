@@ -12,9 +12,7 @@ import com.defey.onepiecestorybase.domain.repository.PersonageDescriptionReposit
 import com.defey.onepiecestorybase.domain.repository.PersonageRepository
 import com.defey.onepiecestorybase.domain.usecase.FlowUseCase
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.onEach
 
 class GetPersonageListUseCase(
     private val personageRepo: PersonageRepository,
@@ -36,11 +34,19 @@ class GetPersonageListUseCase(
                     surname = getSurname(personage, personageDescriptions),
                     bandName = getBandName(personage, bands, bandsPersonages),
                     personageImage = getPersonageImage(personage, personageDescriptions),
-                    bandImage = getBandImage(personage, bands, bandsPersonages)
+                    bandImage = getBandImage(personage, bands, bandsPersonages),
+                    isNewPersonage = getNewInfo(personage, personageDescriptions)
                 )
             }
-            Response.Success(personageCompact)
+            Response.Success(personageCompact.sortedBy { !it.isNewPersonage })
         }
+    }
+
+    private fun getNewInfo(
+        personage: Personage,
+        personageDescriptions: List<PersonageDescription>
+    ): Boolean {
+          return  personageDescriptions.findLast { it.personageId == personage.id }?.isNewPersonage ?: false
     }
 
     private fun getSurname(

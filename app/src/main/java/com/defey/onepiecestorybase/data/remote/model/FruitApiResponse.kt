@@ -28,5 +28,6 @@ fun FruitResponse.toEntity() = FruitEntity(
     image = image,
     description = description,
     nameJp = nameJp,
-    transcriptionJp = transcriptionJp
+    transcriptionJp = transcriptionJp,
+    isNewFruit = true
 )

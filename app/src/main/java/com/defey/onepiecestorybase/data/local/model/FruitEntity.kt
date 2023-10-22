@@ -16,6 +16,7 @@ data class FruitEntity(
     val description: String?,
     val nameJp: String?,
     val transcriptionJp: String?,
+    val isNewFruit: Boolean
 )
 
 fun FruitEntity.asDomainModel() = Fruit(
@@ -26,5 +27,6 @@ fun FruitEntity.asDomainModel() = Fruit(
     image = image,
     description = description,
     nameJp = nameJp,
-    transcriptionJp = transcriptionJp
+    transcriptionJp = transcriptionJp,
+    isNewFruit = isNewFruit
 )

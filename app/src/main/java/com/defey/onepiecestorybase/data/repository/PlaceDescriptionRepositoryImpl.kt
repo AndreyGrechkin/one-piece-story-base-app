@@ -24,4 +24,8 @@ class PlaceDescriptionRepositoryImpl @Inject constructor(
             list.map { it.asDomainModel() }
         }
     }
+
+    override suspend fun sendReadLocation(locationId: Int) {
+        local.sendReadLocation(locationId)
+    }
 }

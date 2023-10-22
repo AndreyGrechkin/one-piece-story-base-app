@@ -30,5 +30,6 @@ fun PersonageDescriptionResponse.toEntity() = PersonageDescriptionEntity(
     personageType = personageType,
     surname = surname,
     fruitId = fruitId,
-    career = career
+    career = career,
+    isNewPersonage = true
 )

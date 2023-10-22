@@ -9,4 +9,5 @@ interface PersonageDescriptionRepository {
     fun getPersonageDescription(personageId: Int): Flow<List<PersonageDescription>>
     suspend fun getPersonageDescriptionInPlace(personageIdList: List<Int>): List<PersonageDescription>
     fun getPersonageDescriptionByFruit(fruitId: Int): Flow<List<PersonageDescription>>
+    suspend fun sendReadPersonage(personageId: Int)
 }

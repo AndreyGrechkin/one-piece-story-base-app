@@ -16,6 +16,7 @@ data class InventoryEntity(
     val name: String,
     val nameJp: String?,
     val transcriptionJp: String?,
+    val isNewSubject: Boolean
 )
 
 fun InventoryEntity.asDomainModel() = Subject(
@@ -26,5 +27,6 @@ fun InventoryEntity.asDomainModel() = Subject(
     description = description,
     name = name,
     nameJp = nameJp,
-    transcriptionJp = transcriptionJp
+    transcriptionJp = transcriptionJp,
+    isNewSubject = isNewSubject
 )

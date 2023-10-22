@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 interface FruitRepository {
     fun getAllFruit(): Flow<List<Fruit>>
     fun getFruit(fruitId: Int): Flow<Fruit?>
+    suspend fun sendReadFruit(fruitId: Int)
 }

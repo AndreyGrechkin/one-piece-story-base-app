@@ -9,4 +9,5 @@ data class Subject(
     val name: String,
     val nameJp: String?,
     val transcriptionJp: String?,
+    val isNewSubject: Boolean
 )

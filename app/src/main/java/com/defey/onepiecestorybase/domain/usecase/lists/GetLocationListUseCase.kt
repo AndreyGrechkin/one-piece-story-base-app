@@ -1,6 +1,8 @@
 package com.defey.onepiecestorybase.domain.usecase.lists
 
 import com.defey.onepiecestorybase.domain.model.LocationCompact
+import com.defey.onepiecestorybase.domain.model.Personage
+import com.defey.onepiecestorybase.domain.model.PersonageDescription
 import com.defey.onepiecestorybase.domain.model.Place
 import com.defey.onepiecestorybase.domain.model.PlaceDescription
 import com.defey.onepiecestorybase.domain.model.Response
@@ -18,21 +20,32 @@ class GetLocationListUseCase(
         return placeRepo.getAllPlaceFlow()
             .combine(descriptionRepo.getAllPlaceDescription()) { placeList, descriptionList ->
                 val placeCompact = placeList.map { getLocationCompact(it, descriptionList) }
-                Response.Success(placeCompact)
+                Response.Success(placeCompact.sortedBy { !it.isNewLocation })
             }
 
     }
-}
 
-private fun getLocationCompact(place: Place, descriptionList: List<PlaceDescription>): LocationCompact {
-    val image = descriptionList
-        .filter { it.id == place.id }
-        .findLast { it.image != null }?.image
-    return LocationCompact(
-        locationId = place.id,
-        placeName = place.namePlace,
-        locationName = place.nameIsland,
-        sea = place.sea,
-        locationImage = image
-    )
+    private fun getLocationCompact(
+        place: Place,
+        descriptionList: List<PlaceDescription>
+    ): LocationCompact {
+        val image = descriptionList
+            .filter { it.id == place.id }
+            .findLast { it.image != null }?.image
+        return LocationCompact(
+            locationId = place.id,
+            placeName = place.namePlace,
+            locationName = place.nameIsland,
+            sea = place.sea,
+            locationImage = image,
+            isNewLocation = getNewInfo(place, descriptionList)
+        )
+    }
+
+    private fun getNewInfo(
+        place: Place,
+        descriptionList: List<PlaceDescription>
+    ): Boolean {
+        return descriptionList.findLast { it.placeId == place.id }?.isNewLocation ?: false
+    }
 }

@@ -20,4 +20,8 @@ class FruitRepositoryImpl @Inject constructor(
     override fun getFruit(fruitId: Int): Flow<Fruit?> {
         return local.getFruit(fruitId).map { it?.asDomainModel() }
     }
+
+    override suspend fun sendReadFruit(fruitId: Int) {
+        local.sendReadFruit(fruitId)
+    }
 }

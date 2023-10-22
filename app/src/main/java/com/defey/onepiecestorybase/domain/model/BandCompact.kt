@@ -4,7 +4,8 @@ data class BandCompact(
     val bandId: Int,
     val bandName: String,
     val bandType: String?,
-    val bandImage: String?
+    val bandImage: String?,
+    val isNewBand: Boolean
 )
 
 

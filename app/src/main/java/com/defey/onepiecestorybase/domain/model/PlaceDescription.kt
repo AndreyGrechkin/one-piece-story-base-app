@@ -7,4 +7,5 @@ data class PlaceDescription(
     val description: String?,
     val event: String?,
     val image: String?,
+    val isNewLocation: Boolean
 )

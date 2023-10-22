@@ -28,5 +28,6 @@ fun InventoryResponse.toEntity() = InventoryEntity(
     description = description,
     name = name,
     nameJp = nameJp,
-    transcriptionJp = transcriptionJp
+    transcriptionJp = transcriptionJp,
+    isNewSubject = true
 )

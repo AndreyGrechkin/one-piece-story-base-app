@@ -21,4 +21,7 @@ interface InventoryDao {
 
     @Query("SELECT * FROM inventory WHERE Id=:subjectId")
     fun getSubject(subjectId: Int): Flow<InventoryEntity?>
+
+    @Query("UPDATE inventory SET isNewSubject = 0 WHERE id=:subjectId")
+    suspend fun sendReadSubject(subjectId: Int)
 }

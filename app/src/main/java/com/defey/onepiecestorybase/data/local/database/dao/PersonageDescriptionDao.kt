@@ -24,4 +24,10 @@ interface PersonageDescriptionDao {
 
     @Query("SELECT * FROM personage_description WHERE fruitId =:fruitId")
     fun getPersonageDescriptionByFruit(fruitId: Int): Flow<List<PersonageDescriptionEntity>>
+
+    @Query("UPDATE personage_description SET isNewPersonage = 0 WHERE personageId=:personageId")
+    suspend fun sendReadPersonage(personageId: Int)
+
+    @Query("UPDATE personage_description SET isNewPersonage = 1 WHERE personageId IN(:personagesId)")
+    suspend fun updateNewPersonage(personagesId: List<Int>)
 }

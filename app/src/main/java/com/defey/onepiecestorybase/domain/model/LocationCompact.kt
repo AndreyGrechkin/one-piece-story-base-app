@@ -5,5 +5,6 @@ data class LocationCompact(
     val placeName: String?,
     val locationName: String?,
     val sea: String?,
-    val locationImage: String?
+    val locationImage: String?,
+    val isNewLocation: Boolean
 )

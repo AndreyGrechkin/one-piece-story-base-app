@@ -16,10 +16,11 @@ class GetSubjectListUseCase(
                 SubjectCompact(
                     subjectId = it.id,
                     subjectName = it.name,
-                    subjectImage = it.image
+                    subjectImage = it.image,
+                    isNewSubject = it.isNewSubject
                 )
             }
-            Response.Success(compact)
+            Response.Success(compact.sortedBy { !it.isNewSubject })
         }
     }
 }

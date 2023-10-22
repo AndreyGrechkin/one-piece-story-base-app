@@ -5,4 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface BandDescriptionRepository {
     fun getBandDescription(bandId: Int): Flow<List<BandDescription>>
+    fun getAllBandDescription(): Flow<List<BandDescription>>
+    suspend fun sendReadBand(bandId: Int)
 }

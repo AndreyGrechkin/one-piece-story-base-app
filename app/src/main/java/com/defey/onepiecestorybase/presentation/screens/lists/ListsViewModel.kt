@@ -1,6 +1,5 @@
 package com.defey.onepiecestorybase.presentation.screens.lists
 
-import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -53,45 +52,41 @@ class ListsViewModel @Inject constructor(
             showBackButton = false,
             actionIconResId = R.drawable.ic_flag_luffy,
             onAction = { text ->
-                Log.d("MyLog", "action top bar $text")
                 _state.update { it.copy(search = text) }
                 filter(text)
 
             }
         )
+
         setupBottomBar(isVisible = true)
         observePersonageList()
         observeBandList()
         observeLocationList()
         observeSubjectList()
         observeFruit()
+
     }
 
     override fun onEvent(event: ListsUiEvent) {
         when (event) {
             is ListsUiEvent.PersonageClick -> {
                 navigateTo(NavTarget.PersonageScreen(event.personageId))
-                Log.d("MyLog", "card personage: ${event.personageId}")
             }
 
             is ListsUiEvent.BandClick -> {
                 navigateTo(NavTarget.BandScreen(event.bandId))
-                Log.d("MyLog", "card band: ${event.bandId}")
             }
 
             is ListsUiEvent.LocationClick -> {
                 navigateTo(NavTarget.IslandScreen(event.locationId))
-                Log.d("MyLog", "card location: ${event.locationId}")
             }
 
             is ListsUiEvent.SubjectClick -> {
                 navigateTo(NavTarget.SubjectScreen(event.subjectId))
-                Log.d("MyLog", "card subject: ${event.subjectId}")
             }
 
             is ListsUiEvent.FruitClick -> {
                 navigateTo(NavTarget.FruitScreen(event.fruitId))
-                Log.d("MyLog", "card fruit: ${event.fruitId}")
             }
         }
     }
@@ -194,5 +189,4 @@ class ListsViewModel @Inject constructor(
             }
         }.launchIn(viewModelScope)
     }
-
 }

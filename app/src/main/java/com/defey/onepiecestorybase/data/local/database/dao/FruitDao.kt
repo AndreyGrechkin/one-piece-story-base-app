@@ -18,4 +18,7 @@ interface FruitDao {
 
     @Query("SELECT * FROM fruit WHERE id =:fruitId")
     fun getFruit(fruitId: Int): Flow<FruitEntity?>
+
+    @Query("UPDATE fruit SET isNewFruit = 0 WHERE id=:fruitId")
+    suspend fun sendReadFruit(fruitId: Int)
 }

@@ -20,9 +20,11 @@ import com.defey.onepiecestorybase.domain.usecase.band.GetBandDescriptionUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetBandPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetBandUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetShipBandUseCase
+import com.defey.onepiecestorybase.domain.usecase.band.SendReadBandUseCase
 import com.defey.onepiecestorybase.domain.usecase.fruit.GetFruitPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.fruit.GetFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.fruit.GetMangaFruitUseCase
+import com.defey.onepiecestorybase.domain.usecase.fruit.SendReadFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetBandListUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetFruitListUseCase
 import com.defey.onepiecestorybase.domain.usecase.lists.GetLocationListUseCase
@@ -41,16 +43,19 @@ import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetRewardUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetSkillUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetWeaponsUseCase
+import com.defey.onepiecestorybase.domain.usecase.personage.SendReadPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.DeleteOldAvatarPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetIslandsUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetLastPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetAvatarPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetNextTimeUseCase
+import com.defey.onepiecestorybase.domain.usecase.location.SendReadLocationUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SyncMapUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizeIslandUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizePersonageIslandUseCase
 import com.defey.onepiecestorybase.domain.usecase.subject.GetMangaSubjectUseCase
 import com.defey.onepiecestorybase.domain.usecase.subject.GetSubjectUseCase
+import com.defey.onepiecestorybase.domain.usecase.subject.SendReadSubjectUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -116,8 +121,9 @@ class UseCaseModule {
 
     @Provides
     fun provideGetBandListUseCase(
-        bandRepo: BandRepository
-    ): GetBandListUseCase = GetBandListUseCase(bandRepo)
+        bandRepo: BandRepository,
+        bandDescriptionRepo: BandDescriptionRepository
+    ): GetBandListUseCase = GetBandListUseCase(bandRepo, bandDescriptionRepo)
 
     @Provides
     fun provideGetLocationListUseCase(
@@ -250,5 +256,30 @@ class UseCaseModule {
     fun provideGetMangaSubjectUseCase(
         repo: MangaRepository
     ): GetMangaSubjectUseCase = GetMangaSubjectUseCase(repo)
+
+    @Provides
+    fun provideSendReadPersonageUseCase(
+        repo: PersonageDescriptionRepository
+    ): SendReadPersonageUseCase = SendReadPersonageUseCase(repo)
+
+    @Provides
+    fun provideSendReadBandUseCase(
+        repo: BandDescriptionRepository
+    ): SendReadBandUseCase = SendReadBandUseCase(repo)
+
+    @Provides
+    fun provideSendReadLocationUseCase(
+        repo: PlaceDescriptionRepository
+    ): SendReadLocationUseCase = SendReadLocationUseCase(repo)
+
+    @Provides
+    fun provideSendReadSubjectUseCase(
+        repo: SubjectRepository
+    ): SendReadSubjectUseCase = SendReadSubjectUseCase(repo)
+
+    @Provides
+    fun provideSendReadFruitUseCase(
+        repo: FruitRepository
+    ): SendReadFruitUseCase = SendReadFruitUseCase(repo)
 
 }

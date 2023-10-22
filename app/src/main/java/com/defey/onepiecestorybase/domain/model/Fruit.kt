@@ -9,4 +9,5 @@ data class Fruit(
     val description: String?,
     val nameJp: String?,
     val transcriptionJp: String?,
+    val isNewFruit: Boolean
 )

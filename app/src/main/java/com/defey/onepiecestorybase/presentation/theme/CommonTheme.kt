@@ -16,7 +16,8 @@ data class OPColors(
     val lightGrayColor: Color,
     val babyBlueEyesColor: Color,
     val pinkColor: Color,
-    val blueColor: Color
+    val blueColor: Color,
+    val greenColor: Color
 )
 
 data class OPTypography(

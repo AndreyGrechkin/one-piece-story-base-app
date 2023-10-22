@@ -12,11 +12,13 @@ data class BandDescriptionEntity(
     val bandId: Int,
     val mangaId: Int,
     val description: String?,
+    val isNewBand: Boolean
 )
 
 fun BandDescriptionEntity.asDomainModel() = BandDescription(
     id = id,
     bandId = bandId,
     mangaId = mangaId,
-    description = description
+    description = description,
+    isNewBand = isNewBand
 )

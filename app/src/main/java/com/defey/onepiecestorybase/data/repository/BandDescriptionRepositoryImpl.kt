@@ -16,4 +16,12 @@ class BandDescriptionRepositoryImpl @Inject constructor(
     override fun getBandDescription(bandId: Int): Flow<List<BandDescription>> {
         return local.getBandDescription(bandId).map { list -> list.map { it.asDomainModel() } }
     }
+
+    override fun getAllBandDescription(): Flow<List<BandDescription>> {
+        return local.getAllBandDescription().map { list -> list.map { it.asDomainModel() } }
+    }
+
+    override suspend fun sendReadBand(bandId: Int) {
+       local.sendReadBand(bandId)
+    }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.defey.onepiecestorybase.domain.model.Response
 import com.defey.onepiecestorybase.domain.usecase.subject.GetMangaSubjectUseCase
 import com.defey.onepiecestorybase.domain.usecase.subject.GetSubjectUseCase
+import com.defey.onepiecestorybase.domain.usecase.subject.SendReadSubjectUseCase
 import com.defey.onepiecestorybase.presentation.screens.AppViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,13 +13,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class SubjectViewModel @Inject constructor(
     stateHandle: SavedStateHandle,
     private val getSubjectUseCase: GetSubjectUseCase,
-    private val getMangaSubjectUseCase: GetMangaSubjectUseCase
+    private val getMangaSubjectUseCase: GetMangaSubjectUseCase,
+    private val sendReadSubjectUseCase: SendReadSubjectUseCase
 ) : AppViewModel<SubjectUiState, SubjectUiEvent>() {
 
     private val subjectId = stateHandle["subjectId"] ?: 0
@@ -27,6 +30,7 @@ class SubjectViewModel @Inject constructor(
 
     init {
         observeSubject()
+        upDateSubject()
     }
 
     override fun onEvent(event: SubjectUiEvent) {
@@ -50,5 +54,11 @@ class SubjectViewModel @Inject constructor(
                 _uiState.update { it.copy(manga = response.value) }
             }
         }.launchIn(viewModelScope)
+    }
+
+    private fun upDateSubject(){
+        viewModelScope.launch {
+            sendReadSubjectUseCase.execute(subjectId)
+        }
     }
 }

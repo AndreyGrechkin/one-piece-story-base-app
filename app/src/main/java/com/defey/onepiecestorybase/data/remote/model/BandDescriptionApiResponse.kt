@@ -20,5 +20,6 @@ fun BandDescriptionResponse.toEntity() = BandDescriptionEntity(
     id = id,
     bandId = bandId,
     mangaId = mangaId,
-    description = description
+    description = description,
+    isNewBand = true
 )

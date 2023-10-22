@@ -4,5 +4,6 @@ data class FruitCompact(
     val fruitId: Int,
     val fruitName: String,
     val fruitType: String?,
-    val fruitImage: String?
+    val fruitImage: String?,
+    val isNewFruit: Boolean
 )

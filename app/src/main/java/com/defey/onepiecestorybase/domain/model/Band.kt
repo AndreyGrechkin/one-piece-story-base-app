@@ -9,10 +9,3 @@ data class Band(
     val nameJp: String?,
     val transcriptionJp: String?,
 )
-
-fun Band.toBandCompact() = BandCompact(
-    bandId = id,
-    bandName = nameBand,
-    bandType = bandType,
-    bandImage = image
-)
