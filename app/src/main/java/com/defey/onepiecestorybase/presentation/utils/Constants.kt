@@ -35,4 +35,13 @@ object Constants {
     const val TIMER_RUNNING_PREF_KEY = "timer_running_key"
     const val PATH_ASSETS_ISLAND = "file:///android_asset/islands/"
     const val PATH_ASSETS_SHIP = "file:///android_asset/avatar/"
+
+    const val FRIEND = "Друг"
+    const val FRIENDS = "Друзья"
+    const val ENEMY = "Враг"
+    const val FAMILY = "Семья"
+    const val TEACHING = "Наставнечество"
+    const val NAKAMA = "Накама"
+    const val ALLIANCE = "Альянс"
+    const val WORKER = "Работник"
 }

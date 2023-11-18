@@ -10,7 +10,11 @@ val DarkColorPalette = OPColors(
     babyBlueEyesColor = Color(0xFFE0F3FE),
     pinkColor = Color(0xFFF6D4D4),
     blueColor = Color(0x99005EEC),
-    greenColor = Color(0xFF00EC04)
+    greenColor = Color(0xFF00EC04),
+    yellowColor = Color(0xFFF8F2BE),
+    redColor = Color(0xFFF50000),
+    orangeColor = Color(0xFFF76300),
+    violetColor = Color(0xFFA100F7),
 )
 
 val LightColorPalette = OPColors(
@@ -21,5 +25,9 @@ val LightColorPalette = OPColors(
     babyBlueEyesColor = Color(0xFFE0F3FE),
     pinkColor = Color(0xFFF6D4D4),
     blueColor = Color(0x99005EEC),
-    greenColor = Color(0xFF00EC04)
+    greenColor = Color(0xFF00EC04),
+    yellowColor = Color(0xFFF8F2BE),
+    redColor = Color(0xFFF50000),
+    orangeColor = Color(0xFFF76300),
+    violetColor = Color(0xFFA100F7),
 )

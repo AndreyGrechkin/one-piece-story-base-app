@@ -3,6 +3,7 @@ package com.defey.onepiecestorybase.di
 import com.defey.onepiecestorybase.domain.repository.BandDescriptionRepository
 import com.defey.onepiecestorybase.domain.repository.BandPersonageRepository
 import com.defey.onepiecestorybase.domain.repository.BandRepository
+import com.defey.onepiecestorybase.domain.repository.BondRepository
 import com.defey.onepiecestorybase.domain.repository.DataStorePreferences
 import com.defey.onepiecestorybase.domain.repository.FruitRepository
 import com.defey.onepiecestorybase.domain.repository.IslandRepository
@@ -21,6 +22,7 @@ import com.defey.onepiecestorybase.domain.usecase.band.GetBandPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetBandUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetShipBandUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.SendReadBandUseCase
+import com.defey.onepiecestorybase.domain.usecase.bond.GetAllBondUseCase
 import com.defey.onepiecestorybase.domain.usecase.fruit.GetFruitPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.fruit.GetFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.fruit.GetMangaFruitUseCase
@@ -281,5 +283,12 @@ class UseCaseModule {
     fun provideSendReadFruitUseCase(
         repo: FruitRepository
     ): SendReadFruitUseCase = SendReadFruitUseCase(repo)
+
+    @Provides
+    fun provideGetAllBondUseCase(
+        repo: BondRepository,
+        personageRepo: PersonageRepository,
+        personageDescriptionRepo: PersonageDescriptionRepository
+    ): GetAllBondUseCase = GetAllBondUseCase(repo, personageRepo, personageDescriptionRepo)
 
 }

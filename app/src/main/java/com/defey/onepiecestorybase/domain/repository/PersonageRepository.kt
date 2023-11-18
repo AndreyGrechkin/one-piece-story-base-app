@@ -7,6 +7,5 @@ interface PersonageRepository {
     fun getPersonageList(): Flow<List<Personage>>
     fun getPersonage(personageId: Int): Flow<Personage>
     fun getPersonageByPlace(placeId: Int): Flow<List<Personage>>
-    suspend fun getPersonageInBand(personagesId: List<Int>): List<Personage>
-
+    suspend fun getPersonagesById(personagesId: List<Int>): List<Personage>
 }

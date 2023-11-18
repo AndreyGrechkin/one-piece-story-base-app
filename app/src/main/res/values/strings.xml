@@ -41,4 +41,5 @@
     <string name="title_subject">Предметы:</string>
     <string name="title_ship">Корабли:</string>
     <string name="title_capitan">Капитан:</string>
+    <string name="title_dialog_bond">Связь %1$s c %2$s</string>
 </resources>

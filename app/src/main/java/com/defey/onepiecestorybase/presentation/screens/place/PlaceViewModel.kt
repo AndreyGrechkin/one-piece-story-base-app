@@ -110,7 +110,9 @@ class PlaceViewModel @Inject constructor(
         syncIslandUseCase().onEach { response ->
             when (response) {
                 Response.Loading -> {}
-                is Response.Success -> {}
+                is Response.Success -> {
+                    Log.d("MyLog", "sync Island Success")
+                }
                 is Response.Failure -> {
                     Log.d("MyLog", "error Island: ${response.getErrorDescription()}")
                 }
@@ -121,7 +123,8 @@ class PlaceViewModel @Inject constructor(
     private fun observeIsland() {
         getIslandsUseCase().onEach { response ->
             if (response is Response.Success) {
-                val update = response.value.find { it.placeId == uiState.value.lastPlaceId }?.name
+                   val update = response.value.find { it.placeId == uiState.value.lastPlaceId }?.name
+                Log.d("MyLog", "observe Island Success: ${response.value.find { it.placeId == uiState.value.lastPlaceId }}")
                 uiState.value.stateMap.removeMarker(update.orEmpty())
                 _uiState.update { it.copy(islands = response.value) }
             }
@@ -130,6 +133,7 @@ class PlaceViewModel @Inject constructor(
 
     private fun syncAvatarIsland() {
         val placeId = uiState.value.lastPlaceId ?: 1
+        Log.d("MyLog", " syncAvatarIsland: $placeId")
         syncAvatarIslandUseCase(placeId).onEach { response ->
             when (response) {
                 Response.Loading -> {}
@@ -146,6 +150,7 @@ class PlaceViewModel @Inject constructor(
 
     private fun observeAvatarPlace() {
         val placeId = uiState.value.lastPlaceId ?: 1
+        Log.d("MyLog", "observe syncAvatarIsland: $placeId")
         getShipIslandUseCase(placeId).onEach { response ->
             if (response is Response.Success) {
                 _uiState.update { it.copy(avatars = response.value) }
@@ -160,7 +165,9 @@ class PlaceViewModel @Inject constructor(
         val placeId = if (lastPlaceId == null) 1 else lastPlaceId + 1
         syncMapUseCase(SyncMapParam(placeId)).onEach { response ->
             when (response) {
-                is Response.Success -> {}
+                is Response.Success -> {
+                    Log.d("MyLog", " sync Map place: $placeId")
+                }
                 is Response.Failure -> {}
                 Response.Loading -> {}
             }

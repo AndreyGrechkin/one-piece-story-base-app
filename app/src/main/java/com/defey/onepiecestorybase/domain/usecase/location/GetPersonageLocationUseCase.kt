@@ -17,9 +17,9 @@ class GetPersonageLocationUseCase(
         return repo.getPersonageByPlace(param)
             .map { personageList ->
                 val description =
-                    repoDescription.getPersonageDescriptionInPlace(personageList.map { it.id })
+                    repoDescription.getDescriptionsByPersonageId(personageList.map { it.id })
                 val locationPersonageList = personageList.map { personage ->
-                    val personageDescription = description.filter { it.personageId == personage.id}
+                    val personageDescription = description.filter { it.personageId == personage.id }
                     LocationPersonage(
                         personageId = personage.id,
                         personageName = personage.name,

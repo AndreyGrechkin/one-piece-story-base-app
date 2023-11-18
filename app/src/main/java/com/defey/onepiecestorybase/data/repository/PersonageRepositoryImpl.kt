@@ -25,8 +25,8 @@ class PersonageRepositoryImpl @Inject constructor(
         return local.getPersonageByPlace(placeId).map { list -> list.map { it.asDomainModel() } }
     }
 
-    override suspend fun getPersonageInBand(personagesId: List<Int>): List<Personage> {
-       return local.getPersonageInBand(personagesId).map { it.asDomainModel() }
+    override suspend fun getPersonagesById(personagesId: List<Int>): List<Personage> {
+        return local.getPersonagesById(personagesId).map { it.asDomainModel() }
     }
 
 }

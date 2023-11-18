@@ -6,6 +6,8 @@ import com.defey.onepiecestorybase.data.local.localDataSource.BandLocalDataSourc
 import com.defey.onepiecestorybase.data.local.localDataSource.BandLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.BandPersonageLocalDataSource
 import com.defey.onepiecestorybase.data.local.localDataSource.BandPersonageLocalDataSourceImpl
+import com.defey.onepiecestorybase.data.local.localDataSource.BondLocalDataSource
+import com.defey.onepiecestorybase.data.local.localDataSource.BondLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.FruitLocalDataSource
 import com.defey.onepiecestorybase.data.local.localDataSource.FruitLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.IslandLocalDataSource
@@ -36,6 +38,8 @@ import com.defey.onepiecestorybase.data.remote.remoteDataSource.BandPersonageRem
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.BandPersonageRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.BandRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.BandRemoteDataSourceImpl
+import com.defey.onepiecestorybase.data.remote.remoteDataSource.BondRemoteDataSource
+import com.defey.onepiecestorybase.data.remote.remoteDataSource.BondRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.FruitRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.FruitRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.IslandRemoteDataSource
@@ -61,6 +65,7 @@ import com.defey.onepiecestorybase.data.remote.remoteDataSource.WeaponsRemoteDat
 import com.defey.onepiecestorybase.data.repository.BandDescriptionRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.BandPersonageRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.BandRepositoryImpl
+import com.defey.onepiecestorybase.data.repository.BondRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.FruitRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.IslandRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.MangaRepositoryImpl
@@ -76,6 +81,7 @@ import com.defey.onepiecestorybase.data.repository.WeaponsRepositoryImpl
 import com.defey.onepiecestorybase.domain.repository.BandDescriptionRepository
 import com.defey.onepiecestorybase.domain.repository.BandPersonageRepository
 import com.defey.onepiecestorybase.domain.repository.BandRepository
+import com.defey.onepiecestorybase.domain.repository.BondRepository
 import com.defey.onepiecestorybase.domain.repository.FruitRepository
 import com.defey.onepiecestorybase.domain.repository.IslandRepository
 import com.defey.onepiecestorybase.domain.repository.MangaRepository
@@ -273,4 +279,16 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideShipRepository(impl: ShipRepositoryImpl): ShipRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideBondLocalDataSource(impl: BondLocalDataSourceImpl): BondLocalDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideBondRemoteDataSource(impl: BondRemoteDataSourceImpl): BondRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun provideBondRepository(impl: BondRepositoryImpl): BondRepository
 }

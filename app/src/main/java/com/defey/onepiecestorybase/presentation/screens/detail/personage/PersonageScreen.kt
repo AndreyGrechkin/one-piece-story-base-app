@@ -1,6 +1,7 @@
 package com.defey.onepiecestorybase.presentation.screens.detail.personage
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -351,11 +352,12 @@ fun PersonageScreen(
 
 @Composable
 fun CardBlock(
+    modifier: Modifier = Modifier,
     content: @Composable ColumnScope.() -> Unit
 ) {
     Card(
         colors = CardDefaults.cardColors(containerColor = Color.Transparent),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .paint(
                 painterResource(id = R.drawable.card_backgraund),
@@ -384,14 +386,13 @@ fun CardImageBlock(image: String?, imageDescription: String?, onEvent: () -> Uni
                     .fillMaxWidth()
                     .aspectRatio(4f / 3f),
             )
-            Icon(
+            Image(
                 imageVector = ImageVector.vectorResource(id = R.drawable.close_icon),
                 contentDescription = stringResource(id = R.string.close),
-                tint = OPTheme.colors.blackColor,
                 modifier = Modifier
                     .padding(top = 8.dp, end = 8.dp)
                     .align(Alignment.TopEnd)
-                    .bounceClick (onClick = onEvent),
+                    .bounceClick(onClick = onEvent),
             )
         }
     }

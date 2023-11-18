@@ -1,6 +1,5 @@
 package com.defey.onepiecestorybase.navigation.bottom
 
-import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.BadgedBox
@@ -41,8 +40,6 @@ fun BottomNavigationBar(
         elevation = 0.dp
     ) {
         items.forEach { item ->
-
-            Log.d("MyLog", "item: ${item.isNew}")
             val selected = item.route == navController.activeElement
             BottomNavigationItem(
                 selected = selected,

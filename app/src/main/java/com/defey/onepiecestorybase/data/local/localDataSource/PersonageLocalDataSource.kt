@@ -2,7 +2,6 @@ package com.defey.onepiecestorybase.data.local.localDataSource
 
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageDao
 import com.defey.onepiecestorybase.data.local.model.PersonageEntity
-import com.defey.onepiecestorybase.domain.model.Personage
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -10,7 +9,7 @@ interface PersonageLocalDataSource {
     fun getAllPersonage(): Flow<List<PersonageEntity>>
     fun getPersonage(personageId: Int): Flow<PersonageEntity>
     fun getPersonageByPlace(placeId: Int): Flow<List<PersonageEntity>>
-    suspend fun getPersonageInBand(personagesId: List<Int>): List<PersonageEntity>
+    suspend fun getPersonagesById(personagesId: List<Int>): List<PersonageEntity>
 
 }
 
@@ -29,8 +28,8 @@ class PersonageLocalDataSourceImpl @Inject constructor(
         return dao.getPersonageByPlace(placeId)
     }
 
-    override suspend fun getPersonageInBand(personagesId: List<Int>): List<PersonageEntity> {
-        return dao.getPersonageInBand(personagesId)
+    override suspend fun getPersonagesById(personagesId: List<Int>): List<PersonageEntity> {
+        return dao.getPersonagesById(personagesId)
     }
 
 }

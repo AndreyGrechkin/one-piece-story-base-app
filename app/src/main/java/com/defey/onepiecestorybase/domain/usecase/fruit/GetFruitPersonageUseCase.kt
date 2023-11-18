@@ -16,7 +16,7 @@ class GetFruitPersonageUseCase(
         val param = parameters ?: throw NullPointerException("fruitId can't be null")
         return repo.getPersonageDescriptionByFruit(param).map { listDescription ->
             val personageList =
-                personageRepo.getPersonageInBand(listDescription.map { it.personageId }.distinct())
+                personageRepo.getPersonagesById(listDescription.map { it.personageId }.distinct())
             val fruitPersonageList = personageList.map { personage ->
                 val image = listDescription.filter { it.personageId == personage.id }
                     .findLast { it.image != null }?.image

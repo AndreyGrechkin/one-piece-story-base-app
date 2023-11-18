@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Update
 import com.defey.onepiecestorybase.data.local.model.PersonageEntity
 import kotlinx.coroutines.flow.Flow
 
@@ -24,6 +23,6 @@ interface PersonageDao {
     fun getPersonageByPlace(placeId: Int): Flow<List<PersonageEntity>>
 
     @Query("SELECT * FROM personage WHERE id IN(:personagesId)")
-    suspend fun getPersonageInBand(personagesId: List<Int>): List<PersonageEntity>
+    suspend fun getPersonagesById(personagesId: List<Int>): List<PersonageEntity>
 
 }
