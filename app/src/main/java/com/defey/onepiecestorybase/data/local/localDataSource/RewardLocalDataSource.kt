@@ -7,6 +7,7 @@ import javax.inject.Inject
 
 interface RewardLocalDataSource {
     fun getRewards(personageId: Int): Flow<List<PersonageRewardEntity>>
+    fun getAllReward(): Flow<List<PersonageRewardEntity>>
 }
 
 class RewardLocalDataSourceImpl @Inject constructor(
@@ -14,6 +15,10 @@ class RewardLocalDataSourceImpl @Inject constructor(
 ): RewardLocalDataSource {
     override fun getRewards(personageId: Int): Flow<List<PersonageRewardEntity>> {
         return dao.getRewards(personageId)
+    }
+
+    override fun getAllReward(): Flow<List<PersonageRewardEntity>> {
+        return dao.getAllRewards()
     }
 
 }

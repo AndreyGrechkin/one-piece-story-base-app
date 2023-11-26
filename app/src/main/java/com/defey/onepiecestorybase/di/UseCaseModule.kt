@@ -52,6 +52,7 @@ import com.defey.onepiecestorybase.domain.usecase.place.GetLastPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetAvatarPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetNextTimeUseCase
 import com.defey.onepiecestorybase.domain.usecase.location.SendReadLocationUseCase
+import com.defey.onepiecestorybase.domain.usecase.place.GetPlaceRewardUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SyncMapUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizeIslandUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizePersonageIslandUseCase
@@ -73,8 +74,9 @@ class UseCaseModule {
 
     @Provides
     fun provideGetAvatarPlaceUseCase(
-        repo: IslandRepository
-    ): GetAvatarPlaceUseCase = GetAvatarPlaceUseCase(repo)
+        repo: IslandRepository,
+        repoPlace: PlaceRepository
+    ): GetAvatarPlaceUseCase = GetAvatarPlaceUseCase(repo, repoPlace)
 
     @Provides
     fun provideSynchronizeIslandUseCase(
@@ -226,7 +228,8 @@ class UseCaseModule {
         repo: BandPersonageRepository,
         personageRepo: PersonageRepository,
         personageDescriptionRepo: PersonageDescriptionRepository
-    ): GetBandPersonageUseCase = GetBandPersonageUseCase(repo, personageRepo, personageDescriptionRepo)
+    ): GetBandPersonageUseCase =
+        GetBandPersonageUseCase(repo, personageRepo, personageDescriptionRepo)
 
     @Provides
     fun provideGetShipBandUseCase(
@@ -291,4 +294,10 @@ class UseCaseModule {
         personageDescriptionRepo: PersonageDescriptionRepository
     ): GetAllBondUseCase = GetAllBondUseCase(repo, personageRepo, personageDescriptionRepo)
 
+    @Provides
+    fun provideGetPlaceRewardUseCase(
+        repoPlace: PlaceRepository,
+        repoReward: RewardRepository,
+        repo: PersonageRepository
+    ): GetPlaceRewardUseCase = GetPlaceRewardUseCase(repoPlace, repoReward, repo)
 }

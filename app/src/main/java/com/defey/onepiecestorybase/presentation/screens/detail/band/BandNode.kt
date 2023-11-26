@@ -16,7 +16,7 @@ class BandNode(
     application: Application,
     private val backStack: BackStack<NavTarget>,
     defaultArgs: Bundle
-): HiltComposeNode(buildContext, application, defaultArgs) {
+) : HiltComposeNode(buildContext, application, defaultArgs) {
 
     @Composable
     override fun View(modifier: Modifier) {

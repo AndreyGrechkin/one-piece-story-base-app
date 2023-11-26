@@ -39,13 +39,13 @@ class IslandRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getPersonageIsland(placeId: Int): Flow<List<PersonageIsland>> {
-        return local.getPersonageIsland(placeId)
+    override fun getPersonageIsland(): Flow<List<PersonageIsland>> {
+        return local.getPersonageIsland()
             .map { value -> value.map { it.asDomain() } }
     }
 
-    override fun getIslandTransit(placeId: Int): Flow<List<IslandTransit>> {
-        return local.getIslandTransit(placeId)
+    override fun getIslandTransit(): Flow<List<IslandTransit>> {
+        return local.getIslandTransit()
             .map { value -> value.map { it.asDomain() } }
     }
 

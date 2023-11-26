@@ -16,4 +16,8 @@ class RewardRepositoryImpl @Inject constructor(
     override fun getRewards(personageId: Int): Flow<List<Reward>> {
         return local.getRewards(personageId).map { list -> list.map { it.asDomainModel() } }
     }
+
+    override fun getAllReward(): Flow<List<Reward>> {
+        return local.getAllReward().map { list -> list.map { it.asDomainModel() } }
+    }
 }

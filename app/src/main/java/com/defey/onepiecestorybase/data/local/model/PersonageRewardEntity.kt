@@ -14,6 +14,7 @@ data class PersonageRewardEntity(
     val reward: Int,
     val rewardType: String,
     val image: String?,
+    val placeId: Int
 )
 
 fun PersonageRewardEntity.asDomainModel() = Reward(
@@ -22,5 +23,6 @@ fun PersonageRewardEntity.asDomainModel() = Reward(
     mangaId = mangaId,
     reward = reward,
     rewardType = rewardType,
-    image = image
+    image = image,
+    placeId = placeId
 )

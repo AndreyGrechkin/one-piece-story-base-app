@@ -21,14 +21,14 @@ interface IslandDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addPersonageIsland(personageIsland: List<PersonageIslandEntity>)
 
-    @Query("SELECT * FROM personage_island WHERE placeId=:placeId")
-    fun getPersonageIsland(placeId: Int): Flow<List<PersonageIslandEntity>>
+    @Query("SELECT * FROM personage_island")
+    fun getPersonageIsland(): Flow<List<PersonageIslandEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addIslandTransit(islandTransit: List<IslandTransitEntity>)
 
-    @Query("SELECT * FROM personage_island_transit WHERE placeId=:placeId")
-    fun getIslandTransit(placeId: Int): Flow<List<IslandTransitEntity>>
+    @Query("SELECT * FROM personage_island_transit")
+    fun getIslandTransit(): Flow<List<IslandTransitEntity>>
 
     @Query("DELETE FROM personage_island WHERE placeId=:lastPlaceId AND nameAvatar=:nameAvatar")
     suspend fun deleteOldAvatar(lastPlaceId: Int, nameAvatar: String)

@@ -15,4 +15,7 @@ interface PersonageRewardDao {
 
     @Query("SELECT * FROM reward WHERE personageId =:personageId")
     fun getRewards(personageId: Int): Flow<List<PersonageRewardEntity>>
+
+    @Query("SELECT * FROM reward")
+    fun getAllRewards(): Flow<List<PersonageRewardEntity>>
 }

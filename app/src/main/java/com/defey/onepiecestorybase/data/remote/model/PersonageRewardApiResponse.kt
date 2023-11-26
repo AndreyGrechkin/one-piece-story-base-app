@@ -16,6 +16,7 @@ data class PersonageRewardResponse(
     val reward: Int,
     val rewardType: String,
     val image: String?,
+    val placeId: Int
 )
 
 fun PersonageRewardResponse.toEntity() = PersonageRewardEntity(
@@ -24,5 +25,6 @@ fun PersonageRewardResponse.toEntity() = PersonageRewardEntity(
     mangaId = mangaId,
     reward = reward,
     rewardType = rewardType,
-    image = image
+    image = image,
+    placeId = placeId
 )

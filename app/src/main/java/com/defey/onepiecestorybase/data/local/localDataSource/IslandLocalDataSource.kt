@@ -12,8 +12,8 @@ interface IslandLocalDataSource {
     fun getIsland(): Flow<List<IslandEntity>>
     suspend fun insertPersonageIsland(personageIsland: List<PersonageIslandEntity>)
     suspend fun insertIslandTransit(islandTransit: List<IslandTransitEntity>)
-    fun getPersonageIsland(placeId: Int): Flow<List<PersonageIslandEntity>>
-    fun getIslandTransit(placeId: Int): Flow<List<IslandTransitEntity>>
+    fun getPersonageIsland(): Flow<List<PersonageIslandEntity>>
+    fun getIslandTransit(): Flow<List<IslandTransitEntity>>
     suspend fun deleteLocalOldAvatarPlace(lastPlaceId: Int, avatarName: String)
 }
 
@@ -36,12 +36,12 @@ class IslandLocalDataSourceImpl @Inject constructor(
         dao.addIslandTransit(islandTransit)
     }
 
-    override fun getPersonageIsland(placeId: Int): Flow<List<PersonageIslandEntity>> {
-        return dao.getPersonageIsland(placeId)
+    override fun getPersonageIsland(): Flow<List<PersonageIslandEntity>> {
+        return dao.getPersonageIsland()
     }
 
-    override fun getIslandTransit(placeId: Int): Flow<List<IslandTransitEntity>> {
-        return dao.getIslandTransit(placeId)
+    override fun getIslandTransit(): Flow<List<IslandTransitEntity>> {
+        return dao.getIslandTransit()
     }
 
     override suspend fun deleteLocalOldAvatarPlace(lastPlaceId: Int, avatarName: String) {

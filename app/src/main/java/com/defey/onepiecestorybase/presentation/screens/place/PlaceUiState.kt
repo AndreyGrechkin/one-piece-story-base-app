@@ -2,6 +2,7 @@ package com.defey.onepiecestorybase.presentation.screens.place
 
 import com.defey.onepiecestorybase.domain.model.AvatarPlace
 import com.defey.onepiecestorybase.domain.model.IslandPlace
+import com.defey.onepiecestorybase.domain.model.RewardPlace
 import com.defey.onepiecestorybase.presentation.screens.UiState
 import ovh.plrapps.mapcompose.ui.state.MapState
 
@@ -10,6 +11,8 @@ data class PlaceUiState(
     val islands: List<IslandPlace> = emptyList(),
     val avatars: List<AvatarPlace> = emptyList(),
     val avatarAnimate: Map<String, AvatarState> = mapOf(),
+    val currentPage: Int = 0,
+    val rewards: List<RewardPlace> = emptyList(),
     val animated: Boolean = false,
     val lastPlaceId: Int? = null,
     val timeStep: String = "",

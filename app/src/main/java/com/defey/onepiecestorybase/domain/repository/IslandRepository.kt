@@ -12,7 +12,7 @@ interface IslandRepository: SafeApiCall {
     suspend fun synchronizeIsland(): Response<Unit>
     fun getIsland(): Flow<List<Island>>
     suspend fun synchronizePersonageIsland(placeId: Int): Response<Unit>
-    fun getPersonageIsland(placeId: Int): Flow<List<PersonageIsland>>
-    fun getIslandTransit(placeId: Int): Flow<List<IslandTransit>>
+    fun getPersonageIsland(): Flow<List<PersonageIsland>>
+    fun getIslandTransit(): Flow<List<IslandTransit>>
     suspend fun deleteOldAvatarPlace(lastPlaceId: Int, avatarName: String)
 }

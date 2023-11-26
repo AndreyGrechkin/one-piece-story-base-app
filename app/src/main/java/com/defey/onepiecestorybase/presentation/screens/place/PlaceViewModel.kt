@@ -1,8 +1,8 @@
 package com.defey.onepiecestorybase.presentation.screens.place
 
 import android.os.CountDownTimer
-import android.util.Log
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateMapOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -14,16 +14,21 @@ import com.defey.onepiecestorybase.domain.usecase.place.GetAvatarPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetIslandsUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetLastPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetNextTimeUseCase
+import com.defey.onepiecestorybase.domain.usecase.place.GetPlaceRewardUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SyncMapParam
 import com.defey.onepiecestorybase.domain.usecase.place.SyncMapUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizeIslandUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizePersonageIslandUseCase
 import com.defey.onepiecestorybase.presentation.screens.AppViewModel
+import com.defey.onepiecestorybase.presentation.utils.Constants.NEXT
+import com.defey.onepiecestorybase.presentation.utils.Constants.TIME
+import com.defey.onepiecestorybase.presentation.utils.UiText
 import com.defey.onepiecestorybase.presentation.utils.asString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
@@ -50,12 +55,13 @@ class PlaceViewModel @Inject constructor(
     private val syncMapUseCase: SyncMapUseCase,
     private val getLastPlaceUseCase: GetLastPlaceUseCase,
     private val dataStore: DataStorePreferences,
-    private val getNextTimeUseCase: GetNextTimeUseCase
+    private val getNextTimeUseCase: GetNextTimeUseCase,
+    private val getPlaceRewardUseCase: GetPlaceRewardUseCase
 ) : AppViewModel<PlaceUiState, PlaceUiEvent>() {
 
     private val tileStreamProvider = maps.getFullMap()
     private val avatar = mutableStateMapOf<String, AvatarState>()
-    private var time by mutableStateOf(0L)
+    private var time by mutableLongStateOf(0L)
     private val stateMap: MapState by mutableStateOf(
         MapState(1, 4096, 3072) {
             scale(1.2f)
@@ -80,6 +86,8 @@ class PlaceViewModel @Inject constructor(
         setupBottomBar(isVisible = true)
         observeLastPlace()
         observeIsland()
+        observeAvatarPlace()
+        observeReward()
         countDown()
     }
 
@@ -88,6 +96,7 @@ class PlaceViewModel @Inject constructor(
             is PlaceUiEvent.OnCenter -> onCenter(event.name)
             is PlaceUiEvent.StartAvatar -> startAnimation(event.id, event.list)
             PlaceUiEvent.ClickNext -> syncNextPlace()
+            is PlaceUiEvent.SwipeReward -> rewardCurrentPager(event.currentPage)
         }
     }
 
@@ -99,8 +108,6 @@ class PlaceViewModel @Inject constructor(
                 if (response.value == null) {
                     syncNextPlace()
                     synchronizeIsland()
-                } else {
-                    syncAvatarIsland()
                 }
             }
         }.launchIn(viewModelScope)
@@ -110,64 +117,68 @@ class PlaceViewModel @Inject constructor(
         syncIslandUseCase().onEach { response ->
             when (response) {
                 Response.Loading -> {}
-                is Response.Success -> {
-                    Log.d("MyLog", "sync Island Success")
-                }
-                is Response.Failure -> {
-                    Log.d("MyLog", "error Island: ${response.getErrorDescription()}")
-                }
+                is Response.Success -> {}
+                is Response.Failure -> {}
             }
         }.launchIn(viewModelScope)
     }
 
     private fun observeIsland() {
-        getIslandsUseCase().onEach { response ->
+        getIslandsUseCase().combine(getLastPlaceUseCase()) { response, lastPlace ->
             if (response is Response.Success) {
-                   val update = response.value.find { it.placeId == uiState.value.lastPlaceId }?.name
-                Log.d("MyLog", "observe Island Success: ${response.value.find { it.placeId == uiState.value.lastPlaceId }}")
-                uiState.value.stateMap.removeMarker(update.orEmpty())
-                _uiState.update { it.copy(islands = response.value) }
+                if (lastPlace is Response.Success) {
+                    val update = response.value.find { it.placeId == lastPlace.value?.id }?.name
+                    uiState.value.stateMap.removeMarker(update.orEmpty())
+                    _uiState.update { it.copy(islands = response.value) }
+                }
             }
         }.launchIn(viewModelScope)
     }
 
-    private fun syncAvatarIsland() {
-        val placeId = uiState.value.lastPlaceId ?: 1
-        Log.d("MyLog", " syncAvatarIsland: $placeId")
+    private fun syncAvatarIsland(placeId: Int) {
         syncAvatarIslandUseCase(placeId).onEach { response ->
             when (response) {
                 Response.Loading -> {}
-                is Response.Success -> {
-                    observeAvatarPlace()
-                }
-
-                is Response.Failure -> {
-                    Log.d("MyLog", "error Avatar Island: ${response.getErrorDescription()}")
-                }
+                is Response.Success -> {}
+                is Response.Failure -> {}
             }
         }.launchIn(viewModelScope)
     }
 
     private fun observeAvatarPlace() {
-        val placeId = uiState.value.lastPlaceId ?: 1
-        Log.d("MyLog", "observe syncAvatarIsland: $placeId")
-        getShipIslandUseCase(placeId).onEach { response ->
+        getShipIslandUseCase().onEach { response ->
             if (response is Response.Success) {
+                val responseAvatar = response.value.map { it.id }
+                uiState.value.avatars.forEach { avatar ->
+                    if (!responseAvatar.contains(avatar.id)) {
+                        uiState.value.stateMap.removeMarker(avatar.id)
+                    }
+                }
                 _uiState.update { it.copy(avatars = response.value) }
             }
         }.launchIn(viewModelScope)
     }
 
+    private fun observeReward() {
+        getPlaceRewardUseCase().onEach { response ->
+            if (response is Response.Success) {
+                _uiState.update { it.copy(rewards = response.value) }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun rewardCurrentPager(current: Int) {
+        _uiState.update { it.copy(currentPage = current) }
+    }
+
     private fun syncNextPlace() {
-        Log.d("MyLog", "time $time ")
         saveNextTime(time)
         val lastPlaceId = uiState.value.lastPlaceId
         val placeId = if (lastPlaceId == null) 1 else lastPlaceId + 1
+        syncAvatarIsland(placeId)
         syncMapUseCase(SyncMapParam(placeId)).onEach { response ->
             when (response) {
-                is Response.Success -> {
-                    Log.d("MyLog", " sync Map place: $placeId")
-                }
+                is Response.Success -> {}
                 is Response.Failure -> {}
                 Response.Loading -> {}
             }
@@ -221,8 +232,6 @@ class PlaceViewModel @Inject constructor(
         getNextTimeUseCase().onEach { response ->
             if (response is Response.Success) {
                 createCountDownTimer(response.value)
-                Log.d("MyLog", "Осталось ${response.value} секунд")
-                println("Осталось ${response.value} секунд ")
             }
         }.launchIn(viewModelScope)
     }
@@ -233,13 +242,13 @@ class PlaceViewModel @Inject constructor(
                 val remainingSeconds = millisUntilFinished / 1000
                 val localDateTime =
                     LocalDateTime.ofEpochSecond(remainingSeconds, 0, java.time.ZoneOffset.UTC)
-                val formatter = DateTimeFormatter.ofPattern("HH:mm:ss")
+                val formatter = DateTimeFormatter.ofPattern(TIME)
                 val timeString = localDateTime.format(formatter)
                 _uiState.update { it.copy(timeStep = timeString, isEnableNext = false) }
             }
 
             override fun onFinish() {
-                _uiState.update { it.copy(timeStep = "Next", isEnableNext = true) }
+                _uiState.update { it.copy(timeStep = NEXT, isEnableNext = true) }
             }
         }
         countDownTimer.start()
@@ -249,7 +258,6 @@ class PlaceViewModel @Inject constructor(
         viewModelScope.launch {
             val dateNow = LocalDateTime.now()
             val datePref = dateNow.plusSeconds(timeStep).asString()
-            Log.d("MyLog", "datePref: $datePref")
             dataStore.saveTimeStep(datePref)
         }
     }
