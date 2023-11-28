@@ -185,7 +185,10 @@ fun PlaceScreen(
             addIslands(
                 stateMap = state.stateMap,
                 islands = state.islands,
-                onEvent = onEvent
+                onClick = {
+                    if (it != null)
+                    onEvent(PlaceUiEvent.ClickIsland(it))
+                }
             )
             addAvatar(
                 state = state.stateMap,
@@ -354,7 +357,7 @@ fun PlaceScreen(
     }
 }
 
-fun addIslands(stateMap: MapState, islands: List<IslandPlace>, onEvent: (PlaceUiEvent) -> Unit) {
+fun addIslands(stateMap: MapState, islands: List<IslandPlace>, onClick: (Int?) -> Unit) {
     islands.forEach { island ->
         stateMap.addMarker(
             id = island.id,
@@ -369,7 +372,10 @@ fun addIslands(stateMap: MapState, islands: List<IslandPlace>, onEvent: (PlaceUi
                 modifier = if (island.isEnabled)
                     Modifier
                         .scale(stateMap.scale)
-                        .bounceClick { Log.d("MyLog", "Click island ${island.name}") }
+                        .bounceClick {
+                            Log.d("MyLog", "Click island ${island.name}")
+                            onClick(island.placeId)
+                        }
                 else
                     Modifier
                         .scale(stateMap.scale)

@@ -20,6 +20,7 @@ import com.defey.onepiecestorybase.presentation.screens.detail.band.BandNode
 import com.defey.onepiecestorybase.presentation.screens.detail.fruit.FruitNode
 import com.defey.onepiecestorybase.presentation.screens.detail.location.IslandNode
 import com.defey.onepiecestorybase.presentation.screens.detail.personage.PersonageNode
+import com.defey.onepiecestorybase.presentation.screens.detail.place.PlaceDetailNode
 import com.defey.onepiecestorybase.presentation.screens.detail.subject.SubjectNode
 import com.defey.onepiecestorybase.presentation.screens.info.InfoNode
 import com.defey.onepiecestorybase.presentation.screens.lists.ListsNode
@@ -125,6 +126,14 @@ class RootNode(
                 }
             )
 
+            is NavTarget.PlaceDetailScreen -> PlaceDetailNode(
+                buildContext,
+                application,
+                backStack,
+                defaultArgs = Bundle().apply {
+                    putInt("placeId", navTarget.placeId)
+                }
+            )
         }
     }
 

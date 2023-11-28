@@ -6,22 +6,22 @@ import kotlinx.parcelize.Parcelize
 sealed class NavTarget : Parcelable {
 
     @Parcelize
-    object SplashScreen : NavTarget()
+    data object SplashScreen : NavTarget()
 
     @Parcelize
-    object OnboardingScreen : NavTarget()
+    data object OnboardingScreen : NavTarget()
 
     @Parcelize
-    object PlaceScreen : NavTarget()
+    data object PlaceScreen : NavTarget()
 
     @Parcelize
-    object ListsScreen : NavTarget()
+    data object ListsScreen : NavTarget()
 
     @Parcelize
-    object BondsScreen : NavTarget()
+    data object BondsScreen : NavTarget()
 
     @Parcelize
-    object InfoScreen : NavTarget()
+    data object InfoScreen : NavTarget()
 
     @Parcelize
     class IslandScreen(val islandId: Int): NavTarget()
@@ -37,6 +37,9 @@ sealed class NavTarget : Parcelable {
 
     @Parcelize
     class SubjectScreen(val subjectId: Int): NavTarget()
+
+    @Parcelize
+    class PlaceDetailScreen(val placeId: Int): NavTarget()
 }
 
 fun NavTarget.name(): String = this.javaClass.kotlin.simpleName.orEmpty()

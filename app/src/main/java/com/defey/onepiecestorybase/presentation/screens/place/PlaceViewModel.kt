@@ -19,10 +19,10 @@ import com.defey.onepiecestorybase.domain.usecase.place.SyncMapParam
 import com.defey.onepiecestorybase.domain.usecase.place.SyncMapUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizeIslandUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizePersonageIslandUseCase
+import com.defey.onepiecestorybase.navigation.NavTarget
 import com.defey.onepiecestorybase.presentation.screens.AppViewModel
 import com.defey.onepiecestorybase.presentation.utils.Constants.NEXT
 import com.defey.onepiecestorybase.presentation.utils.Constants.TIME
-import com.defey.onepiecestorybase.presentation.utils.UiText
 import com.defey.onepiecestorybase.presentation.utils.asString
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
@@ -97,6 +97,7 @@ class PlaceViewModel @Inject constructor(
             is PlaceUiEvent.StartAvatar -> startAnimation(event.id, event.list)
             PlaceUiEvent.ClickNext -> syncNextPlace()
             is PlaceUiEvent.SwipeReward -> rewardCurrentPager(event.currentPage)
+            is PlaceUiEvent.ClickIsland -> navigateTo(NavTarget.PlaceDetailScreen(event.placeId))
         }
     }
 

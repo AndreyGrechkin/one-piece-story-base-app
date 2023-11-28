@@ -7,4 +7,5 @@ sealed class PlaceUiEvent : UiEvent {
     data object ClickNext : PlaceUiEvent()
     class StartAvatar(val id: String, val list: List<Pair<Double, Double>>) : PlaceUiEvent()
     class SwipeReward(val currentPage: Int) : PlaceUiEvent()
+    class ClickIsland(val placeId: Int): PlaceUiEvent()
 }
