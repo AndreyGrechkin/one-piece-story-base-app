@@ -1,7 +1,6 @@
 package com.defey.onepiecestorybase.domain.usecase.place
 
 import com.defey.onepiecestorybase.domain.model.Response
-import com.defey.onepiecestorybase.domain.model.Reward
 import com.defey.onepiecestorybase.domain.model.RewardPlace
 import com.defey.onepiecestorybase.domain.repository.PersonageRepository
 import com.defey.onepiecestorybase.domain.repository.PlaceRepository
@@ -14,15 +13,15 @@ class GetPlaceRewardUseCase(
     private val repoPlace: PlaceRepository,
     private val repoReward: RewardRepository,
     private val repo: PersonageRepository
-):FlowUseCase<Nothing?, List<RewardPlace>>() {
+) : FlowUseCase<Nothing?, List<RewardPlace>>() {
     override fun execute(parameters: Nothing?): Flow<Response<List<RewardPlace>>> {
         return combine(
             repoPlace.getLastPlace(),
             repoReward.getAllReward()
-        ){lastPlace, rewardList ->
+        ) { lastPlace, rewardList ->
             val filterReward = rewardList.filter { it.placeId == lastPlace?.id }
             val personageList = repo.getPersonagesById(filterReward.map { it.personageId })
-         val rewardPlace =  filterReward.map {reward ->
+            val rewardPlace = filterReward.map { reward ->
                 RewardPlace(
                     id = reward.id,
                     personageId = reward.personageId,

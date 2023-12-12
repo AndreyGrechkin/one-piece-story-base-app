@@ -57,7 +57,7 @@ class IslandViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun updateLocation(){
+    private fun updateLocation() {
         viewModelScope.launch {
             sendReadLocationUseCase.execute(locationId)
         }
@@ -115,7 +115,9 @@ class IslandViewModel @Inject constructor(
             if (current != null) {
                 result.append(current)
                 var j = i + 1
-                while (j < set.size && set[j] is String && set[j - 1] is String && set[j]?.toIntOrNull() == set[j - 1]?.toIntOrNull()?.plus(1)) {
+                while (j < set.size && set[j] is String && set[j - 1] is String && set[j]?.toIntOrNull() == set[j - 1]?.toIntOrNull()
+                        ?.plus(1)
+                ) {
                     j++
                 }
                 if (j - i > 2) {

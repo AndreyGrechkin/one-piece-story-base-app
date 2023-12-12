@@ -6,17 +6,22 @@ import com.defey.onepiecestorybase.domain.repository.BandRepository
 import com.defey.onepiecestorybase.domain.repository.BondRepository
 import com.defey.onepiecestorybase.domain.repository.DataStorePreferences
 import com.defey.onepiecestorybase.domain.repository.FruitRepository
+import com.defey.onepiecestorybase.domain.repository.ImageLoaderRepository
 import com.defey.onepiecestorybase.domain.repository.IslandRepository
 import com.defey.onepiecestorybase.domain.repository.MangaRepository
 import com.defey.onepiecestorybase.domain.repository.PersonageDescriptionRepository
 import com.defey.onepiecestorybase.domain.repository.PersonageRepository
 import com.defey.onepiecestorybase.domain.repository.PlaceDescriptionRepository
+import com.defey.onepiecestorybase.domain.repository.PlaceItemRepository
 import com.defey.onepiecestorybase.domain.repository.PlaceRepository
 import com.defey.onepiecestorybase.domain.repository.RewardRepository
 import com.defey.onepiecestorybase.domain.repository.ShipRepository
 import com.defey.onepiecestorybase.domain.repository.SkillRepository
 import com.defey.onepiecestorybase.domain.repository.SubjectRepository
 import com.defey.onepiecestorybase.domain.repository.WeaponsRepository
+import com.defey.onepiecestorybase.domain.usecase.actionPlace.GetImageSizeUseCase
+import com.defey.onepiecestorybase.domain.usecase.actionPlace.GetMangaPlaceUseCase
+import com.defey.onepiecestorybase.domain.usecase.actionPlace.GetPlaceAvatarUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetBandDescriptionUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetBandPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetBandUseCase
@@ -37,22 +42,23 @@ import com.defey.onepiecestorybase.domain.usecase.location.GetLocationUseCase
 import com.defey.onepiecestorybase.domain.usecase.location.GetMangaLocationUseCase
 import com.defey.onepiecestorybase.domain.usecase.location.GetPersonageLocationUseCase
 import com.defey.onepiecestorybase.domain.usecase.location.GetSubjectLocationUseCase
+import com.defey.onepiecestorybase.domain.usecase.location.SendReadLocationUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetCareerUseCase
-import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetMangaUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageDescriptionUseCase
+import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetRewardUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetSkillUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetWeaponsUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.SendReadPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.DeleteOldAvatarPlaceUseCase
+import com.defey.onepiecestorybase.domain.usecase.place.GetAvatarPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetIslandsUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetLastPlaceUseCase
-import com.defey.onepiecestorybase.domain.usecase.place.GetAvatarPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetNextTimeUseCase
-import com.defey.onepiecestorybase.domain.usecase.location.SendReadLocationUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetPlaceRewardUseCase
+import com.defey.onepiecestorybase.domain.usecase.place.GetPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SyncMapUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizeIslandUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizePersonageIslandUseCase
@@ -300,4 +306,25 @@ class UseCaseModule {
         repoReward: RewardRepository,
         repo: PersonageRepository
     ): GetPlaceRewardUseCase = GetPlaceRewardUseCase(repoPlace, repoReward, repo)
+
+    @Provides
+    fun provideGetMangaPlaceUseCase(
+        repo: MangaRepository
+    ): GetMangaPlaceUseCase = GetMangaPlaceUseCase(repo)
+
+    @Provides
+    fun provideGetPlaceAvatarUseCase(
+        repoItem: PlaceItemRepository,
+        repoPersonage: PersonageRepository,
+    ): GetPlaceAvatarUseCase = GetPlaceAvatarUseCase(repoItem, repoPersonage)
+
+    @Provides
+    fun provideGetPlaceUseCase(
+        repo: PlaceRepository
+    ): GetPlaceUseCase = GetPlaceUseCase(repo)
+
+    @Provides
+    fun provideGetImageSizeUseCase(
+        repo: ImageLoaderRepository
+    ): GetImageSizeUseCase = GetImageSizeUseCase(repo)
 }

@@ -1,14 +1,11 @@
 package com.defey.onepiecestorybase.data.remote.model
 
 import com.defey.onepiecestorybase.data.local.model.PlaceItemEntity
-import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
 data class PlaceItemApiResponse(
     val response: List<PlaceItemResponse>
 )
 
-@JsonClass(generateAdapter = true)
 data class PlaceItemResponse(
     val id: Int,
     val placeId: Int,
@@ -17,6 +14,8 @@ data class PlaceItemResponse(
     val transcriptionJp: String?,
     val description: String?,
     val image: String?,
+    val posX: Double,
+    val posY: Double,
 )
 
 fun PlaceItemResponse.toEntity() = PlaceItemEntity(
@@ -26,5 +25,7 @@ fun PlaceItemResponse.toEntity() = PlaceItemEntity(
     nameJp = nameJp,
     transcriptionJp = transcriptionJp,
     description = description,
-    image = image
+    image = image,
+    posX = posX,
+    posY = posY
 )

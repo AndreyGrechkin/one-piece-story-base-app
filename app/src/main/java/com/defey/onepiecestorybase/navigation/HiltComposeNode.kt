@@ -14,6 +14,7 @@ open class HiltComposeNode(
     defaultArgs: Bundle? = null
 ) : Node(buildContext), HasHiltSupport {
 
+    @Suppress("LeakingThis")
     override val hiltSupport = HiltSupport(
         lifecycle = lifecycle,
         initialSavedState = buildContext.savedStateMap?.get(SAVED_STATE_REGISTRY_KEY) as Bundle?,

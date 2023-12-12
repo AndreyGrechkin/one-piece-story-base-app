@@ -15,6 +15,7 @@ import com.defey.onepiecestorybase.domain.usecase.place.GetIslandsUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetLastPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetNextTimeUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetPlaceRewardUseCase
+import com.defey.onepiecestorybase.domain.usecase.place.GetPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SyncMapParam
 import com.defey.onepiecestorybase.domain.usecase.place.SyncMapUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizeIslandUseCase
@@ -56,12 +57,14 @@ class PlaceViewModel @Inject constructor(
     private val getLastPlaceUseCase: GetLastPlaceUseCase,
     private val dataStore: DataStorePreferences,
     private val getNextTimeUseCase: GetNextTimeUseCase,
-    private val getPlaceRewardUseCase: GetPlaceRewardUseCase
+    private val getPlaceRewardUseCase: GetPlaceRewardUseCase,
+    private val getPlaceUseCase: GetPlaceUseCase
 ) : AppViewModel<PlaceUiState, PlaceUiEvent>() {
 
     private val tileStreamProvider = maps.getFullMap()
     private val avatar = mutableStateMapOf<String, AvatarState>()
     private var time by mutableLongStateOf(0L)
+    private var hasNextPlace by mutableStateOf(false)
     private val stateMap: MapState by mutableStateOf(
         MapState(1, 4096, 3072) {
             scale(1.2f)
@@ -97,8 +100,25 @@ class PlaceViewModel @Inject constructor(
             is PlaceUiEvent.StartAvatar -> startAnimation(event.id, event.list)
             PlaceUiEvent.ClickNext -> syncNextPlace()
             is PlaceUiEvent.SwipeReward -> rewardCurrentPager(event.currentPage)
-            is PlaceUiEvent.ClickIsland -> navigateTo(NavTarget.PlaceDetailScreen(event.placeId))
+            is PlaceUiEvent.ClickIsland -> observeClickPlace(event.placeId)
         }
+    }
+
+    private fun observeClickPlace(placeId: Int) {
+        getPlaceUseCase(placeId).onEach { response ->
+            if (response is Response.Success) {
+                if (response.value.placeDetailImage != null) {
+                    navigateTo(
+                        NavTarget.PlaceDetailScreen(
+                            placeId = placeId,
+                            imageIsland = response.value.placeDetailImage
+                        )
+                    )
+                } else {
+                    navigateTo(NavTarget.IslandScreen(placeId))
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 
     private fun observeLastPlace() {
@@ -131,6 +151,10 @@ class PlaceViewModel @Inject constructor(
                     val update = response.value.find { it.placeId == lastPlace.value?.id }?.name
                     uiState.value.stateMap.removeMarker(update.orEmpty())
                     _uiState.update { it.copy(islands = response.value) }
+                    if (hasNextPlace && update == null && lastPlace.value != null) {
+                        hasNextPlace = false
+                        navigateTo(NavTarget.IslandScreen(lastPlace.value.id))
+                    }
                 }
             }
         }.launchIn(viewModelScope)
@@ -173,6 +197,7 @@ class PlaceViewModel @Inject constructor(
     }
 
     private fun syncNextPlace() {
+        hasNextPlace = true
         saveNextTime(time)
         val lastPlaceId = uiState.value.lastPlaceId
         val placeId = if (lastPlaceId == null) 1 else lastPlaceId + 1

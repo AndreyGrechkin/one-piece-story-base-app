@@ -1,9 +1,7 @@
 package com.defey.onepiecestorybase.data.remote.model
 
 import com.defey.onepiecestorybase.data.local.model.PlaceEntity
-import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
 data class MapResponse(
     val id: Int,
     val namePlace: String?,
@@ -16,6 +14,7 @@ data class MapResponse(
     val nameJp: String?,
     val transcriptionJp: String?,
     val timeStep: Long,
+    val placeDetailImage: String?,
     val band: List<BandResponse>,
     val bandDescription: List<BandDescriptionResponse>,
     val bandPersonage: List<BandPersonageResponse>,
@@ -43,5 +42,6 @@ fun MapResponse.toEntity() = PlaceEntity(
     nameIsland = nameIsland,
     nameJp = nameJp,
     transcriptionJp = transcriptionJp,
-    timeStep = timeStep
+    timeStep = timeStep,
+    placeDetailImage = placeDetailImage
 )

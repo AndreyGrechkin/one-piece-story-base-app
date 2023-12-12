@@ -2,6 +2,7 @@ package com.defey.onepiecestorybase.presentation.screens
 
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Brush
@@ -37,7 +38,7 @@ abstract class AppViewModel<S : UiState, E : UiEvent> : ViewModel() {
 
     private var updateScreenData by mutableStateOf(UpdateEventsScreen())
 
-    var currentTab by mutableStateOf(0)
+    var currentTab by mutableIntStateOf(0)
 
     val searchAppBarState: MutableState<SearchAppBarState> =
         mutableStateOf(SearchAppBarState.CLOSED)
@@ -165,6 +166,6 @@ sealed class NavigationIntent {
     ) : NavigationIntent()
 
     data class Replace(val navTarget: NavTarget) : NavigationIntent()
-    object NavigateBack : NavigationIntent()
+    data object NavigateBack : NavigationIntent()
 }
 

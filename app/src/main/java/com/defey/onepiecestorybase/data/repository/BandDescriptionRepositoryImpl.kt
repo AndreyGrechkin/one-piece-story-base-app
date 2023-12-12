@@ -22,6 +22,6 @@ class BandDescriptionRepositoryImpl @Inject constructor(
     }
 
     override suspend fun sendReadBand(bandId: Int) {
-       local.sendReadBand(bandId)
+        local.sendReadBand(bandId)
     }
 }

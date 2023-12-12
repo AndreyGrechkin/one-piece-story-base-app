@@ -6,8 +6,8 @@ import javax.inject.Inject
 interface SubjectRemoteDataSource {
 }
 
-class  SubjectRemoteDataSourceImpl @Inject constructor(
+class SubjectRemoteDataSourceImpl @Inject constructor(
     private val api: OnePieceApi
-): SubjectRemoteDataSource {
+) : SubjectRemoteDataSource {
 
 }

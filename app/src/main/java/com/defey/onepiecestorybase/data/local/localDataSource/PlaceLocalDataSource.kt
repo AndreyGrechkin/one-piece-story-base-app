@@ -11,7 +11,7 @@ interface PlaceLocalDataSource {
 
 class PlaceLocalDataSourceImpl @Inject constructor(
     private val dao: PlaceDao
-): PlaceLocalDataSource {
+) : PlaceLocalDataSource {
     override fun getLocation(id: Int): Flow<PlaceEntity> {
         return dao.getLocation(id)
     }

@@ -22,6 +22,7 @@ object Constants {
     const val ISLAND_TABLE = "island"
     const val PERSONAGE_ISLAND_TABLE = "personage_island"
     const val ISLAND_TRANSIT_TABLE = "personage_island_transit"
+    const val PLACE_AVATAR_TABLE = "place_avatar"
 
     const val LOG_ERROR_CODE = "Код ошибки:"
     const val LOG_ERROR_TEXT = "Сообщение об ошибке:"
@@ -33,9 +34,9 @@ object Constants {
     const val ONBOARDING_PREF_KEY = "onboarding_key"
     const val TIME_STEP_PREF_KEY = "time_step_key"
     const val TIME_NOW_PREF_KEY = "time_now_key"
-    const val TIMER_RUNNING_PREF_KEY = "timer_running_key"
+    const val LAST_MANGA_KEY = "last_manga_key"
     const val PATH_ASSETS_ISLAND = "file:///android_asset/islands/"
-    const val PATH_ASSETS_SHIP = "file:///android_asset/avatar/"
+    const val PATH_ASSETS_AVATAR = "file:///android_asset/avatar/"
     const val PATH_ASSETS_POSTER = "file:///android_asset/other/poster.png"
 
     const val FRIEND = "Друг"
@@ -46,6 +47,16 @@ object Constants {
     const val NAKAMA = "Накама"
     const val ALLIANCE = "Альянс"
     const val WORKER = "Работник"
+
+    const val CAPITAN = "Капитан"
+
+    //onboarding
+    const val MAP_PIECE = "Карта мира"
+    const val MAP_PIECE_DESCRIPTION = "Перемещаетесь вместе с героями по карте мира"
+    const val BONDS = "Связи"
+    const val BONDS_DESCRIPTION = "Посмотрите каккие образуются связи "
+    const val INFORMATION = "Информация"
+    const val INFORMATION_DESCRIPTION = "Информация об островах, персонажей, команд и предметов"
 
     const val REWARD_POSTER = "reward poster"
     const val REWARD = "reward"
@@ -69,5 +80,6 @@ object Constants {
 
     // Data Time format
     const val TIME = "HH:mm:ss"
+    const val DATE_TIME = "yyyy-MM-dd'T'HH:mm:ss"
 
 }

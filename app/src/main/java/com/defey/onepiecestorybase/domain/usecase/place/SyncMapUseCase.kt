@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.flow
 
 class SyncMapUseCase(
     private val repo: PlaceRepository
-): FlowUseCase<SyncMapParam, Unit>() {
+) : FlowUseCase<SyncMapParam, Unit>() {
     override fun execute(parameters: SyncMapParam?): Flow<Response<Unit>> {
         return flow {
             val param = parameters ?: throw Exception("Place Id can't be null")

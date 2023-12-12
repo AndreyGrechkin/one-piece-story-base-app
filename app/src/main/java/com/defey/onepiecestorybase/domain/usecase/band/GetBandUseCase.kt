@@ -9,10 +9,10 @@ import kotlinx.coroutines.flow.map
 
 class GetBandUseCase(
     private val repo: BandRepository
-): FlowUseCase<Int?, Band>() {
+) : FlowUseCase<Int?, Band>() {
     override fun execute(parameters: Int?): Flow<Response<Band>> {
         val param = parameters ?: throw NullPointerException("bandId can't be null")
-        return repo.getBandFlow(param).map {value ->
+        return repo.getBandFlow(param).map { value ->
             Response.Success(value)
         }
     }

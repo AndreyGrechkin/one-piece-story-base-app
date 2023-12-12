@@ -11,7 +11,7 @@ import com.defey.onepiecestorybase.navigation.NavTarget
 import com.defey.onepiecestorybase.navigation.appyxHiltViewModel
 import com.defey.onepiecestorybase.presentation.screens.AppScreen
 
-class PlaceDetailNode (
+class PlaceDetailNode(
     buildContext: BuildContext,
     application: Application,
     private val backStack: BackStack<NavTarget>,
@@ -20,14 +20,12 @@ class PlaceDetailNode (
 
     @Composable
     override fun View(modifier: Modifier) {
-        val viewModel = appyxHiltViewModel<PlaceDetailViewModel>()
-
+        val viewModel: PlaceDetailViewModel = appyxHiltViewModel()
         AppScreen(
             viewModel = viewModel,
-            backStack = backStack
+            backStack = backStack,
         ) { state, onEvent ->
             PlaceDetailScreen(state = state, onEvent = onEvent)
         }
     }
-
 }

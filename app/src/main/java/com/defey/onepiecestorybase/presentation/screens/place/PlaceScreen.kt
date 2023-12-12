@@ -1,7 +1,6 @@
 package com.defey.onepiecestorybase.presentation.screens.place
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.AnimationVector1D
 import androidx.compose.animation.core.animateDp
@@ -66,9 +65,9 @@ import com.defey.onepiecestorybase.presentation.utils.Constants.IMAGE_ARROW_NEXT
 import com.defey.onepiecestorybase.presentation.utils.Constants.IMAGE_CENTRED
 import com.defey.onepiecestorybase.presentation.utils.Constants.IMAGE_CLOSE
 import com.defey.onepiecestorybase.presentation.utils.Constants.NEXT
+import com.defey.onepiecestorybase.presentation.utils.Constants.PATH_ASSETS_AVATAR
 import com.defey.onepiecestorybase.presentation.utils.Constants.PATH_ASSETS_ISLAND
 import com.defey.onepiecestorybase.presentation.utils.Constants.PATH_ASSETS_POSTER
-import com.defey.onepiecestorybase.presentation.utils.Constants.PATH_ASSETS_SHIP
 import com.defey.onepiecestorybase.presentation.utils.Constants.POSTER
 import com.defey.onepiecestorybase.presentation.utils.Constants.POSTER_ALIGN_X
 import com.defey.onepiecestorybase.presentation.utils.Constants.POSTER_ALIGN_Y
@@ -185,9 +184,11 @@ fun PlaceScreen(
             addIslands(
                 stateMap = state.stateMap,
                 islands = state.islands,
-                onClick = {
-                    if (it != null)
-                    onEvent(PlaceUiEvent.ClickIsland(it))
+                onClick = { placeId ->
+                    if (placeId != null)
+                        onEvent(
+                            PlaceUiEvent.ClickIsland(placeId = placeId)
+                        )
                 }
             )
             addAvatar(
@@ -373,7 +374,6 @@ fun addIslands(stateMap: MapState, islands: List<IslandPlace>, onClick: (Int?) -
                     Modifier
                         .scale(stateMap.scale)
                         .bounceClick {
-                            Log.d("MyLog", "Click island ${island.name}")
                             onClick(island.placeId)
                         }
                 else
@@ -400,7 +400,7 @@ fun addAvatar(
             zIndex = 2f
         ) {
             AsyncImage(
-                model = PATH_ASSETS_SHIP + avatarPlace.nameImage,
+                model = PATH_ASSETS_AVATAR + avatarPlace.nameImage,
                 contentDescription = avatarPlace.name,
                 modifier = Modifier
                     .scale(state.scale)

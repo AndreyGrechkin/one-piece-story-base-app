@@ -4,9 +4,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.defey.onepiecestorybase.domain.model.Response
 import com.defey.onepiecestorybase.domain.usecase.personage.GetCareerUseCase
-import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetMangaUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageDescriptionUseCase
+import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageFruitUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetPersonageUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetRewardUseCase
 import com.defey.onepiecestorybase.domain.usecase.personage.GetSkillUseCase
@@ -51,9 +51,9 @@ class PersonageViewModel @Inject constructor(
     }
 
     override fun onEvent(event: PersonageUiEvent) {
-       when(event) {
-           PersonageUiEvent.ClosePersonage -> navigateBack()
-       }
+        when (event) {
+            PersonageUiEvent.ClosePersonage -> navigateBack()
+        }
     }
 
     private fun observePersonage() {
@@ -119,12 +119,12 @@ class PersonageViewModel @Inject constructor(
     private fun observeFruit(fruitId: Int) {
         getPersonageFruitUseCase(fruitId).onEach { response ->
             if (response is Response.Success) {
-            _uiState.update { it.copy(fruit = response.value) }
+                _uiState.update { it.copy(fruit = response.value) }
             }
         }.launchIn(viewModelScope)
     }
 
-    private fun observeWeapons(){
+    private fun observeWeapons() {
         getWeaponsUseCase(personageId).onEach { response ->
             if (response is Response.Success) {
                 _uiState.update { it.copy(weapons = response.value) }
@@ -132,7 +132,7 @@ class PersonageViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun sendReadPersonage(){
+    private fun sendReadPersonage() {
         viewModelScope.launch {
             sendReadPersonageUseCase.execute(personageId)
         }

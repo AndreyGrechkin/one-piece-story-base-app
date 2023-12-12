@@ -2,7 +2,6 @@ package com.defey.onepiecestorybase.data.local.localDataSource
 
 import com.defey.onepiecestorybase.data.local.database.dao.BandDao
 import com.defey.onepiecestorybase.data.local.model.BandEntity
-import com.defey.onepiecestorybase.domain.model.Band
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

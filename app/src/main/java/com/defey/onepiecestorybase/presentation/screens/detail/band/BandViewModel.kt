@@ -9,6 +9,7 @@ import com.defey.onepiecestorybase.domain.usecase.band.GetBandUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.GetShipBandUseCase
 import com.defey.onepiecestorybase.domain.usecase.band.SendReadBandUseCase
 import com.defey.onepiecestorybase.presentation.screens.AppViewModel
+import com.defey.onepiecestorybase.presentation.utils.Constants.CAPITAN
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -41,7 +42,7 @@ class BandViewModel @Inject constructor(
     }
 
     override fun onEvent(event: BandUiEvent) {
-        when(event){
+        when (event) {
             BandUiEvent.CloseBand -> navigateBack()
         }
     }
@@ -71,7 +72,7 @@ class BandViewModel @Inject constructor(
     private fun observePersonage() {
         getBandPersonageUseCase(bandId).onEach { response ->
             if (response is Response.Success) {
-                val capitan = response.value.findLast { it.career == "Капитан" }?.personageName
+                val capitan = response.value.findLast { it.career == CAPITAN }?.personageName
                 _uiState.update {
                     it.copy(
                         personageList = response.value,
@@ -90,7 +91,7 @@ class BandViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun updateBand(){
+    private fun updateBand() {
         viewModelScope.launch {
             sendReadBandUseCase.execute(bandId)
         }

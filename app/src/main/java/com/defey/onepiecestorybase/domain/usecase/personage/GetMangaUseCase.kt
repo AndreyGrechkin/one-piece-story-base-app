@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 
 class GetMangaUseCase(
     private val repo: MangaRepository
-): FlowUseCase<Int?, Manga?>() {
+) : FlowUseCase<Int?, Manga?>() {
     override fun execute(parameters: Int?): Flow<Response<Manga?>> {
         val param = parameters ?: throw NullPointerException("mangaId can't be null")
         return repo.getManga(param).map { value ->

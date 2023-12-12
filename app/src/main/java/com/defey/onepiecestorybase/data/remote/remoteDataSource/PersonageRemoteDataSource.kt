@@ -8,6 +8,6 @@ interface PersonageRemoteDataSource {
 
 class PersonageRemoteDataSourceImpl @Inject constructor(
     private val api: OnePieceApi
-): PersonageRemoteDataSource {
+) : PersonageRemoteDataSource {
 
 }

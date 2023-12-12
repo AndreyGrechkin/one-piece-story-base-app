@@ -39,9 +39,10 @@ interface SafeApiCall {
                     Response.Failure(
                         false,
                         throwable.code(),
-                        "$serverUrl ${ throwable.response()?.errorBody().toString() }"
+                        "$serverUrl ${throwable.response()?.errorBody().toString()}"
                     )
                 }
+
                 is IOException -> {
                     Response.Failure(
                         true,
@@ -49,6 +50,7 @@ interface SafeApiCall {
                         "$ERROR_NO_ETHERNET_CONNECTION ${throwable.localizedMessage}"
                     )
                 }
+
                 else -> {
                     Response.Failure(
                         false,

@@ -4,7 +4,7 @@ import com.defey.onepiecestorybase.domain.repository.PersonageDescriptionReposit
 
 class SendReadPersonageUseCase(
     private val repo: PersonageDescriptionRepository
-){
+) {
     suspend fun execute(parameters: Int) {
         repo.sendReadPersonage(parameters)
     }

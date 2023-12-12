@@ -1,6 +1,5 @@
 package com.defey.onepiecestorybase.navigation.top
 
-import com.defey.onepiecestorybase.presentation.utils.AppOutlineTextField
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.expandHorizontally
@@ -51,6 +50,7 @@ import com.defey.onepiecestorybase.presentation.screens.AppViewModel
 import com.defey.onepiecestorybase.presentation.screens.UiEvent
 import com.defey.onepiecestorybase.presentation.screens.UiState
 import com.defey.onepiecestorybase.presentation.theme.OPTheme
+import com.defey.onepiecestorybase.presentation.utils.AppOutlineTextField
 import kotlinx.coroutines.delay
 
 enum class SearchAppBarState {

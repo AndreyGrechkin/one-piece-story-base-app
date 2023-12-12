@@ -3,8 +3,8 @@ package com.defey.onepiecestorybase.presentation.screens.lists
 import com.defey.onepiecestorybase.domain.model.BandCompact
 import com.defey.onepiecestorybase.domain.model.FruitCompact
 import com.defey.onepiecestorybase.domain.model.LocationCompact
-import com.defey.onepiecestorybase.domain.model.SubjectCompact
 import com.defey.onepiecestorybase.domain.model.PersonageCompact
+import com.defey.onepiecestorybase.domain.model.SubjectCompact
 import com.defey.onepiecestorybase.presentation.screens.UiState
 
 data class ListsUiState(

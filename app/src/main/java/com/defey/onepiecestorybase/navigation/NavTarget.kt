@@ -24,22 +24,22 @@ sealed class NavTarget : Parcelable {
     data object InfoScreen : NavTarget()
 
     @Parcelize
-    class IslandScreen(val islandId: Int): NavTarget()
+    class IslandScreen(val islandId: Int) : NavTarget()
 
     @Parcelize
-    class PersonageScreen(val personageId: Int): NavTarget()
+    class PersonageScreen(val personageId: Int) : NavTarget()
 
     @Parcelize
-    class BandScreen(val bandId: Int): NavTarget()
+    class BandScreen(val bandId: Int) : NavTarget()
 
     @Parcelize
-    class FruitScreen(val fruitId: Int): NavTarget()
+    class FruitScreen(val fruitId: Int) : NavTarget()
 
     @Parcelize
-    class SubjectScreen(val subjectId: Int): NavTarget()
+    class SubjectScreen(val subjectId: Int) : NavTarget()
 
     @Parcelize
-    class PlaceDetailScreen(val placeId: Int): NavTarget()
+    class PlaceDetailScreen(val placeId: Int, val imageIsland: String) : NavTarget()
 }
 
 fun NavTarget.name(): String = this.javaClass.kotlin.simpleName.orEmpty()

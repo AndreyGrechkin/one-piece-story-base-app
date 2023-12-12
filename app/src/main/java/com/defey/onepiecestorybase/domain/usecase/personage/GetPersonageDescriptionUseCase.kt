@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 
 class GetPersonageDescriptionUseCase(
     private val repo: PersonageDescriptionRepository
-): FlowUseCase<Int?, List<PersonageDescription>>() {
+) : FlowUseCase<Int?, List<PersonageDescription>>() {
     override fun execute(parameters: Int?): Flow<Response<List<PersonageDescription>>> {
         val param = parameters ?: throw NullPointerException("personageId can't be null")
         return repo.getPersonageDescription(param).map { value ->

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.map
 
 class GetLastPlaceUseCase(
     private val repo: PlaceRepository
-):FlowUseCase<Nothing?, Place?>() {
+) : FlowUseCase<Nothing?, Place?>() {
     override fun execute(parameters: Nothing?): Flow<Response<Place?>> {
         return repo.getLastPlace().map { value -> Response.Success(value) }
     }

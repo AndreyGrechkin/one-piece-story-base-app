@@ -67,7 +67,7 @@ class FruitViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun updateFruit(){
+    private fun updateFruit() {
         viewModelScope.launch {
             sendReadFruitUseCase.execute(fruitId)
         }

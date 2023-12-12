@@ -1,7 +1,6 @@
 package com.defey.onepiecestorybase.presentation.screens.detail.location
 
 import com.defey.onepiecestorybase.domain.model.LocationPersonage
-import com.defey.onepiecestorybase.domain.model.Manga
 import com.defey.onepiecestorybase.domain.model.Place
 import com.defey.onepiecestorybase.domain.model.Subject
 import com.defey.onepiecestorybase.presentation.screens.UiState
@@ -15,4 +14,4 @@ data class IslandUiState(
     val anime: String? = null,
     val personageList: List<LocationPersonage> = emptyList(),
     val subjectList: List<Subject> = emptyList()
-):UiState
+) : UiState

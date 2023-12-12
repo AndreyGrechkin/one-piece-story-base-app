@@ -10,22 +10,22 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class InfoViewModel @Inject constructor(): AppViewModel<InfoUiState, InfoUiEvent>() {
+class InfoViewModel @Inject constructor() : AppViewModel<InfoUiState, InfoUiEvent>() {
 
     private val _uiState = MutableStateFlow(InfoUiState())
 
     override val uiState: StateFlow<InfoUiState> = _uiState
+
     init {
         setupTopBar(showTopBar = true, title = UiText.StringResource(R.string.title_setting))
         setupBottomBar(isVisible = true)
-       _uiState.update { it.copy(title = "Настройки")}
+        _uiState.update { it.copy(title = "Настройки") }
     }
 
 
-    override fun onEvent(event: InfoUiEvent){
+    override fun onEvent(event: InfoUiEvent) {
 
     }
-
 
 
 }

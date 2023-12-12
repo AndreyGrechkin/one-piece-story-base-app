@@ -11,9 +11,8 @@ interface WeaponsLocalDataSource {
 
 class WeaponsLocalDataSourceImpl @Inject constructor(
     private val dao: PersonageWeaponsDao
-): WeaponsLocalDataSource {
+) : WeaponsLocalDataSource {
     override fun getWeapons(personageId: Int): Flow<List<PersonageWeaponsEntity>> {
         return dao.getWeapons(personageId)
     }
-
 }

@@ -26,7 +26,7 @@ class BandRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getBandList(bandsId: List<Int>): List<Band> {
-       return local.getBandList(bandsId).map { it.asDomainModel() }
+        return local.getBandList(bandsId).map { it.asDomainModel() }
     }
 
     override fun getBandFlow(bandId: Int): Flow<Band> {

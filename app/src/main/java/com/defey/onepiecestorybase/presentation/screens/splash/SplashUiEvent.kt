@@ -5,5 +5,5 @@ import com.defey.onepiecestorybase.presentation.screens.UiEvent
 
 sealed class SplashUiEvent : UiEvent {
     class NavigateTo(val naveTarget: NavTarget) : SplashUiEvent()
-    object NavigateBack : SplashUiEvent()
+    data object NavigateBack : SplashUiEvent()
 }

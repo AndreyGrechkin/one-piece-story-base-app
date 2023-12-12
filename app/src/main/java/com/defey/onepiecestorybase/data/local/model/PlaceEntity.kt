@@ -18,6 +18,7 @@ data class PlaceEntity(
     val nameJp: String?,
     val transcriptionJp: String?,
     val timeStep: Long,
+    val placeDetailImage: String?,
 )
 
 fun PlaceEntity.asDomain() = Place(
@@ -30,6 +31,7 @@ fun PlaceEntity.asDomain() = Place(
     nameIsland = nameIsland,
     nameJp = nameJp,
     transcriptionJp = transcriptionJp,
-    timeStep = timeStep
+    timeStep = timeStep,
+    placeDetailImage = placeDetailImage
 )
 

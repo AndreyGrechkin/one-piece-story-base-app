@@ -56,7 +56,7 @@ class SubjectViewModel @Inject constructor(
         }.launchIn(viewModelScope)
     }
 
-    private fun upDateSubject(){
+    private fun upDateSubject() {
         viewModelScope.launch {
             sendReadSubjectUseCase.execute(subjectId)
         }

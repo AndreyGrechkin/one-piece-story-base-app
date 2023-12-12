@@ -16,6 +16,7 @@ import com.defey.onepiecestorybase.data.local.database.dao.PersonageDescriptionD
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageRewardDao
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageSkillDao
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageWeaponsDao
+import com.defey.onepiecestorybase.data.local.database.dao.PlaceAvatarDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceDescriptionDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceItemDao
@@ -47,10 +48,12 @@ class DataBaseModule {
     fun provideBandDao(dataBase: OnePieceDataBase): BandDao = dataBase.bandDao()
 
     @Provides
-    fun provideBandDescriptionDao(dataBase: OnePieceDataBase): BandDescriptionDao = dataBase.bandDescriptionDao()
+    fun provideBandDescriptionDao(dataBase: OnePieceDataBase): BandDescriptionDao =
+        dataBase.bandDescriptionDao()
 
     @Provides
-    fun provideBandPersonageDao(dataBase: OnePieceDataBase): BandPersonageDao = dataBase.bandPersonageDao()
+    fun provideBandPersonageDao(dataBase: OnePieceDataBase): BandPersonageDao =
+        dataBase.bandPersonageDao()
 
     @Provides
     fun provideBondDao(dataBase: OnePieceDataBase): BondDao = dataBase.bondDao()
@@ -68,32 +71,42 @@ class DataBaseModule {
     fun providePersonageDao(dataBase: OnePieceDataBase): PersonageDao = dataBase.personageDao()
 
     @Provides
-    fun providePersonageDescriptionDao(dataBase: OnePieceDataBase): PersonageDescriptionDao = dataBase.personageDescriptionDao()
+    fun providePersonageDescriptionDao(dataBase: OnePieceDataBase): PersonageDescriptionDao =
+        dataBase.personageDescriptionDao()
 
     @Provides
-    fun providePersonageRewardDao(dataBase: OnePieceDataBase): PersonageRewardDao = dataBase.personageRewardDao()
+    fun providePersonageRewardDao(dataBase: OnePieceDataBase): PersonageRewardDao =
+        dataBase.personageRewardDao()
 
     @Provides
-    fun providePersonageSkillDao(dataBase: OnePieceDataBase): PersonageSkillDao = dataBase.personageSkillDao()
+    fun providePersonageSkillDao(dataBase: OnePieceDataBase): PersonageSkillDao =
+        dataBase.personageSkillDao()
 
     @Provides
-    fun providePersonageWeaponsDao(dataBase: OnePieceDataBase): PersonageWeaponsDao = dataBase.personageWeaponsDao()
+    fun providePersonageWeaponsDao(dataBase: OnePieceDataBase): PersonageWeaponsDao =
+        dataBase.personageWeaponsDao()
 
     @Provides
     fun providePlaceDao(dataBase: OnePieceDataBase): PlaceDao = dataBase.placeDao()
 
     @Provides
-    fun providePlaceDescriptionDao(dataBase: OnePieceDataBase): PlaceDescriptionDao = dataBase.placeDescriptionDao()
+    fun providePlaceDescriptionDao(dataBase: OnePieceDataBase): PlaceDescriptionDao =
+        dataBase.placeDescriptionDao()
 
     @Provides
     fun providePlaceItemDao(dataBase: OnePieceDataBase): PlaceItemDao = dataBase.placeItemDao()
 
     @Provides
-    fun providePlaceTransitItemDao(dataBase: OnePieceDataBase): PlaceTransitItemDao = dataBase.placeTransitItemDao()
+    fun providePlaceTransitItemDao(dataBase: OnePieceDataBase): PlaceTransitItemDao =
+        dataBase.placeTransitItemDao()
 
     @Provides
     fun provideShipDao(dataBase: OnePieceDataBase): ShipDao = dataBase.shipDao()
 
     @Provides
     fun provideIslandDao(dataBase: OnePieceDataBase): IslandDao = dataBase.islandDao()
+
+    @Provides
+    fun providePlaceAvatarDao(dataBase: OnePieceDataBase): PlaceAvatarDao =
+        dataBase.placeAvatarDao()
 }

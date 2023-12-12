@@ -8,6 +8,6 @@ interface FruitRemoteDataSource {
 
 class FruitRemoteDataSourceImpl @Inject constructor(
     private val api: OnePieceApi
-): FruitRemoteDataSource {
+) : FruitRemoteDataSource {
 
 }

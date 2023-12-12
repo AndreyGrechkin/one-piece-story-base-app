@@ -11,4 +11,5 @@ data class Place(
     val nameJp: String?,
     val transcriptionJp: String?,
     val timeStep: Long,
+    val placeDetailImage: String?,
 )

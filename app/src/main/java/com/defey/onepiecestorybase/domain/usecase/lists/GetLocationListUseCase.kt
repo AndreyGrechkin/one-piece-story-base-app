@@ -1,8 +1,6 @@
 package com.defey.onepiecestorybase.domain.usecase.lists
 
 import com.defey.onepiecestorybase.domain.model.LocationCompact
-import com.defey.onepiecestorybase.domain.model.Personage
-import com.defey.onepiecestorybase.domain.model.PersonageDescription
 import com.defey.onepiecestorybase.domain.model.Place
 import com.defey.onepiecestorybase.domain.model.PlaceDescription
 import com.defey.onepiecestorybase.domain.model.Response

@@ -1,14 +1,11 @@
 package com.defey.onepiecestorybase.data.remote.model
 
 import com.defey.onepiecestorybase.data.local.model.BandEntity
-import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
 data class BandApiResponse(
     val response: List<BandResponse>
 )
 
-@JsonClass(generateAdapter = true)
 data class BandResponse(
     val id: Int,
     val mangaId: Int,

@@ -19,7 +19,7 @@ class BandDescriptionLocalDataSourceImpl @Inject constructor(
     }
 
     override fun getAllBandDescription(): Flow<List<BandDescriptionEntity>> {
-       return dao.getAllBandDescription()
+        return dao.getAllBandDescription()
     }
 
     override suspend fun sendReadBand(bandId: Int) {

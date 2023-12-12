@@ -1,6 +1,5 @@
 package com.defey.onepiecestorybase.presentation.screens.lists.tabs
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -38,7 +37,6 @@ fun SubjectTab(
 ) {
     LazyColumn {
         items(subjectList) { subject ->
-           // Log.d("MyLog", "band: $subject")
             Card(
                 modifier = Modifier
                     .fillMaxWidth()

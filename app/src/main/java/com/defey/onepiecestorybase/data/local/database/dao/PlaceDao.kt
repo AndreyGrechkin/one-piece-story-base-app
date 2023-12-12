@@ -5,7 +5,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.defey.onepiecestorybase.data.local.model.PlaceEntity
-import com.defey.onepiecestorybase.domain.model.Place
 import kotlinx.coroutines.flow.Flow
 
 @Dao

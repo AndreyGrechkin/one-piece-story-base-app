@@ -1,7 +1,6 @@
 package com.defey.onepiecestorybase.data.remote.model
 
 import com.defey.onepiecestorybase.data.local.model.IslandEntity
-import com.squareup.moshi.JsonClass
 
 data class IslandApiResponse(
     val response: List<IslandResponse>

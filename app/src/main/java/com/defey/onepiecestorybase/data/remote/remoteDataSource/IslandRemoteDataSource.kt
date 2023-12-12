@@ -14,7 +14,7 @@ interface IslandRemoteDataSource {
 
 class IslandRemoteDataSourceImpl @Inject constructor(
     private val api: OnePieceApi
-): IslandRemoteDataSource {
+) : IslandRemoteDataSource {
     override suspend fun getIsland(): IslandApiResponse {
         return api.getIsland()
     }

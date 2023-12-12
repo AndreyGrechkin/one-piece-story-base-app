@@ -12,7 +12,7 @@ import javax.inject.Inject
 class FruitRepositoryImpl @Inject constructor(
     private val remote: FruitRemoteDataSource,
     private val local: FruitLocalDataSource
-): FruitRepository {
+) : FruitRepository {
     override fun getAllFruit(): Flow<List<Fruit>> {
         return local.getAllFruit().map { list -> list.map { it.asDomainModel() } }
     }

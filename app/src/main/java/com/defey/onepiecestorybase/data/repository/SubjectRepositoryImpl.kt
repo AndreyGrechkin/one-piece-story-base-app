@@ -22,7 +22,7 @@ class SubjectRepositoryImpl @Inject constructor(
     }
 
     override fun getSubject(subjectId: Int): Flow<Subject?> {
-       return local.getSubject(subjectId).map { it?.asDomainModel() }
+        return local.getSubject(subjectId).map { it?.asDomainModel() }
     }
 
     override suspend fun sendReadSubject(subjectId: Int) {

@@ -15,6 +15,7 @@ import com.defey.onepiecestorybase.data.local.database.dao.PersonageDescriptionD
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageRewardDao
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageSkillDao
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageWeaponsDao
+import com.defey.onepiecestorybase.data.local.database.dao.PlaceAvatarDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceDescriptionDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceItemDao
@@ -35,6 +36,7 @@ import com.defey.onepiecestorybase.data.local.model.PersonageIslandEntity
 import com.defey.onepiecestorybase.data.local.model.PersonageRewardEntity
 import com.defey.onepiecestorybase.data.local.model.PersonageSkillEntity
 import com.defey.onepiecestorybase.data.local.model.PersonageWeaponsEntity
+import com.defey.onepiecestorybase.data.local.model.PlaceAvatarEntity
 import com.defey.onepiecestorybase.data.local.model.PlaceDescriptionEntity
 import com.defey.onepiecestorybase.data.local.model.PlaceEntity
 import com.defey.onepiecestorybase.data.local.model.PlaceItemEntity
@@ -62,7 +64,8 @@ import com.defey.onepiecestorybase.data.local.model.ShipEntity
         ShipEntity::class,
         IslandEntity::class,
         PersonageIslandEntity::class,
-        IslandTransitEntity::class
+        IslandTransitEntity::class,
+        PlaceAvatarEntity::class
     ], version = 1, exportSchema = true
 )
 abstract class OnePieceDataBase : RoomDatabase() {
@@ -85,4 +88,5 @@ abstract class OnePieceDataBase : RoomDatabase() {
     abstract fun placeTransitItemDao(): PlaceTransitItemDao
     abstract fun shipDao(): ShipDao
     abstract fun islandDao(): IslandDao
+    abstract fun placeAvatarDao(): PlaceAvatarDao
 }

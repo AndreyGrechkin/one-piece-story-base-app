@@ -3,7 +3,6 @@ package com.defey.onepiecestorybase.data.local.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.defey.onepiecestorybase.domain.model.Island
-import com.defey.onepiecestorybase.domain.model.IslandPlace
 import com.defey.onepiecestorybase.presentation.utils.Constants.ISLAND_TABLE
 
 @Entity(tableName = ISLAND_TABLE)

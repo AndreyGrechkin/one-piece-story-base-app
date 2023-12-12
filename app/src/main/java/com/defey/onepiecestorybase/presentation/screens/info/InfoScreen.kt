@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 fun InfoScreen(
     state: InfoUiState,
     onEvent: (InfoUiEvent) -> Unit
-){
+) {
     Box(contentAlignment = Alignment.Center) {
         Text(text = "Экран ${state.title}")
     }

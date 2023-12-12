@@ -5,9 +5,8 @@ import com.defey.onepiecestorybase.domain.model.Place
 import com.defey.onepiecestorybase.domain.model.Response
 import com.defey.onepiecestorybase.domain.model.SafeApiCall
 import kotlinx.coroutines.flow.Flow
-import ovh.plrapps.mapcompose.core.TileStreamProvider
 
-interface PlaceRepository: SafeApiCall {
+interface PlaceRepository : SafeApiCall {
     suspend fun getMapById(id: Int): MapResponse
     suspend fun syncMapById(id: Int): Response<Unit>
     fun getLastPlace(): Flow<Place?>

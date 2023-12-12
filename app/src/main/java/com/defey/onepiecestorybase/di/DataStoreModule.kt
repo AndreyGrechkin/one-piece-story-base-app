@@ -2,8 +2,10 @@ package com.defey.onepiecestorybase.di
 
 import android.content.Context
 import com.defey.onepiecestorybase.data.local.sharedPref.DataStorePreferencesImpl
+import com.defey.onepiecestorybase.data.repository.ImageLoaderRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.MapsRepositoryImpl
 import com.defey.onepiecestorybase.domain.repository.DataStorePreferences
+import com.defey.onepiecestorybase.domain.repository.ImageLoaderRepository
 import com.defey.onepiecestorybase.domain.repository.MapsRepository
 import com.defey.onepiecestorybase.presentation.utils.Constants.DATA_STORE_NAME
 import dagger.Module
@@ -26,4 +28,9 @@ class DataStoreModule {
     @Singleton
     fun provideMapsRepository(@ApplicationContext context: Context): MapsRepository =
         MapsRepositoryImpl(context = context)
+
+    @Provides
+    @Singleton
+    fun provideImageLoaderRepository(@ApplicationContext context: Context): ImageLoaderRepository =
+        ImageLoaderRepositoryImpl(context = context)
 }

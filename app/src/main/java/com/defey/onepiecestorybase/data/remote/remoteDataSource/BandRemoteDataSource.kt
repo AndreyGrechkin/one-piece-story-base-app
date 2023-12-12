@@ -8,6 +8,6 @@ interface BandRemoteDataSource {
 
 class BandRemoteDataSourceImpl @Inject constructor(
     private val api: OnePieceApi
-): BandRemoteDataSource {
+) : BandRemoteDataSource {
 
 }

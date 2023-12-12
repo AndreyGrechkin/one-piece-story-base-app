@@ -45,6 +45,6 @@ class IslandLocalDataSourceImpl @Inject constructor(
     }
 
     override suspend fun deleteLocalOldAvatarPlace(lastPlaceId: Int, avatarName: String) {
-       dao.deleteOldAvatar(lastPlaceId, avatarName)
+        dao.deleteOldAvatar(lastPlaceId, avatarName)
     }
 }

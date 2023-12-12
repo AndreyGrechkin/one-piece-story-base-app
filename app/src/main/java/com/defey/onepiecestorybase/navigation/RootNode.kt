@@ -132,6 +132,7 @@ class RootNode(
                 backStack,
                 defaultArgs = Bundle().apply {
                     putInt("placeId", navTarget.placeId)
+                    putString("imageIsland", navTarget.imageIsland)
                 }
             )
         }

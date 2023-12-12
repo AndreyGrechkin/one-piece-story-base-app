@@ -2,6 +2,12 @@ package com.defey.onepiecestorybase.domain.model
 
 import androidx.annotation.DrawableRes
 import com.defey.onepiecestorybase.R
+import com.defey.onepiecestorybase.presentation.utils.Constants.BONDS
+import com.defey.onepiecestorybase.presentation.utils.Constants.BONDS_DESCRIPTION
+import com.defey.onepiecestorybase.presentation.utils.Constants.INFORMATION
+import com.defey.onepiecestorybase.presentation.utils.Constants.INFORMATION_DESCRIPTION
+import com.defey.onepiecestorybase.presentation.utils.Constants.MAP_PIECE
+import com.defey.onepiecestorybase.presentation.utils.Constants.MAP_PIECE_DESCRIPTION
 
 sealed class OnboardingPage(
     @DrawableRes
@@ -9,21 +15,21 @@ sealed class OnboardingPage(
     val title: String,
     val description: String
 ) {
-    object First: OnboardingPage(
+    data object First : OnboardingPage(
         image = R.drawable.onboarding_map,
-        title = "Карта мира",
-        description = "Перемещаетесь вместе с героями по карте мира"
+        title = MAP_PIECE,
+        description = MAP_PIECE_DESCRIPTION
     )
 
-    object Second: OnboardingPage(
+    data object Second : OnboardingPage(
         image = R.drawable.onboarding_bond,
-        title = "Связи",
-        description = "Посмотрите каккие образуются связи "
+        title = BONDS,
+        description = BONDS_DESCRIPTION
     )
 
-    object Third: OnboardingPage(
+    data object Third : OnboardingPage(
         image = R.drawable.onboarding_info,
-        title = "Информация",
-        description = "Информация об островах, персонажей, команд и предметов"
+        title = INFORMATION,
+        description = INFORMATION_DESCRIPTION
     )
 }

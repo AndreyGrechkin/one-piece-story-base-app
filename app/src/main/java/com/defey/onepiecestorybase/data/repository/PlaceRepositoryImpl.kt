@@ -112,13 +112,13 @@ class PlaceRepositoryImpl @Inject constructor(
     }
 
     private suspend fun addShipDao(ship: List<ShipEntity>) {
-        if (ship.isNotEmpty()){
+        if (ship.isNotEmpty()) {
             shipDao.addShip(ship)
         }
     }
 
     private suspend fun addPlaceTransitItemDao(placeTransit: List<PlaceTransitItemEntity>) {
-        if (placeTransit.isNotEmpty()){
+        if (placeTransit.isNotEmpty()) {
             placeTransitItemDao.addPlaceTransit(placeTransit)
         }
     }
@@ -130,8 +130,8 @@ class PlaceRepositoryImpl @Inject constructor(
     }
 
     private suspend fun addPlaceDescriptionDao(placeDescription: List<PlaceDescriptionEntity>) {
-        if (placeDescription.isNotEmpty()){
-        placeDescriptionDao.addPlaceDescription(placeDescription)
+        if (placeDescription.isNotEmpty()) {
+            placeDescriptionDao.addPlaceDescription(placeDescription)
         }
     }
 
@@ -140,21 +140,21 @@ class PlaceRepositoryImpl @Inject constructor(
     }
 
     private suspend fun addWeaponDao(weapons: List<PersonageWeaponsEntity>) {
-        if (weapons.isNotEmpty()){
+        if (weapons.isNotEmpty()) {
             weaponsDao.addPersonageWeapon(weapons)
             personageDescriptionDao.updateNewPersonage(weapons.map { it.personageId }.distinct())
         }
     }
 
     private suspend fun addSkillDao(skill: List<PersonageSkillEntity>) {
-        if (skill.isNotEmpty()){
+        if (skill.isNotEmpty()) {
             skillDao.addPersonageSkill(skill)
             personageDescriptionDao.updateNewPersonage(skill.map { it.personageId }.distinct())
         }
     }
 
     private suspend fun addRewardDao(reward: List<PersonageRewardEntity>) {
-        if (reward.isNotEmpty()){
+        if (reward.isNotEmpty()) {
             rewardDao.addPersonageReward(reward)
             personageDescriptionDao.updateNewPersonage(reward.map { it.personageId }.distinct())
         }
@@ -179,26 +179,27 @@ class PlaceRepositoryImpl @Inject constructor(
     }
 
     private suspend fun addBandDao(band: List<BandEntity>) {
-        if (band.isNotEmpty()){
+        if (band.isNotEmpty()) {
             bandDao.addBand(band)
         }
     }
 
     private suspend fun addBandDescriptionDao(bandDescription: List<BandDescriptionEntity>) {
-        if (bandDescription.isNotEmpty()){
+        if (bandDescription.isNotEmpty()) {
             bandDescriptionDao.addBandDescription(bandDescription)
         }
     }
 
     private suspend fun addBandPersonageDao(bandPersonage: List<BandPersonageEntity>) {
-        if (bandPersonage.isNotEmpty()){
+        if (bandPersonage.isNotEmpty()) {
             bandPersonageDao.addBandPersonage(bandPersonage)
-            personageDescriptionDao.updateNewPersonage(bandPersonage.map { it.personageId }.distinct())
+            personageDescriptionDao.updateNewPersonage(bandPersonage.map { it.personageId }
+                .distinct())
         }
     }
 
     private suspend fun addBondDao(bond: List<BondEntity>) {
-        if (bond.isNotEmpty()){
+        if (bond.isNotEmpty()) {
             bondDao.addBond(bond)
         }
     }

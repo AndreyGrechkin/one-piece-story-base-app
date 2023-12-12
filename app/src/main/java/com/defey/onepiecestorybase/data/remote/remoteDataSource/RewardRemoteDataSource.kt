@@ -8,6 +8,6 @@ interface RewardRemoteDataSource {
 
 class RewardRemoteDataSourceImpl @Inject constructor(
     private val api: OnePieceApi
-): RewardRemoteDataSource {
+) : RewardRemoteDataSource {
 
 }

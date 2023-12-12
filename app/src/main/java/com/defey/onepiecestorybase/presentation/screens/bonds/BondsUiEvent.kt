@@ -6,5 +6,5 @@ sealed class BondsUiEvent : UiEvent {
     class ClickPersonage(val id: Int) : BondsUiEvent()
     class UnClickPersonage(val id: Int) : BondsUiEvent()
     class ClickBond(val id: Int) : BondsUiEvent()
-    object ClickCloseDialog : BondsUiEvent()
+    data object ClickCloseDialog : BondsUiEvent()
 }

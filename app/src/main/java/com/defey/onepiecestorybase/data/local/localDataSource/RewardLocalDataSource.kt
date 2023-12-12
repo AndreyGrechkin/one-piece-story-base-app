@@ -12,7 +12,7 @@ interface RewardLocalDataSource {
 
 class RewardLocalDataSourceImpl @Inject constructor(
     private val dao: PersonageRewardDao
-): RewardLocalDataSource {
+) : RewardLocalDataSource {
     override fun getRewards(personageId: Int): Flow<List<PersonageRewardEntity>> {
         return dao.getRewards(personageId)
     }

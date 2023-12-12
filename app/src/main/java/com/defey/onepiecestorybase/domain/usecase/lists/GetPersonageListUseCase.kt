@@ -46,7 +46,8 @@ class GetPersonageListUseCase(
         personage: Personage,
         personageDescriptions: List<PersonageDescription>
     ): Boolean {
-          return  personageDescriptions.findLast { it.personageId == personage.id }?.isNewPersonage ?: false
+        return personageDescriptions.findLast { it.personageId == personage.id }?.isNewPersonage
+            ?: false
     }
 
     private fun getSurname(

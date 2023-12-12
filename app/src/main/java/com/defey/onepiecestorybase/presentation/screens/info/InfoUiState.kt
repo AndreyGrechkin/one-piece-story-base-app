@@ -4,4 +4,4 @@ import com.defey.onepiecestorybase.presentation.screens.UiState
 
 data class InfoUiState(
     val title: String = ""
-): UiState
+) : UiState

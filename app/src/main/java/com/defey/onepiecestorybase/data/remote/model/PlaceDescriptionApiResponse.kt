@@ -1,14 +1,11 @@
 package com.defey.onepiecestorybase.data.remote.model
 
 import com.defey.onepiecestorybase.data.local.model.PlaceDescriptionEntity
-import com.squareup.moshi.JsonClass
 
-@JsonClass(generateAdapter = true)
 data class PlaceDescriptionApiResponse(
     val response: List<PlaceDescriptionResponse>
 )
 
-@JsonClass(generateAdapter = true)
 data class PlaceDescriptionResponse(
     val id: Int,
     val placeId: Int,

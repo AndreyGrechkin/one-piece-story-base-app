@@ -20,6 +20,8 @@ import com.defey.onepiecestorybase.data.local.localDataSource.PersonageLocalData
 import com.defey.onepiecestorybase.data.local.localDataSource.PersonageLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.PlaceDescriptionLocalDataSource
 import com.defey.onepiecestorybase.data.local.localDataSource.PlaceDescriptionLocalDataSourceImpl
+import com.defey.onepiecestorybase.data.local.localDataSource.PlaceItemLocalDataSource
+import com.defey.onepiecestorybase.data.local.localDataSource.PlaceItemLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.PlaceLocalDataSource
 import com.defey.onepiecestorybase.data.local.localDataSource.PlaceLocalDataSourceImpl
 import com.defey.onepiecestorybase.data.local.localDataSource.RewardLocalDataSource
@@ -52,6 +54,8 @@ import com.defey.onepiecestorybase.data.remote.remoteDataSource.PersonageRemoteD
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.PersonageRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceDescriptionRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceDescriptionRemoteDataSourceImpl
+import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceItemRemoteDataSource
+import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceItemRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.RewardRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.RewardRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.ShipRemoteDataSource
@@ -72,6 +76,7 @@ import com.defey.onepiecestorybase.data.repository.MangaRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.PersonageDescriptionRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.PersonageRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.PlaceDescriptionRepositoryImpl
+import com.defey.onepiecestorybase.data.repository.PlaceItemRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.PlaceRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.RewardRepositoryImpl
 import com.defey.onepiecestorybase.data.repository.ShipRepositoryImpl
@@ -88,6 +93,7 @@ import com.defey.onepiecestorybase.domain.repository.MangaRepository
 import com.defey.onepiecestorybase.domain.repository.PersonageDescriptionRepository
 import com.defey.onepiecestorybase.domain.repository.PersonageRepository
 import com.defey.onepiecestorybase.domain.repository.PlaceDescriptionRepository
+import com.defey.onepiecestorybase.domain.repository.PlaceItemRepository
 import com.defey.onepiecestorybase.domain.repository.PlaceRepository
 import com.defey.onepiecestorybase.domain.repository.RewardRepository
 import com.defey.onepiecestorybase.domain.repository.ShipRepository
@@ -291,4 +297,16 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideBondRepository(impl: BondRepositoryImpl): BondRepository
+
+    @Binds
+    @Singleton
+    abstract fun providePlaceItemLocalDataSource(impl: PlaceItemLocalDataSourceImpl): PlaceItemLocalDataSource
+
+    @Binds
+    @Singleton
+    abstract fun providePlaceItemRemoteDataSource(impl: PlaceItemRemoteDataSourceImpl): PlaceItemRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun providePlaceItemRepository(impl: PlaceItemRepositoryImpl): PlaceItemRepository
 }
