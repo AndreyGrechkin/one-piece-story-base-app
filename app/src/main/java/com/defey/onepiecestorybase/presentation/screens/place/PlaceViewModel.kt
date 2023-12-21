@@ -1,6 +1,7 @@
 package com.defey.onepiecestorybase.presentation.screens.place
 
 import android.os.CountDownTimer
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateMapOf
@@ -16,8 +17,7 @@ import com.defey.onepiecestorybase.domain.usecase.place.GetLastPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetNextTimeUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetPlaceRewardUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetPlaceUseCase
-import com.defey.onepiecestorybase.domain.usecase.place.SyncMapParam
-import com.defey.onepiecestorybase.domain.usecase.place.SyncMapUseCase
+import com.defey.onepiecestorybase.domain.usecase.place.PlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizeIslandUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizePersonageIslandUseCase
 import com.defey.onepiecestorybase.navigation.NavTarget
@@ -53,12 +53,12 @@ class PlaceViewModel @Inject constructor(
     private val getIslandsUseCase: GetIslandsUseCase,
     private val syncAvatarIslandUseCase: SynchronizePersonageIslandUseCase,
     private val getShipIslandUseCase: GetAvatarPlaceUseCase,
-    private val syncMapUseCase: SyncMapUseCase,
     private val getLastPlaceUseCase: GetLastPlaceUseCase,
     private val dataStore: DataStorePreferences,
     private val getNextTimeUseCase: GetNextTimeUseCase,
     private val getPlaceRewardUseCase: GetPlaceRewardUseCase,
-    private val getPlaceUseCase: GetPlaceUseCase
+    private val getPlaceUseCase: GetPlaceUseCase,
+    private val placeUseCase: PlaceUseCase
 ) : AppViewModel<PlaceUiState, PlaceUiEvent>() {
 
     private val tileStreamProvider = maps.getFullMap()
@@ -92,6 +92,7 @@ class PlaceViewModel @Inject constructor(
         observeAvatarPlace()
         observeReward()
         countDown()
+
     }
 
     override fun onEvent(event: PlaceUiEvent) {
@@ -163,8 +164,14 @@ class PlaceViewModel @Inject constructor(
     private fun syncAvatarIsland(placeId: Int) {
         syncAvatarIslandUseCase(placeId).onEach { response ->
             when (response) {
-                Response.Loading -> {}
-                is Response.Success -> {}
+                Response.Loading -> {
+                    Log.d("MyLog", "load Avatar")
+                }
+
+                is Response.Success -> {
+                    Log.d("MyLog", "success Avatar")
+                }
+
                 is Response.Failure -> {}
             }
         }.launchIn(viewModelScope)
@@ -201,14 +208,7 @@ class PlaceViewModel @Inject constructor(
         saveNextTime(time)
         val lastPlaceId = uiState.value.lastPlaceId
         val placeId = if (lastPlaceId == null) 1 else lastPlaceId + 1
-        syncAvatarIsland(placeId)
-        syncMapUseCase(SyncMapParam(placeId)).onEach { response ->
-            when (response) {
-                is Response.Success -> {}
-                is Response.Failure -> {}
-                Response.Loading -> {}
-            }
-        }.launchIn(viewModelScope)
+        syncMap(placeId)
     }
 
     private fun onCenter(name: String) {
@@ -286,5 +286,332 @@ class PlaceViewModel @Inject constructor(
             val datePref = dateNow.plusSeconds(timeStep).asString()
             dataStore.saveTimeStep(datePref)
         }
+    }
+
+    private fun syncMap(placeId: Int) {
+        syncAvatarIsland(placeId)
+        syncPlace(placeId)
+        syncBand(placeId)
+        syncBandDescription(placeId)
+        syncBandPersonage(placeId)
+        syncBond(placeId)
+        syncFruit(placeId)
+        syncSubject(placeId)
+        syncManga(placeId)
+        syncPersonage(placeId)
+        syncPersonageDescription(placeId)
+        syncReward(placeId)
+        syncSkill(placeId)
+        syncWeapon(placeId)
+        syncPlaceDescription(placeId)
+        syncPlaceItem(placeId)
+        syncPlaceItemTransit(placeId)
+        syncShip(placeId)
+    }
+
+    private fun syncPlace(placeId: Int) {
+        placeUseCase.syncPlaceUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Place")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Place")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncBand(placeId: Int) {
+        placeUseCase.syncBandUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Band")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Band")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncBandDescription(placeId: Int) {
+        placeUseCase.syncBandDescriptionUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success BandDescription")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load BandDescription")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncBandPersonage(placeId: Int) {
+        placeUseCase.syncBandPersonageUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success BandPersonage")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load BandPersonage")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncBond(placeId: Int) {
+        placeUseCase.syncBondUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Bond")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Bond")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncFruit(placeId: Int) {
+        placeUseCase.syncFruitUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Fruit")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Fruit")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncSubject(placeId: Int) {
+        placeUseCase.syncSubjectUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Subject")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Subject")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncManga(placeId: Int) {
+        placeUseCase.syncMangaUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Manga")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Manga")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncPersonage(placeId: Int) {
+        placeUseCase.syncPersonageUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Personage")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Personage")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncPersonageDescription(placeId: Int) {
+        placeUseCase.syncPersonageDescriptionUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success PersonageDescription")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load PersonageDescription")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncReward(placeId: Int) {
+        placeUseCase.syncRewardUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Reward")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Reward")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncSkill(placeId: Int) {
+        placeUseCase.syncSkillUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Skill")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Skill")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncWeapon(placeId: Int) {
+        placeUseCase.syncWeaponUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Weapon")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Weapon")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncPlaceDescription(placeId: Int) {
+        placeUseCase.syncPlaceDescriptionUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success PlaceDescription")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load PlaceDescription")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncPlaceItem(placeId: Int) {
+        placeUseCase.syncPlaceItemUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success PlaceItem")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load PlaceItem")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncPlaceItemTransit(placeId: Int) {
+        placeUseCase.syncPlaceItemTransitUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success PlaceItemTransit")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load PlaceItemTransit")
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncShip(placeId: Int) {
+        placeUseCase.syncShipUseCase(placeId).onEach { response ->
+            when (response) {
+                is Response.Success -> {
+                    Log.d("MyLog", "success Ship")
+                }
+
+                is Response.Failure -> {
+                    Log.d("MyLog", "error ${response.getErrorDescription()}")
+                }
+
+                Response.Loading -> {
+                    Log.d("MyLog", "Load Ship")
+                }
+            }
+        }.launchIn(viewModelScope)
     }
 }

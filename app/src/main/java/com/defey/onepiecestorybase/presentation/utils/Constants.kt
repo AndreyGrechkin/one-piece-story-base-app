@@ -8,7 +8,7 @@ object Constants {
     const val BAND_PERSONAGE_TABLE = "band_personage"
     const val BOND_TABLE = "bond"
     const val FRUIT_TABLE = "fruit"
-    const val INVENTORY_TABLE = "inventory"
+    const val SUBJECT_TABLE = "subject"
     const val MANGA_TABLE = "manga"
     const val PERSONAGE_TABLE = "personage"
     const val PERSONAGE_DESCRIPTION_TABLE = "personage_description"

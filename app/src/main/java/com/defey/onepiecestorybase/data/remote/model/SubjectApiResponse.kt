@@ -1,12 +1,12 @@
 package com.defey.onepiecestorybase.data.remote.model
 
-import com.defey.onepiecestorybase.data.local.model.InventoryEntity
+import com.defey.onepiecestorybase.data.local.model.SubjectEntity
 
-data class InventoryApiResponse(
-    val response: List<InventoryResponse>
+data class SubjectApiResponse(
+    val response: List<SubjectResponse>
 )
 
-data class InventoryResponse(
+data class SubjectResponse(
     val id: Int,
     val mangaId: Int,
     val placeId: Int,
@@ -17,7 +17,7 @@ data class InventoryResponse(
     val transcriptionJp: String?,
 )
 
-fun InventoryResponse.toEntity() = InventoryEntity(
+fun SubjectResponse.toEntity() = SubjectEntity(
     id = id,
     mangaId = mangaId,
     placeId = placeId,

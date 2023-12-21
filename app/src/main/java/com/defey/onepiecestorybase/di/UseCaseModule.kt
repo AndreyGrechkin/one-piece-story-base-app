@@ -59,7 +59,6 @@ import com.defey.onepiecestorybase.domain.usecase.place.GetLastPlaceUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetNextTimeUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetPlaceRewardUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.GetPlaceUseCase
-import com.defey.onepiecestorybase.domain.usecase.place.SyncMapUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizeIslandUseCase
 import com.defey.onepiecestorybase.domain.usecase.place.SynchronizePersonageIslandUseCase
 import com.defey.onepiecestorybase.domain.usecase.subject.GetMangaSubjectUseCase
@@ -100,10 +99,10 @@ class UseCaseModule {
         placeRepo: PlaceRepository
     ): GetIslandsUseCase = GetIslandsUseCase(repo, placeRepo)
 
-    @Provides
-    fun provideSyncMapUseCase(
-        repo: PlaceRepository
-    ): SyncMapUseCase = SyncMapUseCase(repo)
+//    @Provides
+//    fun provideSyncMapUseCase(
+//        repo: PlaceRepository
+//    ): SyncMapUseCase = SyncMapUseCase(repo)
 
     @Provides
     fun provideGetLastPlaceUseCase(

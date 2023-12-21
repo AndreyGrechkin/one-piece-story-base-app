@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 interface PersonageDescriptionLocalDataSource {
+    suspend fun addPersonageDescription(personageDescriptions: List<PersonageDescriptionEntity>)
     fun getAllPersonageDescription(): Flow<List<PersonageDescriptionEntity>>
     fun getPersonageDescription(personageId: Int): Flow<List<PersonageDescriptionEntity>>
     suspend fun getDescriptionsByPersonageId(personageIdList: List<Int>): List<PersonageDescriptionEntity>
@@ -17,6 +18,10 @@ interface PersonageDescriptionLocalDataSource {
 class PersonageDescriptionLocalDataSourceImpl @Inject constructor(
     private val dao: PersonageDescriptionDao
 ) : PersonageDescriptionLocalDataSource {
+    override suspend fun addPersonageDescription(personageDescriptions: List<PersonageDescriptionEntity>) {
+        dao.addPersonageDescription(personageDescriptions)
+    }
+
     override fun getAllPersonageDescription(): Flow<List<PersonageDescriptionEntity>> {
         return dao.getAllPersonageDescription()
     }

@@ -1,29 +1,34 @@
 package com.defey.onepiecestorybase.data.local.localDataSource
 
-import com.defey.onepiecestorybase.data.local.database.dao.InventoryDao
-import com.defey.onepiecestorybase.data.local.model.InventoryEntity
+import com.defey.onepiecestorybase.data.local.database.dao.SubjectDao
+import com.defey.onepiecestorybase.data.local.model.SubjectEntity
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface SubjectLocalDataSource {
-    fun getAllSubject(): Flow<List<InventoryEntity>>
-    fun getSubjectInPlace(placeId: Int): Flow<List<InventoryEntity>>
-    fun getSubject(subjectId: Int): Flow<InventoryEntity?>
+    suspend fun addSubject(subjects: List<SubjectEntity>)
+    fun getAllSubject(): Flow<List<SubjectEntity>>
+    fun getSubjectInPlace(placeId: Int): Flow<List<SubjectEntity>>
+    fun getSubject(subjectId: Int): Flow<SubjectEntity?>
     suspend fun sendReadSubject(subjectId: Int)
 }
 
 class SubjectLocalDataSourceImpl @Inject constructor(
-    private val dao: InventoryDao
+    private val dao: SubjectDao
 ) : SubjectLocalDataSource {
-    override fun getAllSubject(): Flow<List<InventoryEntity>> {
+    override suspend fun addSubject(subjects: List<SubjectEntity>) {
+        dao.addSubject(subjects)
+    }
+
+    override fun getAllSubject(): Flow<List<SubjectEntity>> {
         return dao.getAllSubject()
     }
 
-    override fun getSubjectInPlace(placeId: Int): Flow<List<InventoryEntity>> {
+    override fun getSubjectInPlace(placeId: Int): Flow<List<SubjectEntity>> {
         return dao.getSubjectInPlace(placeId)
     }
 
-    override fun getSubject(subjectId: Int): Flow<InventoryEntity?> {
+    override fun getSubject(subjectId: Int): Flow<SubjectEntity?> {
         return dao.getSubject(subjectId)
     }
 

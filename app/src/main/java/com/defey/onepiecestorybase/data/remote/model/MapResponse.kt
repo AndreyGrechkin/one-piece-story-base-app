@@ -20,7 +20,7 @@ data class MapResponse(
     val bandPersonage: List<BandPersonageResponse>,
     val bond: List<BondResponse>,
     val fruit: List<FruitResponse>,
-    val inventory: List<InventoryResponse>,
+    val inventory: List<SubjectResponse>,
     val personages: List<PersonageResponse>,
     val personageDescription: List<PersonageDescriptionResponse>,
     val personageReward: List<PersonageRewardResponse>,

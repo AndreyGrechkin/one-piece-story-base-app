@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface PlaceItemLocalDataSource {
+    suspend fun addPlaceItem(items: List<PlaceItemEntity>)
+    suspend fun addPlaceItemTransit(transit: List<PlaceTransitItemEntity>)
     fun getItemsByPlace(placeId: Int): Flow<List<PlaceItemEntity>>
     fun getItemTransitByManga(mangaId: Int): Flow<List<PlaceTransitItemEntity>>
     suspend fun addPlaceAvatar(placeAvatar: List<PlaceAvatarEntity>)
@@ -22,6 +24,14 @@ class PlaceItemLocalDataSourceImpl @Inject constructor(
     private val daoTransit: PlaceTransitItemDao,
     private val daoAvatar: PlaceAvatarDao
 ) : PlaceItemLocalDataSource {
+    override suspend fun addPlaceItem(items: List<PlaceItemEntity>) {
+        dao.addPlaceItem(items)
+    }
+
+    override suspend fun addPlaceItemTransit(transit: List<PlaceTransitItemEntity>) {
+        daoTransit.addPlaceTransit(transit)
+    }
+
     override fun getItemsByPlace(placeId: Int): Flow<List<PlaceItemEntity>> {
         return dao.getItemsByPlace(placeId)
     }

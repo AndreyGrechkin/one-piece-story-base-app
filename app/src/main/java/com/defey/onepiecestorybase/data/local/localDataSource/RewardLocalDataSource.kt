@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface RewardLocalDataSource {
+    suspend fun addReward(rewards: List<PersonageRewardEntity>)
     fun getRewards(personageId: Int): Flow<List<PersonageRewardEntity>>
     fun getAllReward(): Flow<List<PersonageRewardEntity>>
 }
@@ -13,6 +14,10 @@ interface RewardLocalDataSource {
 class RewardLocalDataSourceImpl @Inject constructor(
     private val dao: PersonageRewardDao
 ) : RewardLocalDataSource {
+    override suspend fun addReward(rewards: List<PersonageRewardEntity>) {
+        dao.addPersonageReward(rewards)
+    }
+
     override fun getRewards(personageId: Int): Flow<List<PersonageRewardEntity>> {
         return dao.getRewards(personageId)
     }

@@ -7,7 +7,6 @@ import com.defey.onepiecestorybase.data.local.database.dao.BandDescriptionDao
 import com.defey.onepiecestorybase.data.local.database.dao.BandPersonageDao
 import com.defey.onepiecestorybase.data.local.database.dao.BondDao
 import com.defey.onepiecestorybase.data.local.database.dao.FruitDao
-import com.defey.onepiecestorybase.data.local.database.dao.InventoryDao
 import com.defey.onepiecestorybase.data.local.database.dao.IslandDao
 import com.defey.onepiecestorybase.data.local.database.dao.MangaDao
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageDao
@@ -21,12 +20,12 @@ import com.defey.onepiecestorybase.data.local.database.dao.PlaceDescriptionDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceItemDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceTransitItemDao
 import com.defey.onepiecestorybase.data.local.database.dao.ShipDao
+import com.defey.onepiecestorybase.data.local.database.dao.SubjectDao
 import com.defey.onepiecestorybase.data.local.model.BandDescriptionEntity
 import com.defey.onepiecestorybase.data.local.model.BandEntity
 import com.defey.onepiecestorybase.data.local.model.BandPersonageEntity
 import com.defey.onepiecestorybase.data.local.model.BondEntity
 import com.defey.onepiecestorybase.data.local.model.FruitEntity
-import com.defey.onepiecestorybase.data.local.model.InventoryEntity
 import com.defey.onepiecestorybase.data.local.model.IslandEntity
 import com.defey.onepiecestorybase.data.local.model.IslandTransitEntity
 import com.defey.onepiecestorybase.data.local.model.MangaEntity
@@ -42,6 +41,7 @@ import com.defey.onepiecestorybase.data.local.model.PlaceEntity
 import com.defey.onepiecestorybase.data.local.model.PlaceItemEntity
 import com.defey.onepiecestorybase.data.local.model.PlaceTransitItemEntity
 import com.defey.onepiecestorybase.data.local.model.ShipEntity
+import com.defey.onepiecestorybase.data.local.model.SubjectEntity
 
 @Database(
     entities = [
@@ -50,7 +50,7 @@ import com.defey.onepiecestorybase.data.local.model.ShipEntity
         BandPersonageEntity::class,
         BondEntity::class,
         FruitEntity::class,
-        InventoryEntity::class,
+        SubjectEntity::class,
         MangaEntity::class,
         PersonageEntity::class,
         PersonageDescriptionEntity::class,
@@ -75,7 +75,7 @@ abstract class OnePieceDataBase : RoomDatabase() {
     abstract fun bandPersonageDao(): BandPersonageDao
     abstract fun bondDao(): BondDao
     abstract fun fruitDao(): FruitDao
-    abstract fun inventoryDao(): InventoryDao
+    abstract fun subjectDao(): SubjectDao
     abstract fun mangaDao(): MangaDao
     abstract fun personageDao(): PersonageDao
     abstract fun personageDescriptionDao(): PersonageDescriptionDao

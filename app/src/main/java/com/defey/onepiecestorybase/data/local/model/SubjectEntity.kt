@@ -3,10 +3,10 @@ package com.defey.onepiecestorybase.data.local.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.defey.onepiecestorybase.domain.model.Subject
-import com.defey.onepiecestorybase.presentation.utils.Constants.INVENTORY_TABLE
+import com.defey.onepiecestorybase.presentation.utils.Constants.SUBJECT_TABLE
 
-@Entity(tableName = INVENTORY_TABLE)
-data class InventoryEntity(
+@Entity(tableName = SUBJECT_TABLE)
+data class SubjectEntity(
     @PrimaryKey
     val id: Int,
     val mangaId: Int,
@@ -19,7 +19,7 @@ data class InventoryEntity(
     val isNewSubject: Boolean
 )
 
-fun InventoryEntity.asDomainModel() = Subject(
+fun SubjectEntity.asDomainModel() = Subject(
     id = id,
     mangaId = mangaId,
     placeId = placeId,

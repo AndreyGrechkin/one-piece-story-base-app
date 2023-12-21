@@ -56,6 +56,8 @@ import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceDescription
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceDescriptionRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceItemRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceItemRemoteDataSourceImpl
+import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceRemoteDataSource
+import com.defey.onepiecestorybase.data.remote.remoteDataSource.PlaceRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.RewardRemoteDataSource
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.RewardRemoteDataSourceImpl
 import com.defey.onepiecestorybase.data.remote.remoteDataSource.ShipRemoteDataSource
@@ -309,4 +311,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun providePlaceItemRepository(impl: PlaceItemRepositoryImpl): PlaceItemRepository
+
+    @Binds
+    @Singleton
+    abstract fun providePlaceRemoteDataSource(impl: PlaceRemoteDataSourceImpl): PlaceRemoteDataSource
 }

@@ -8,7 +8,6 @@ import com.defey.onepiecestorybase.data.local.database.dao.BandDescriptionDao
 import com.defey.onepiecestorybase.data.local.database.dao.BandPersonageDao
 import com.defey.onepiecestorybase.data.local.database.dao.BondDao
 import com.defey.onepiecestorybase.data.local.database.dao.FruitDao
-import com.defey.onepiecestorybase.data.local.database.dao.InventoryDao
 import com.defey.onepiecestorybase.data.local.database.dao.IslandDao
 import com.defey.onepiecestorybase.data.local.database.dao.MangaDao
 import com.defey.onepiecestorybase.data.local.database.dao.PersonageDao
@@ -22,6 +21,7 @@ import com.defey.onepiecestorybase.data.local.database.dao.PlaceDescriptionDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceItemDao
 import com.defey.onepiecestorybase.data.local.database.dao.PlaceTransitItemDao
 import com.defey.onepiecestorybase.data.local.database.dao.ShipDao
+import com.defey.onepiecestorybase.data.local.database.dao.SubjectDao
 import com.defey.onepiecestorybase.presentation.utils.Constants.ONE_PIECE_DATABASE
 import dagger.Module
 import dagger.Provides
@@ -62,7 +62,7 @@ class DataBaseModule {
     fun provideFruitDao(dataBase: OnePieceDataBase): FruitDao = dataBase.fruitDao()
 
     @Provides
-    fun provideInventoryDao(dataBase: OnePieceDataBase): InventoryDao = dataBase.inventoryDao()
+    fun provideSubjectDao(dataBase: OnePieceDataBase): SubjectDao = dataBase.subjectDao()
 
     @Provides
     fun provideMangaDao(dataBase: OnePieceDataBase): MangaDao = dataBase.mangaDao()

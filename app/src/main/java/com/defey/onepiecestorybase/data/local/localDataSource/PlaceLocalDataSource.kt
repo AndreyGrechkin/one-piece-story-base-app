@@ -7,6 +7,9 @@ import javax.inject.Inject
 
 interface PlaceLocalDataSource {
     fun getLocation(id: Int): Flow<PlaceEntity>
+    suspend fun addPlace(place: PlaceEntity)
+    fun getLastPlace(): Flow<PlaceEntity?>
+    fun getAllPlaceFlow(): Flow<List<PlaceEntity>>
 }
 
 class PlaceLocalDataSourceImpl @Inject constructor(
@@ -14,6 +17,18 @@ class PlaceLocalDataSourceImpl @Inject constructor(
 ) : PlaceLocalDataSource {
     override fun getLocation(id: Int): Flow<PlaceEntity> {
         return dao.getLocation(id)
+    }
+
+    override suspend fun addPlace(place: PlaceEntity) {
+        dao.addPlace(place)
+    }
+
+    override fun getLastPlace(): Flow<PlaceEntity?> {
+        return dao.getLastPlace()
+    }
+
+    override fun getAllPlaceFlow(): Flow<List<PlaceEntity>> {
+        return dao.getAllPlaceFlow()
     }
 
 }

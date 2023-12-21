@@ -5,18 +5,15 @@ import com.defey.onepiecestorybase.domain.repository.PlaceRepository
 import com.defey.onepiecestorybase.domain.usecase.FlowUseCase
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class SyncMapUseCase(
+class SynchronizePlaceUseCase @Inject constructor(
     private val repo: PlaceRepository
-) : FlowUseCase<SyncMapParam, Unit>() {
-    override fun execute(parameters: SyncMapParam?): Flow<Response<Unit>> {
+) : FlowUseCase<Int?, Unit>() {
+    override fun execute(parameters: Int?): Flow<Response<Unit>> {
+        val param = parameters ?: throw Exception("Place Id can't be null")
         return flow {
-            val param = parameters ?: throw Exception("Place Id can't be null")
-            emit(repo.syncMapById(param.placeId))
+            emit(repo.syncPlaceById(param))
         }
     }
 }
-
-data class SyncMapParam(
-    val placeId: Int
-)

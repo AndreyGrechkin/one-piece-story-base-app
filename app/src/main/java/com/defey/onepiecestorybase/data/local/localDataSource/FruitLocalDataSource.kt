@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface FruitLocalDataSource {
+    suspend fun addFruit(fruits: List<FruitEntity>)
     fun getAllFruit(): Flow<List<FruitEntity>>
     fun getFruit(fruitId: Int): Flow<FruitEntity?>
     suspend fun sendReadFruit(fruitId: Int)
@@ -14,6 +15,10 @@ interface FruitLocalDataSource {
 class FruitLocalDataSourceImpl @Inject constructor(
     private val dao: FruitDao
 ) : FruitLocalDataSource {
+    override suspend fun addFruit(fruits: List<FruitEntity>) {
+        dao.addFruit(fruits)
+    }
+
     override fun getAllFruit(): Flow<List<FruitEntity>> {
         return dao.getAllFruit()
     }
