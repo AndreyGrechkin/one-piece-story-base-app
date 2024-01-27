@@ -367,20 +367,39 @@ fun addIslands(stateMap: MapState, islands: List<IslandPlace>, onClick: (Int?) -
             relativeOffset = Offset(-0.5f, -0.5f),
             zIndex = if (island.name == DOWN_ISLAND || island.name == GOAT_ISLAND) 1f else 0f
         ) {
-            AsyncImage(
-                model = PATH_ASSETS_ISLAND + island.nameImage,
-                contentDescription = "",
-                modifier = if (island.isEnabled)
-                    Modifier
-                        .scale(stateMap.scale)
-                        .bounceClick {
-                            onClick(island.placeId)
-                        }
-                else
-                    Modifier
-                        .scale(stateMap.scale)
-                        .alpha(0.3f),
-            )
+            val visiblePlace = island.nameImage == "movie.png" || island.nameImage == "anime.png"
+            if (!visiblePlace) {
+                AsyncImage(
+                    model = PATH_ASSETS_ISLAND + island.nameImage,
+                    contentDescription = "",
+                    modifier = if (island.isEnabled)
+                        Modifier
+                            .scale(stateMap.scale)
+                            .bounceClick {
+                                onClick(island.placeId)
+                            }
+                    else
+                        Modifier
+                            .scale(stateMap.scale)
+                            .alpha(0.3f),
+                )
+            } else {
+                AsyncImage(
+                    model = PATH_ASSETS_ISLAND + island.nameImage,
+                    contentDescription = "",
+                    modifier = if (island.isEnabled)
+                        Modifier
+                            .scale(stateMap.scale)
+                            .bounceClick {
+                                onClick(island.placeId)
+                            }
+                    else
+                        Modifier
+                            .scale(stateMap.scale)
+                            .alpha(0f),
+                )
+            }
+
         }
     }
 }

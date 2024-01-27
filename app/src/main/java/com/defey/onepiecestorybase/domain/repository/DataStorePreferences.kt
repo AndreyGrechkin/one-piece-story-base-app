@@ -11,4 +11,6 @@ interface DataStorePreferences {
     fun readTimeNow(): Flow<String>
     suspend fun saveLastManga(id: Int)
     fun readLastManga(): Flow<Int?>
+    suspend fun saveLastPlace(id: Int)
+    fun readLastPlace(): Flow<Int?>
 }

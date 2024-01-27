@@ -131,6 +131,9 @@ class PlaceViewModel @Inject constructor(
                     syncNextPlace()
                     synchronizeIsland()
                 }
+                if(response.value?.timeStep == 0L){
+                    syncNextPlace()
+                }
             }
         }.launchIn(viewModelScope)
     }
@@ -154,7 +157,7 @@ class PlaceViewModel @Inject constructor(
                     _uiState.update { it.copy(islands = response.value) }
                     if (hasNextPlace && update == null && lastPlace.value != null) {
                         hasNextPlace = false
-                        navigateTo(NavTarget.IslandScreen(lastPlace.value.id))
+                      //  navigateTo(NavTarget.IslandScreen(lastPlace.value.id))
                     }
                 }
             }
@@ -290,6 +293,9 @@ class PlaceViewModel @Inject constructor(
 
     private fun syncMap(placeId: Int) {
         syncAvatarIsland(placeId)
+        syncAvatarIslandTransit(placeId)
+        syncPlaceItem(placeId)
+        syncPlaceItemTransit(placeId)
         syncPlace(placeId)
         syncBand(placeId)
         syncBandDescription(placeId)
@@ -304,8 +310,6 @@ class PlaceViewModel @Inject constructor(
         syncSkill(placeId)
         syncWeapon(placeId)
         syncPlaceDescription(placeId)
-        syncPlaceItem(placeId)
-        syncPlaceItemTransit(placeId)
         syncShip(placeId)
     }
 
@@ -323,6 +327,22 @@ class PlaceViewModel @Inject constructor(
                 Response.Loading -> {
                     Log.d("MyLog", "Load Place")
                 }
+            }
+        }.launchIn(viewModelScope)
+    }
+
+    private fun syncAvatarIslandTransit(placeId: Int) {
+        placeUseCase.syncIslandTransitUseCase(placeId).onEach { response ->
+            when (response) {
+                Response.Loading -> {
+                    Log.d("MyLog", "load AvatarTransit")
+                }
+
+                is Response.Success -> {
+                    Log.d("MyLog", "success AvatarTransit")
+                }
+
+                is Response.Failure -> {}
             }
         }.launchIn(viewModelScope)
     }

@@ -10,6 +10,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.defey.onepiecestorybase.domain.repository.DataStorePreferences
 import com.defey.onepiecestorybase.presentation.utils.Constants.LAST_MANGA_KEY
+import com.defey.onepiecestorybase.presentation.utils.Constants.LAST_PLACE_KEY
 import com.defey.onepiecestorybase.presentation.utils.Constants.ONBOARDING_PREF_KEY
 import com.defey.onepiecestorybase.presentation.utils.Constants.TIME_NOW_PREF_KEY
 import com.defey.onepiecestorybase.presentation.utils.Constants.TIME_STEP_PREF_KEY
@@ -26,6 +27,7 @@ class DataStorePreferencesImpl(context: Context, name: String) : DataStorePrefer
         val timeStepKey = stringPreferencesKey(TIME_STEP_PREF_KEY)
         val timeNowKey = stringPreferencesKey(TIME_NOW_PREF_KEY)
         val lastManga = intPreferencesKey(LAST_MANGA_KEY)
+        val lastPlace = intPreferencesKey(LAST_PLACE_KEY)
     }
 
 
@@ -82,6 +84,20 @@ class DataStorePreferencesImpl(context: Context, name: String) : DataStorePrefer
         return prefDataStore.data
             .map { pref ->
                 pref[PreferenceKey.lastManga]
+            }
+    }
+
+    override suspend fun saveLastPlace(id: Int) {
+        prefDataStore.edit { pref ->
+            pref.clear()
+            pref[PreferenceKey.lastPlace] = id
+        }
+    }
+
+    override fun readLastPlace(): Flow<Int?> {
+        return prefDataStore.data
+            .map { pref ->
+                pref[PreferenceKey.lastPlace]
             }
     }
 }

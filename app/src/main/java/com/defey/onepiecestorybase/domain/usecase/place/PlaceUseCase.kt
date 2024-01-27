@@ -20,4 +20,5 @@ data class PlaceUseCase @Inject constructor(
     val syncPlaceItemUseCase: SynchronizePlaceItemUseCase,
     val syncPlaceItemTransitUseCase: SynchronizePlaceItemTransitUseCase,
     val syncShipUseCase: SynchronizeShipUseCase,
+    val syncIslandTransitUseCase: SynchronizeIslandTransitUseCase
 )

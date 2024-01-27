@@ -99,11 +99,6 @@ class UseCaseModule {
         placeRepo: PlaceRepository
     ): GetIslandsUseCase = GetIslandsUseCase(repo, placeRepo)
 
-//    @Provides
-//    fun provideSyncMapUseCase(
-//        repo: PlaceRepository
-//    ): SyncMapUseCase = SyncMapUseCase(repo)
-
     @Provides
     fun provideGetLastPlaceUseCase(
         repo: PlaceRepository

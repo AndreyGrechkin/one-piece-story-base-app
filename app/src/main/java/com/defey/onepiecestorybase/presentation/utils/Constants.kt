@@ -35,6 +35,7 @@ object Constants {
     const val TIME_STEP_PREF_KEY = "time_step_key"
     const val TIME_NOW_PREF_KEY = "time_now_key"
     const val LAST_MANGA_KEY = "last_manga_key"
+    const val LAST_PLACE_KEY = "last_place_key"
     const val PATH_ASSETS_ISLAND = "file:///android_asset/islands/"
     const val PATH_ASSETS_AVATAR = "file:///android_asset/avatar/"
     const val PATH_ASSETS_POSTER = "file:///android_asset/other/poster.png"

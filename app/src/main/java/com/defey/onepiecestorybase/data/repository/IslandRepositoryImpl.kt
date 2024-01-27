@@ -33,8 +33,13 @@ class IslandRepositoryImpl @Inject constructor(
     override suspend fun synchronizePersonageIsland(placeId: Int): Response<Unit> {
         return safeApiCall {
             val personageIsland = remote.getPersonageIsland(placeId)
-            val islandTransit = remote.getIslandTransit(placeId)
             local.insertPersonageIsland(personageIsland.map { it.toEntity() })
+        }
+    }
+
+    override suspend fun synchronizeIslandTransit(placeId: Int): Response<Unit> {
+        return safeApiCall {
+            val islandTransit = remote.getIslandTransit(placeId)
             local.insertIslandTransit(islandTransit.map { it.toEntity() })
         }
     }

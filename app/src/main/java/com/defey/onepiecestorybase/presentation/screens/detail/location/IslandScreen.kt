@@ -117,11 +117,12 @@ fun IslandScreen(
                             Text(
                                 text = stringResource(id = R.string.title_anime),
                                 style = OPTheme.typography.title,
-                                modifier = Modifier.padding(end = 4.dp)
+                                modifier = Modifier.padding(start = 16.dp, end = 4.dp)
                             )
                             Text(
                                 text = state.anime.toString(),
-                                style = OPTheme.typography.title
+                                style = OPTheme.typography.title,
+                                modifier = Modifier.padding(end = 10.dp),
                             )
                         }
                     }
