@@ -92,7 +92,7 @@ class PlaceViewModel @Inject constructor(
         observeAvatarPlace()
         observeReward()
         countDown()
-
+        Log.d("MyLog", "ee4345t")
     }
 
     override fun onEvent(event: PlaceUiEvent) {
